@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form action="" method="post">		
+	<h1>hello 注册</h1>
+	姓名：<input type="text" name="nickname" placeholder="请输入用户名"><br/>
+	pwd：<input type="password" name="pwd"><br/>
+	repwd：<input type="password" name="repwd"><br/>
+	邀请码：<input type="text" name="tjtoken"><br/>
+	图形验证：<input type="text" name="imgVali"><img src="{:captcha_src()}" onclick="this.src='{:captcha_src()}'"><br/>
+	手机号码：<input type="text" name="phone"><br/>
+	手机验证：<input type="text" name="phoneCode"><a href="{:url('sendCode')}" target="_bank">点击获取</a>
+	<input type="submit" value="提交1">
+	</form>
+</body>
+</html>

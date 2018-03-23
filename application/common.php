@@ -917,3 +917,24 @@ function encryptShow($str, $start, $length)
     }
     return implode('', $array);
 }
+/*
+    验证码
+*/
+function getCaptcha()
+{
+    $captcha = new \think\captcha\Captcha($config);
+    return $captcha->entry();
+}
+/*
+    邀请码
+*/
+function getToken(){
+    return sprintf('%x',crc32(microtime()));
+}
+/*
+    密码加密
+*/
+function getMd5($pwd,$code)
+{
+    return md5($pwd.$code);
+}
