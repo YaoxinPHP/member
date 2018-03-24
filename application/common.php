@@ -926,6 +926,14 @@ function getCaptcha()
     return $captcha->entry();
 }
 /*
+    验证码验证
+*/
+function valiCaptcha($value)
+{
+    $imgVali = new \think\captcha\ Captcha();
+    return ($imgVali->check($value))?true:false;
+}
+/*
     邀请码
 */
 function getToken(){
@@ -937,4 +945,23 @@ function getToken(){
 function getMd5($pwd,$code)
 {
     return md5($pwd.$code);
+}
+/*
+    二维码
+*/
+function getQrcodeImg($url)
+{
+    //生成当前的二维码
+    $qrCode = new \Endroid\QrCode\QrCode();
+    //想显示在二维码中的文字内容，这里设置了一个查看文章的地址
+    $qrCode->setText($url)
+        ->setSize(300)//大小
+        ->setLabelFontPath(VENDOR_PATH.'endroid\qrcode\assets\noto_sans.otf')
+        ->setErrorCorrectionLevel('high')
+        ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
+        ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
+        ->setLabel('推广码')
+        ->setLabelFontSize(16);
+    header('Content-Type: '.$qrCode->getContentType());
+    echo $qrCode->writeString();
 }

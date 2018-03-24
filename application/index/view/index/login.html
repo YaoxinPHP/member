@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+</head>
+<body>
+	<h1>Login</h1>
+	<form action="" method="post">
+		username:<input type="text" name="nickname"><br/>
+		password:<input type="password" name="pwd"><br/>
+		picture code:<input type="text" name="captcha"><img src="{:captcha_src()}" onclick="this.src=this.src"><br/>
+		<input type="submit" value="提交"><a href="{:url('/index/index/register')}">注册</a>
+	</form>
+</body>
+</html>
