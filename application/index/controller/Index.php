@@ -79,7 +79,7 @@ class Index extends \think\Controller
             $data['NickName'] = $post['nickname'];
             $data['L1Pwd'] = getMd5($post['pwd'],$nToken);
             //注册等级（推荐人下级与节点无关）
-            // $data['RegisterLevelId'] = $result['RegisterLevelId']+1;
+            $data['RegisterLevelId'] = $result['RegisterLevelId']+1;
             $data['Mobile'] = $post['phone'];
             $data['TJtoken'] = $nToken;
             $data['Ranks'] = 0;
