@@ -17,7 +17,7 @@ class Common extends Controller {
     public function __construct(\think\Request $request = null) {
 
         parent::__construct($request);
-
+        
         if (!session('user_id')) {
 
             $this->error('请登陆', 'login/index', '', 0);

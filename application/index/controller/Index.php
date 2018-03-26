@@ -73,20 +73,6 @@ class Index extends \think\Controller
                 }
             }
             return ;*/
-            // 生成邀请码
-            $nToken = getToken();
-            //注册
-            $data['NickName'] = $post['nickname'];
-            $data['L1Pwd'] = getMd5($post['pwd'],$nToken);
-            //注册等级（推荐人下级与节点无关）
-            $data['RegisterLevelId'] = $result['RegisterLevelId']+1;
-            $data['Mobile'] = $post['phone'];
-            $data['TJtoken'] = $nToken;
-            $data['Ranks'] = 0;
-            $flagid = $member->insertGetId($data);
-            if(!$flagid){
-                return $this->error('注册失败');
-            }
             /*
                 1、判断是否还有推荐位 如果有填入TJvalue 如果没有往下填入DJvalue
                 isFull 0 有两个位子 1 左边位子被占（推荐位） 2 左边位子被占（节点位）3 两个位置都被占
@@ -98,37 +84,65 @@ class Index extends \think\Controller
                 
             }*/
             $update = [];
+            $updateflag = 'TJLeftValue';
             $resultId = $result['Id'];
             $resultRanks = $result['Ranks'];
             switch ($result['IsFull']) {
                 case 0:
-                    $update['TJLeftValue'] = $flagid;
+                    $update["$updateflag"] = 0;
                     $update['IsFull'] = 1;
                     break;
                 case 1:
-                    $update['TJRightValue'] = $flagid;
+                    $updateflag = 'TJRightValue';
+                    $update["$updateflag"] = 0;
                     $update['IsFull'] = 3;
                     break;
                 case 2:
-                    $update['TJRightValue'] = $flagid;
+                    $updateflag = 'TJRightValue';
+                    $update["$updateflag"] = 0;
                     $update['IsFull'] = 3;
                     break;
                 case 3:
                 //向下滑
+
                     $ranks = explode(',',$result['Ranks']);
                     $arr = $member->where(['Id'=>['in',$ranks],'IsFull'=>['neq',3]])->find();
                     if(count($arr)){
                         if($arr['IsFull']==0){
-                            $update['JDLeftValue'] = $flagid;
+                            $updateflag = 'JDLeftValue';
+                            $update["$updateflag"] = 0;
                             $update['IsFull'] = 2;
                         }else{
-                            $update['JDRightValue'] = $flagid;
+                            $updateflag = 'JDRightValue';
+                            $update["$updateflag"] = 0;
                             $update['IsFull'] = 3;
                         }
                     }
                     $resultId = $arr['Id'];
                     $resultRanks = $arr['Ranks'];
+            }          
+            // 生成邀请码
+            $nToken = getToken();
+            //注册
+            $data['NickName'] = $post['nickname'];
+            $data['L1Pwd'] = getMd5($post['pwd'],$nToken);
+            //注册等级（推荐人下级与节点无关）
+            $data['RegisterLevelId'] = $result['RegisterLevelId']+1;
+            //推荐人 节点人
+            $data['TJUserId'] = $result['Id'];
+            $data['TJUserNickName'] = $result['NickName'];
+            if($result['Id']!=$resultId){
+                $data['JDUserId'] = $resultId;
+                $data['JDUserNickName'] = $arr['NickName'];
             }
+            $data['Mobile'] = $post['phone'];
+            $data['TJtoken'] = $nToken;
+            $data['Ranks'] = 0;
+            $flagid = $member->insertGetId($data);
+            if(!$flagid){
+                return $this->error('注册失败');
+            }
+            $update["$updateflag"] = $flagid;
             //更新上游数据
             $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks')->select();
             foreach ($resultArr as $v) {
