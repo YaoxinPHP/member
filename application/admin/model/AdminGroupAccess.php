@@ -9,14 +9,14 @@
 
 namespace app\admin\model;
 
-use think\model;
+use think\Model;
 
 class AdminGroupAccess extends Model{
 
     /**
-     *
-     * @param int $userid 用户ID
-     * @return Array
+     * @param $uid
+     * @return bool|string
+     * Author: ConRose Li <rows_lrc@163.com>
      */
     public function getUserGroups($uid) {
 

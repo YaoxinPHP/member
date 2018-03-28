@@ -49,7 +49,7 @@
                                 </td>
                                 <td>{$vo.Id}</td>
                                 <td><a href="#">{$vo.NickName}</a></td>
-                                <td>{eq name="vo['Id']" value="1"}超级管理员{else/}{$vo.groups}{/eq}</td>
+                                <td>{eq name="vo['Id']" value="1"}超级管理员{else/}{$vo.Groups}{/eq}</td>
                                 <td class="hidden-480">{:long2ip($vo.LastLoginIp)}</td>
                                 <td>{:date('Y-m-d H:i:s',$vo['LastLoginTime'])}</td>
 
