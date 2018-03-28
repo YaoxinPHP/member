@@ -18,10 +18,11 @@ class Admin extends \think\Model {
     }
 
     /**
-     * 登陆更新
-     * @param int $type 1:登陆更新,2:信息更新
-     * @param int $id id
+     * @param $type 1:登陆更新,2:信息更新
+     * @param $id
      * @param array $data 更新的数据
+     * @return false|int
+     * Author: ConRose Li <rows_lrc@163.com>
      */
     public function editInfo($type, $id, $data = array()) {
         if ($type == 1) {
