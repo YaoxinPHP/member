@@ -7,8 +7,6 @@
 
 namespace app\admin\model;
 
-use think\Db;
-
 class Admin extends \think\Model {
 
     public $status = array(1 => '无效', 2 => '有效');
@@ -17,26 +15,6 @@ class Admin extends \think\Model {
         return $this->field('Id,NickName,LastLoginIp,LastLoginTime,mobile,status')
                 ->where(array('Id' => $id))
                 ->find();
-    }
-
-    /**
-     * 
-     * @param int $userid 用户ID
-     * @return Array
-     */
-    public function getUserGroups($uid) {
-
-        $res = db('admin_group_access')->field('GroupId')->where('UId', $uid)->select();
-
-        $userGroups = '';
-        if ($res) {
-            foreach ($res as $k => $v) {
-                $userGroups .= $v['GroupId'] . ',';
-            }
-            return trim($userGroups, ',');
-        } else {
-            return false;
-        }
     }
 
     /**
