@@ -1,0 +1,124 @@
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'add'">
+            添加
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+    <div class="page-header">
+        <h1>
+            {:model('menu')->getName()} 
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form action="{:url('','type=2')}" method="post">                    
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table id="simple-table" class="table  table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>奖金参数</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>{$para[0][Name]}</td>
+                                    <td>当注册人账户余额大于<input type="text" name="para[0][Min]" value="{$para[0][Min]}">后，该账户自动激活。一次性赠送推荐人<input type="text" name="para[0][Give]" value="{$para[0][Min]}"></td>
+                                </tr>
+                                <tr>
+                                    <td>{$para[1][Name]}</td>
+                                    <td><input type="text" name="para[1][Percent]" value="{$para[1][Percent]}">%，必须本币达到<input type="text" name="para[1][Min]" value="{$para[1][Min]}">或以上才可享受奖金</td>
+                                </tr>
+                                <tr>
+                                    <td>{$para[2][Name]}</td>
+                                    <td>按照当前会员持有币量的<input type="text" name="para[2][Percent]" value="{$para[2][Percent]}">%每日封顶，最高封顶值<input type="text" name="para[2][Max]" value="{$para[2][Max]}"></td>
+                                </tr>
+                                <tr>
+                                    <td>{$para[3][Name]}</td>
+                                    <td>本币每天释放<input type="text" name="para[3][Percent]"  value="{$para[3][Percent]}">%进入可转移资产账户</td>
+                                </tr>
+                                <tr>
+                                    <td>{$para[4][Name]}</td>
+                                    <td>每次奖金结算额度的<input type="text" name="para[4][Percent]" value="{$para[4][Percent]}">%进入可转移资产账户</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <input class="btn btn-sm btn-primary pull-right" type="submit" name="">
+                    </div><!-- /.span -->
+                </div><!-- /.row -->
+            </form>
+            <form action="{:url('','type=0')}" method="post">                    
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table id="simple-table" class="table  table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    {volist name='setting' id='v'}
+                                    {if condition="$v[Type] == 0"}
+                                    <th>{$v[Min]}-{$v[Max]}</th>
+                                    {/if}
+                                    {/volist}
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                    <tr>
+                                        <td>智能算力</td>
+                                        {volist name='setting' id='v'}
+                                        {if condition="$v[Type] == 0"}
+                                        <th><input type="text" name="setting[{$v[Id]}][Percent]" value="{$v[Percent]}">%</th>
+                                        {/if}
+                                        {/volist}
+                                    </tr>
+                            </tbody>
+                        </table>                        
+                        <input class="btn btn-sm btn-primary pull-right" type="submit" name="">
+                    </div><!-- /.span -->
+                </div><!-- /.row -->
+            </form>
+            <form action="{:url('','type=1')}" method="post">                    
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table id="simple-table" class="table  table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    {volist name='setting' id='v'}
+                                    {if condition="$v[Type] == 1"}
+                                    <th>{$v[Min]}-{$v[Max]}</th>
+                                    {/if}
+                                    {/volist}
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                    <tr>
+                                        <td>动态奖金</td>
+                                        {volist name='setting' id='v'}
+                                        {if condition="$v[Type] == 1"}
+                                        <th><input type="text" name="setting[{$v[Id]}][Percent]" value="{$v[Percent]}">%</th>
+                                        {/if}
+                                        {/volist}
+                                    </tr>
+                            </tbody>
+                        </table>                        
+                        <input class="btn btn-sm btn-primary pull-right" type="submit" name="">
+                    </div><!-- /.span -->
+                </div><!-- /.row -->
+            </form>
+
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+

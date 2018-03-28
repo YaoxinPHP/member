@@ -1,10 +1,10 @@
 <div class="page-content">
     <div class="col-sm-6 pull-right">
-        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'info'">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'register'">
             添加
             <i class="icon-reply icon-only"></i>
         </span>
-        <span style="margin-right: 5px;" class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'excleExport'">
+        <span style="margin-right: 5px;" class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = '{:url(\"index\",[export=>1])}'">
             导出Excel
             <i class="icon-reply icon-only"></i>
         </span>
@@ -17,12 +17,13 @@
 
     <div class="row">
         <div class="col-xs-12" style="margin-bottom:10px;">
-            <form>
-               会员编号<input type="" name="">
-               钱包地址<input type="" name="">
-               昵称<input type="" name="">
-               激活日期<input type="" name="" id="calendar" style="width: 270px;" >
-               <input type="submit" name="查询">
+            <form action="" method="post">
+               会员编号<input type="text" name="Id" value="{$where.Id}">
+               钱包地址<input type="text" name="WalletAdress" value="{$where.WalletAdress}">
+               昵称<input type="text" name="NickName" value="{$where.NickName}">
+               激活日期<input type="text" name="JiHuoDate" id="calendar" style="width: 270px;"  value="{$where.JiHuoDate}">
+               状态<select name="JiHuoMemberType"><option value="">请选择</option><option value="1">激活</option><option value="0">未激活</option></select>
+               <input type="submit" value="查询" name="submit">
             </form>
         </div>
         <div class="col-xs-12">
@@ -65,17 +66,21 @@
                                 <td>{$vo.TJUserNickName}</td>
                                 <td>{$vo.JDUserNickName}</td>
                                 <td>{$vo.RegisterDate}</td>
+                                <td>{if($vo.JiHuoMemberType)}激活{else/}未激活{/if}</td>
                                 <td>{$vo.IsValid}</td>
                                 <td>{$vo.IsValid}</td>
-                                <td>{$vo.IsValid}</td>
-                                <td>{$vo.IsValid}</td>
+                                <td>{$vo.WalletAdress}</td>
                                 <td>
-                                    <a href="">锁定</a>
-                                    <a href="">冻结转入转出</a>
-                                    <a href="">编辑</a>
-                                    <a href="">删除</a>
-                                    <select>
+                                    {if condition="$vo.IsLock == 1"}<a href="{:url(opreation,[lock=>$vo.Id,type=>0])}">解锁</a>{else/}<a href="{:url(opreation,[lock=>$vo.Id,type=>1])}">锁定</a>{/if}&nbsp;
+                                    {if condition="$vo.Isjiaoyi == 1"}<a href="{:url(opreation,[trade=>$vo.Id,type=>0])}">解冻转入转出</a>{else/}<a href="{:url(opreation,[trade=>$vo.Id,type=>1])}">冻结转入转出</a>{/if}
+                                    <a href="{:url(edit,[Id=>$vo.Id])}">编辑</a>
+                                    <a href="{:url(del,[Id=>$vo.Id])}">删除</a>
+                                    <select onchange="window.location.href=$(this).children(':selected').attr('url')">
                                         <option>更多</option>
+                                        <option url="{:url(info,[Id=>$vo.Id
+                                            ])}">查看详情</option>
+                                        <option url="{:url(reset,[Id=>$vo.Id
+                                            ])}">重置密码</option>
                                     </select>
                                 </td>
                             </tr>
