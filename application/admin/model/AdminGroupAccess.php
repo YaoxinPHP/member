@@ -20,7 +20,7 @@ class AdminGroupAccess extends Model{
      */
     public function getUserGroups($uid) {
 
-        $res = $this->field('GroupId')->where('UId', $uid)->select();
+        $res = $this->where('UId', $uid)->field('GroupId')->select();
 
         $userGroups = '';
         if ($res) {

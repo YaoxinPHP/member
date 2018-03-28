@@ -24,7 +24,6 @@ class Admin extends \think\Model {
      * @param array $data 更新的数据
      */
     public function editInfo($type, $id, $data = array()) {
-        
         if ($type == 1) {
             $data['LastLoginTime'] = time();
             $data['LastLoginIp'] = ip2long(request()->ip());
