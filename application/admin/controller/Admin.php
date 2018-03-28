@@ -7,15 +7,15 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\Admin as A;
 use think\Loader;
 
 class Admin extends Common {
 
     public function index() {
         $where = array();
-        if ($group_id = input('group_id')) {
+        if ($group_id = input('group_id')){
             $where['t2.GroupId'] = $group_id;
-            
         }
         $lists = db('admin')->alias('t1')->field('t1.*')
                 ->where($where)
@@ -51,6 +51,9 @@ class Admin extends Common {
         $url = $id?'edit':'add';
         if ($id) {
             //当前用户信息
+            $adminModel = new A();
+            $adminModel->getInfo();
+
             $info = model('Admin')->getInfo($id);
             $info['userGroups'] = Loader::model('Admin')->getUserGroups($id);
             $this->assign('info', $info);

@@ -14,14 +14,9 @@ class Admin extends \think\Model {
     public $status = array(1 => '无效', 2 => '有效');
 
     public function getInfo($id) {
-        $res = $this->field('Id,NickName,LastLoginIp,LastLoginTime,mobile,status')
+        return $this->field('Id,NickName,LastLoginIp,LastLoginTime,mobile,status')
                 ->where(array('Id' => $id))
                 ->find();
-        if ($res) {
-            $res = $res->data;
-        }
-
-        return $res;
     }
 
     /**
