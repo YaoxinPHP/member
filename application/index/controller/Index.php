@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 use think\Session;
+use think\Loader;
 class Index extends \think\Controller
 {
     public function index()
@@ -14,65 +15,31 @@ class Index extends \think\Controller
     {
         if(request()->isPost()){
             $post = input('post.');
-            $member = model('member');
+            $validate = Loader::validate('User');
             //验证
-            if(!$post['nickname']){
-                return $this->error('昵称不能为空');
-            }else{
-                $isNull = $member->where("NickName = '$post[nickname]'")->field('Id')->find();
-                if($isNull){
-                    return $this->error('用户已经存在');
-                }
+            if(!$validate->check($post)){
+                return $this->error($validate->scene('register')->getError());
             }
-            if(!preg_match('/^\w{6,}$/', $post['pwd'])){
-                return $this->error('密码至少6位');
+            $imgVali = new \think\captcha\ Captcha();
+            if(!$imgVali->check($post['imgVali'])){
+                return $this->error('图形验证码错误');
             }
-            if($post['pwd'] !== $post['repwd']){
-                return $this->error('两次密码不相同');
+            $member = model('member');
+            $isNull = $member->where("NickName = '$post[nickname]'")->field('Id')->find();
+            if($isNull){
+                return $this->error('用户已经存在');
             }
-            if(!$post['tjtoken']){
-                return $this->error('邀请码不能为空');
-            }else{
-                $result = $member->where("TJtoken = '$post[tjtoken]'")->find();
-                if($result['TJtoken'] !== $post['tjtoken']){
-                    return $this->error('邀请码错误');
-                }
+            $result = $member->where("TJtoken = '$post[tjtoken]'")->find();
+            if($result['TJtoken'] !== $post['tjtoken']){
+                return $this->error('邀请码错误');
             }
-            if(!$post['imgVali']){
-                return $this->error('图形验证不能为空');
-            }else{
-                $imgVali = new \think\captcha\ Captcha();
-                if(!$imgVali->check($post['imgVali'])){
-                    return $this->error('图形验证码错误');
-                }
-            }
-            if(!preg_match('/^1[3|4|5|7|8]\d{9}$/', $post['phone'])){
-                return $this->error('手机格式错误');
-            }else{
-                $count = $member->where("Mobile = $post[phone]")->count();
-                if($count === 10){
-                    return $this->error('手机已经注册10次了');
-                }
+            $count = $member->where("Mobile = $post[phone]")->count();
+            if($count === 10){
+                return $this->error('手机已经注册10次了');
             }
             if($post['phoneCode'] != Session::get($post['phone'].'_smsVali')){
                 return $this->error('短信验证码错误');
             }
-           /* $tjhuman = $member->where("RegisterLevelId = 1 AND Ranks like '%,11%'")->field('Ranks')->find();
-            $tjhuman = explode(',', substr($tjhuman['Ranks'], 2));
-            foreach ($tjhuman as $v) {
-                $tjhumanR = $member->where("Id = $v")->field('IsFull')->find();
-                if($tjhumanR['IsFull'] <3){
-                    if($tjhumanR['IsFull']==0){
-                            $update['TJLeftValue'] = $flagid;
-                            $update['IsFull'] = 2;
-                        }else{
-                            $update['TJRightValue'] = $flagid;
-                            $update['IsFull'] = 3;
-                        }
-                    break;
-                }
-            }
-            return ;*/
             /*
                 1、判断是否还有推荐位 如果有填入TJvalue 如果没有往下填入DJvalue
                 isFull 0 有两个位子 1 左边位子被占（推荐位） 2 左边位子被占（节点位）3 两个位置都被占
@@ -138,6 +105,8 @@ class Index extends \think\Controller
             $data['Mobile'] = $post['phone'];
             $data['TJtoken'] = $nToken;
             $data['Ranks'] = 0;
+            //钱包地址
+            $data['WalletAdress'] = md5($data['NickName'].$data['Mobile']);
             $flagid = $member->insertGetId($data);
             if(!$flagid){
                 return $this->error('注册失败');

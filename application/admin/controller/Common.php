@@ -25,7 +25,6 @@ class Common extends Controller {
 
         $this->user_id = session('user_id');
         $this->user_name = session('user_name');
-
         //权限检查
         if (!$this->_checkAuthor($this->user_id)) {
             $this->error('你无权限操作');
