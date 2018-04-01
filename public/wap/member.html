@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<div id="body">
+		<h1>{{nickname}}</h1>
+		<h2>FCC:{{wallet.Amount}}</h2><h2>可转移:{{wallet.Release}}</h2>
+		<div style="border: 1px solid red; width: 500px;height: 300px;">
+			<ul>
+				<li><a href="">今日智能算力：{{zn}}</a></li>
+				<li><a href="">今日节点算力：{{jd}}</a></li>
+				<li><a href="">我的GAS：{{wallet.Gas}}</a></li>
+				<li><a href="setting.html">设置</a></li>
+				<li><a href="spread.html">我的推广</a></li>
+				<li><a href="share.html">我的分享</a></li>
+				<li><a href="">新闻公告</a></li>
+				<li><a href="">我要留言</a></li>
+				<li><a href="">我的留言</a></li>
+				<li><a href="take.html">接收</a></li>
+			</ul>
+		</div>
+		<div style="border: 1px solid red; width: 200px;height: 100px;">
+			<a href="">首页</a>
+			<a href="">地址</a>
+			<a href="">算力</a>
+			<a href="">我的</a>
+		</div>
+	</div>
+	
+</body>
+<script type="text/javascript" src="../static/js/vue.min.js"></script>
+<script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$.ajax({
+		url:'/index/Returnjson/member',
+		type:'post',
+		success:function(obj){
+			console.log(obj)
+			var vm = new Vue({
+				el:'#body',
+				data:obj
+			})
+		}
+	})
+	/*var vm = new Vue({
+        el: '#body',
+        data: {
+            nickname: "name",
+            fcc: "0",
+            release: "0",
+            zn: "10000",
+            jd: "10000",
+            gas: "10000",
+        },
+        methods: {
+        	getData:function(){
+        		
+        	}
+        }
+    })*/
+</script>
+</html>

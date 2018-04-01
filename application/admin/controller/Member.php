@@ -66,6 +66,8 @@ class Member extends Common
 	            $updateflag = 'TJLeftValue';
 	            $resultId = $result['Id'];
 	            $resultRanks = $result['Ranks'];
+	            $resultJTRanks = $result['JTRanks'];
+	            $resultTime = $result['RanksTime'];
 	            switch ($result['IsFull']) {
 	                case 0:
 	                    $update["$updateflag"] = 0;
@@ -99,6 +101,8 @@ class Member extends Common
 	                    }
 	                    $resultId = $arr['Id'];
 	                    $resultRanks = $arr['Ranks'];
+	                    $resultJTRanks = $arr['JTRanks'];
+	                    $resultTime = $arr['RanksTime'];
 	            }          
 	            //注册
 	            $data['NickName'] = $post['NickName'];
@@ -128,10 +132,16 @@ class Member extends Common
 	            //更新上游数据
 	            $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks')->select();
 	            foreach ($resultArr as $v) {
-	                $member->where("Id = $v[Id]")->update(['Ranks'=>$v['Ranks'].','.$flagid]);
+	                //今日增加团队
+	                $Ranksdata = ['Ranks'=>$v['Ranks'].','.$flagid];
+	                $Ranksdata['JTRanks'] = (date('Ymd',$v['RanksTime'])==date('Ymd'))?$v['JTRanks'].','.$flagid:$flagid;
+	                $Ranksdata['RanksTime'] = time();
+	                $member->where("Id = $v[Id]")->update($Ranksdata);
 	            }
 	            //更新数据
 	            $update['Ranks'] = $resultRanks.','.$flagid;
+	            $update['JTRanks'] = (date('Ymd',$resultTime)==date('Ymd'))?$resultJTRanks.','.$flagid:$flagid;
+	            $update['RanksTime'] = time();
 	            $flagUp = $member->where("Id = $resultId")->update($update);
 	            return $this->success('注册成功');
 			}else{

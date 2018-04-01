@@ -1,16 +1,9 @@
 <?php
 namespace app\index\controller;
-use think\Session;
 use think\Loader;
-class Index extends \think\Controller
+use think\Session;
+class Login extends \think\Controller
 {
-    public function index()
-    {
-    	if(!Session::get('userInfo.Id')){
-            return $this->error('请先登录',url('/index/index/login'));
-        }
-        return $this->fetch();
-    }
     public function register()
     {
         if(request()->isPost()){
@@ -54,6 +47,8 @@ class Index extends \think\Controller
             $updateflag = 'TJLeftValue';
             $resultId = $result['Id'];
             $resultRanks = $result['Ranks'];
+            $resultJTRanks = $result['JTRanks'];
+            $resultTime = $result['RanksTime'];
             switch ($result['IsFull']) {
                 case 0:
                     $update["$updateflag"] = 0;
@@ -87,6 +82,8 @@ class Index extends \think\Controller
                     }
                     $resultId = $arr['Id'];
                     $resultRanks = $arr['Ranks'];
+                    $resultJTRanks = $arr['JTRanks'];
+                    $resultTime = $arr['RanksTime'];
             }          
             // 生成邀请码
             $nToken = getToken();
@@ -105,6 +102,8 @@ class Index extends \think\Controller
             $data['Mobile'] = $post['phone'];
             $data['TJtoken'] = $nToken;
             $data['Ranks'] = 0;
+            $data['JTRanks'] = 0;
+            $data['RanksTime'] = time();
             //钱包地址
             $data['WalletAdress'] = md5($data['NickName'].$data['Mobile']);
             $flagid = $member->insertGetId($data);
@@ -115,10 +114,17 @@ class Index extends \think\Controller
             //更新上游数据
             $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks')->select();
             foreach ($resultArr as $v) {
-                $member->where("Id = $v[Id]")->update(['Ranks'=>$v['Ranks'].','.$flagid]);
+                //今日增加团队
+                $Ranksdata = ['Ranks'=>$v['Ranks'].','.$flagid];
+                $Ranksdata['JTRanks'] = (date('Ymd',$v['RanksTime'])==date('Ymd'))?$v['JTRanks'].','.$flagid:$flagid;
+                $Ranksdata['RanksTime'] = time();
+                $member->where("Id = $v[Id]")->update($Ranksdata);
+
             }
             //更新数据
             $update['Ranks'] = $resultRanks.','.$flagid;
+            $update['JTRanks'] = (date('Ymd',$resultTime)==date('Ymd'))?$resultJTRanks.','.$flagid:$flagid;
+            $update['RanksTime'] = time();
             $flagUp = $member->where("Id = $resultId")->update($update);
             return $this->success('注册成功',url('/index/index/login'));
         }
@@ -137,7 +143,7 @@ class Index extends \think\Controller
             return $this->error('数据错误');
         }
         $member = model('member');
-        $result = $member->where("NickName = $post[nickname]")->find();
+        $result = $member->where("NickName = '$post[nickname]'")->find();
         if(!$result){
             return $this->error('没有该用户');
         }
@@ -148,22 +154,18 @@ class Index extends \think\Controller
         Session::set('userInfo',$result);
         return $this->success('登录成功',url('/'));
     }
-    //退出
-    public function loginOut()
-    {
-        Session::delete('userInfo');
-        return $this->success('成功登出',url('/index/index/login'));
-    }
+
     //二维码
     public function getQrcode()
     {
-        getQrcodeImg('https://www.m.com'.url('/index/index/show','tj='.Session::get('userInfo.TJtoken')));
+        $url = (input('type')==1)?url('/index/login/register','tj='.Session::get('userInfo.TJtoken')):url('/wap/online','wallet='.Session::get('userInfo.WalletAdress'));
+        getQrcodeImg('https://www.m.com'.$url);
     }
     public function sendCode()
     {
-    	$code = rand(1000,9999);
-    	$p = '15283827970';
-    	Session::set($p.'_smsVali',$code);
-    	echo $code;
+        $code = rand(1000,9999);
+        $p = '15283827970';
+        Session::set($p.'_smsVali',$code);
+        echo $code;
     }
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<h1>Banner</h1>
+	<div style="border: 1px solid red; width: 500px;height: 100px;">
+		<a href="">在线发送</a>
+		<a href="">在线明细</a>
+		<a href="">GAS兑换</a>
+		<a href="">GAS兑换记录</a>
+		<a href="">离线发送</a>
+		<a href="">离线明细</a>
+	</div>
+	<div style="border: 1px solid red; width: 200px;height: 100px;">
+		<a href="">首页</a>
+		<a href="">地址</a>
+		<a href="">算力</a>
+		<a href="member.html">我的</a>
+	</div>
+</body>
+<script type="text/javascript" src="../static/js/vue.min.js"></script>
+<script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+        el: '#vue_det',
+        data: {
+            site: "菜鸟教程",
+            url: "www.runoob.com",
+            alexa: "10000"
+        },
+        methods: {
+            details: function() {
+                return  this.site + " - 学的不仅是技术，更是梦想！";
+            }
+        }
+    })
+</script>
+</html>
