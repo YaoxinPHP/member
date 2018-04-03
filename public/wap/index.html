@@ -64,6 +64,15 @@
 <script type="text/javascript" src="../static/js/vue.min.js"></script>
 <script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
+	$.ajax({
+		url:'/index/Returnjson/index',
+		success:function(obj){
+			console.log(obj);
+			if(obj.code==0){
+				window.location.href = obj.url;
+			}
+		}
+	})
 	var vm = new Vue({
         el: '#vue_det',
         data: {

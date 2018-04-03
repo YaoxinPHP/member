@@ -136,7 +136,9 @@ return [
         // 标签库标签开始标记
         'taglib_begin' => '{',
         // 标签库标签结束标记
-        'taglib_end'   => '}',
+        'taglib_end'   => '}', 
+        'layout_on'     =>  true,
+        'layout_name'   =>  'layouts',
     ],
 
     // 视图输出字符串内容替换

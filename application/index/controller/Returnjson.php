@@ -5,6 +5,10 @@ use think\Db;
 use think\Session;
 class Returnjson extends Common
 {
+    public function index()
+    {
+        return ['status'=>200,'msg'=>'ok'];
+    }
     public function member()
     {
         $data['nickname'] = $this->userInfo['NickName'];
@@ -116,6 +120,9 @@ class Returnjson extends Common
         $post = input('post.');
         if(!$validate->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
+        }
+        if(!valiCaptcha($post['captcha'])){
+            return ['status'=>202,'msg'=>'图形验证码错误'];
         }        
         $code = session($this->userInfo['Mobile'].'_smsVali');
         if($post['phoneCode']!=$code){
@@ -185,6 +192,9 @@ class Returnjson extends Common
         $post = input('post.');
         if(!$validate->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
+        }
+        if(!valiCaptcha($post['captcha'])){
+            return ['status'=>202,'msg'=>'图形验证码错误'];
         }        
         $code = session($this->userInfo['Mobile'].'_smsVali');
         if($post['phoneCode']!=$code){
@@ -300,8 +310,7 @@ class Returnjson extends Common
         if(!$validate->scene('updatePhone')->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
         }
-        $imgVali = new \think\captcha\ Captcha();
-        if(!$imgVali->check($post['captcha'])){
+        if(!valiCaptcha($post['captcha'])){
             return ['status'=>202,'msg'=>'图形验证码错误'];
         }
         $code = session($this->userInfo['Mobile'].'_smsVali');
@@ -327,9 +336,11 @@ class Returnjson extends Common
         }
         $data['Title'] = $post['title'];
         $data['UserId'] = $this->userId;
+        $data['UserId'] = $this->userInfo['NickName'];
         $data['Type'] = $post['type'];
         $data['Mobile'] = $post['phone'];
         $data['Content'] = $post['content'];
+        $data['AddTime'] = time();
         $flag = model('Mess')->save($data);
         return $flag?['status'=>200,'msg'=>'留言成功']:['status'=>202,'msg'=>'留言失败'];
     }

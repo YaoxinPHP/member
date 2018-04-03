@@ -8,30 +8,29 @@ class Login extends \think\Controller
     {
         if(request()->isPost()){
             $post = input('post.');
-            $validate = Loader::validate('User');
+            $validate = Loader::validate('User')->scene('register');
             //验证
             if(!$validate->check($post)){
-                return $this->error($validate->scene('register')->getError());
+                return ['status'=>201,'msg'=>$validate->getError()];
             }
-            $imgVali = new \think\captcha\ Captcha();
-            if(!$imgVali->check($post['imgVali'])){
-                return $this->error('图形验证码错误');
+            if(!valiCaptcha($post['imgVali'])){
+                return ['status'=>201,'msg'=>'图形验证码错误'];
             }
-            $member = model('member');
+            $member = model('Member');
             $isNull = $member->where("NickName = '$post[nickname]'")->field('Id')->find();
             if($isNull){
-                return $this->error('用户已经存在');
+                return ['status'=>201,'msg'=>'用户已经存在'];
             }
             $result = $member->where("TJtoken = '$post[tjtoken]'")->find();
             if($result['TJtoken'] !== $post['tjtoken']){
-                return $this->error('邀请码错误');
+                return ['status'=>201,'msg'=>'邀请码错误'];
             }
             $count = $member->where("Mobile = $post[phone]")->count();
             if($count === 10){
-                return $this->error('手机已经注册10次了');
+                return ['status'=>201,'msg'=>'手机已经注册10次了'];
             }
             if($post['phoneCode'] != Session::get($post['phone'].'_smsVali')){
-                return $this->error('短信验证码错误');
+                return ['status'=>201,'msg'=>'短信验证码错误'];
             }
             /*
                 1、判断是否还有推荐位 如果有填入TJvalue 如果没有往下填入DJvalue
@@ -108,13 +107,13 @@ class Login extends \think\Controller
             $data['WalletAdress'] = md5($data['NickName'].$data['Mobile']);
             $flagid = $member->insertGetId($data);
             if(!$flagid){
-                return $this->error('注册失败');
+                return ['status'=>202,'msg'=>'注册失败'];
             }
             //添加钱包
             model('Wallet')->insert(['UserId'=>$flagid,'UpdateTime'=>time()]);
             $update["$updateflag"] = $flagid;
             //更新上游数据
-            $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks')->select();
+            $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks,RanksTime')->select();
             foreach ($resultArr as $v) {
                 //今日增加团队
                 $Ranksdata = ['Ranks'=>$v['Ranks'].','.$flagid];
@@ -128,9 +127,9 @@ class Login extends \think\Controller
             $update['JTRanks'] = (date('Ymd',$resultTime)==date('Ymd'))?$resultJTRanks.','.$flagid:$flagid;
             $update['RanksTime'] = time();
             $flagUp = $member->where("Id = $resultId")->update($update);
-            return $this->success('注册成功',url('/index/index/login'));
+            return ['status'=>200,'msg'=>'注册成功','url'=>'/wap/login.html'];
+            return $this->success('',url('/index/index/login'));
         }
-        return $this->fetch();
     }
     //登录
     public function login()
@@ -142,19 +141,19 @@ class Login extends \think\Controller
         //验证
         $flag = valiCaptcha($post['captcha']);
         if(!$post['nickname']||!preg_match('/^\w{6,}$/',$post['pwd'])||!$flag){
-            return $this->error('数据错误');
+            return ['status'=>202,'msg'=>'错误数据'];
         }
         $member = model('member');
         $result = $member->where("NickName = '$post[nickname]'")->find();
         if(!$result){
-            return $this->error('没有该用户');
+            return ['status'=>202,'msg'=>'没有该用户'];
         }
         if(md5($post['pwd'].$result['TJtoken'])!==$result['L1Pwd']){
-            return $this->error('密码错误');
+            return ['status'=>202,'msg'=>'密码错误'];
         }
         //登陆成功
         Session::set('userInfo',$result);
-        return $this->success('登录成功',url('/'));
+        return ['status'=>200,'msg'=>'登录成功','url'=>'/wap/index.html'];;
     }
 
     //二维码
@@ -165,8 +164,11 @@ class Login extends \think\Controller
     }
     public function sendCode()
     {
+        if(!preg_match('/^1[34578]\d{9}$/', input('phone'))){
+            return ['status'=>201,'msg'=>'手机格式错误'];
+        }
         $code = rand(1000,9999);
-        $p = '15283827970';
+        $p = input('phone');
         Session::set($p.'_smsVali',$code);
         echo $code;
     }

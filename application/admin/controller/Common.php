@@ -16,8 +16,6 @@ class Common extends Controller {
     public function __construct(\think\Request $request = null) {
 
         parent::__construct($request);
-        Config::set('template.layout_on','true');
-        Config::set('template.layout_name','layout');
         if (!session('user_id')) {
 
             $this->error('请登陆', 'login/index', '', 0);

@@ -128,9 +128,11 @@ class Member extends Common
 	            if(!$flagid){
 	                return $this->error('注册失败');
 	            }
+	            //添加钱包
+	            model('Wallet')->insert(['UserId'=>$flagid,'UpdateTime'=>time()]);
 	            $update["$updateflag"] = $flagid;
 	            //更新上游数据
-	            $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks')->select();
+	            $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks,RanksTime')->select();
 	            foreach ($resultArr as $v) {
 	                //今日增加团队
 	                $Ranksdata = ['Ranks'=>$v['Ranks'].','.$flagid];

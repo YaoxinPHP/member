@@ -1,0 +1,66 @@
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+    </div>
+    <div class="page-header">
+        <h1>
+            {:model('menu')->getName()} 
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th class="detail-col">编号</th>
+                                <th>昵称</th>
+                                <th>标题</th>
+                                <th>联系电话</th>
+                                <th>内容</th>
+                                <th>添加时间</th>
+                                <th>类型</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {volist name="lists" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>{$vo.Id}</td>
+                                <td>{$vo.NickName}</td>
+                                <td>{$vo.Title}</td>
+                                <td>{$vo.Mobile}</td>
+                                <td>{$vo.Content}</td>
+                                <td>{:date('Y-m-d',$vo.AddTime)}</td>
+                                <td>{if($vo.Type==0)}系统{else/}其他{/if}</td>
+                            </tr>
+                            {/volist}    
+                        </tbody>
+                    </table>
+                    {$lists->render()}
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+
+
+
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+

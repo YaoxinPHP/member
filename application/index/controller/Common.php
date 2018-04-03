@@ -11,8 +11,7 @@ class Common extends Controller{
         parent::__construct($request);
         Config::set('default_return_type','json');
         if (!session('userInfo.Id')) {
-
-            $this->error('请登陆', 'login/login', '', 0);
+            $this->error('请登陆', '/wap/login.html');
         }
         $this->userId = session('userInfo.Id');
         $this->userInfo = session('userInfo');

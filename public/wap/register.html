@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<form action="{:url('register')}" method="post">		
+	<h1>hello 注册</h1>
+	姓名：<input type="text" name="nickname" placeholder="请输入用户名"><br/>
+	pwd：<input type="password" name="pwd"><br/>
+	repwd：<input type="password" name="repwd"><br/>
+	邀请码：<input type="text" name="tjtoken"><br/>
+	图形验证：<input type="text" name="imgVali"><img src="/captcha.html" onclick="this.src='/captcha.html'"><br/>
+	手机号码：<input type="text" name="phone"><br/>
+	手机验证：<input type="text" name="phoneCode"><a id="code">点击获取</a>
+	<input type="button" id="su" value="提交1"><a href="{:url('/index/index/login')}">登录</a>
+	</form>
+</body>
+<script type="text/javascript" src="../static/js/vue.min.js"></script>
+<script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$('#code').click(function(){
+		$.ajax({
+			url:'/index/Login/sendCode',
+			type:'get',
+			data:{'phone':$('input[name=phone]').val()},
+			success:function(obj){
+				console.log(obj);
+			}
+		})
+	})
+	$('#su').click(function(){
+		var data = {
+			'nickname':$('input[name=nickname]').val(),
+			'pwd':$('input[name=pwd]').val(),
+			'repwd':$('input[name=repwd]').val(),
+			'tjtoken':$('input[name=tjtoken]').val(),
+			'imgVali':$('input[name=imgVali]').val(),
+			'phone':$('input[name=phone]').val(),
+			'phoneCode':$('input[name=phoneCode]').val(),
+		};
+		$.ajax({
+			url:'/index/Login/register',
+			type:'post',
+			data:data,
+			success:function(obj){
+				console.log(obj);
+				if(obj.status==200){
+					window.location.href = obj.url;
+				}
+			}
+		})
+	})
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<h1>Login</h1>
+	<form action="" method="post">
+		username:<input type="text" name="nickname"><br/>
+		password:<input type="password" name="pwd"><br/>
+		picture code:<input type="text" name="captcha"><img src="/captcha.html" onclick="this.src=this.src"><br/>
+		<input type="button" id="submit" value="提交"><a href="register">注册</a>
+	</form>
+</body>
+<script type="text/javascript" src="../static/js/vue.min.js"></script>
+<script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$('#submit').click(function(){
+		var data = {
+			'nickname':$('input[name=nickname]').val(),
+			'pwd':$('input[name=pwd]').val(),
+			'captcha':$('input[name=captcha]').val(),
+		};
+		console.log(data);
+		$.ajax({
+			url:'/index/Login/login',
+			data:data,
+			type:'post',
+			success:function(obj){
+				console.log(obj);
+				if(obj.status==200){
+					window.location.href = obj.url;
+				}
+				alert(obj.msg)
+			}
+		})
+	})
+</script>
+</html>

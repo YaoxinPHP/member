@@ -1,0 +1,83 @@
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'addNew'">
+            添加
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+    <div class="page-header">
+        <h1>
+            {:model('menu')->getName()} 
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th class="detail-col">编号</th>
+                                <th>标题</th>
+                                <th>内容</th>
+                                <th>添加时间</th>
+                                <th>类型</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {volist name="lists" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>{$vo.Id}</td>
+                                <td>{$vo.Title}</td>
+                                <td>{$vo.Content}</td>
+                                <td>{:date('Y-m-d',$vo.CreateDate)}</td>
+                                <td>{if($vo.Type==0)}系统{else/}其他{/if}</td>
+                                <td>
+                                    <div class="hidden-sm hidden-xs btn-group">
+
+                                        <a href='{:url("editNew","id=$vo[Id]")}' 
+                                           <span class="btn btn-xs btn-info">
+                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                            </span>
+                                        </a>
+                                        <a href='javascript:void(0)' onclick="return alert_del('{:url(\"delNew\",\"id=$vo[Id]\")}', '确认要删除『 id={$vo.Id} 』这条记录吗？');" 
+                                           <span class="btn btn-xs btn-danger">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                       
+                                    </div>
+                                </td>
+                            </tr>
+                            {/volist}    
+                        </tbody>
+                    </table>
+                    {$lists->render()}
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+
+
+
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+
