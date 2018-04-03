@@ -110,6 +110,8 @@ class Login extends \think\Controller
             if(!$flagid){
                 return $this->error('注册失败');
             }
+            //添加钱包
+            model('Wallet')->insert(['UserId'=>$flagid,'UpdateTime'=>time()]);
             $update["$updateflag"] = $flagid;
             //更新上游数据
             $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks')->select();

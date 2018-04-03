@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-03-26 22:29:03
+Date: 2018-04-03 15:09:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `sysdiagrams` (
   `diagram_id` int(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `definition` longblob
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sysdiagrams
@@ -49,12 +49,12 @@ CREATE TABLE `t_admin` (
   `UpdateTime` int(10) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否有效(2:无效,1:有效)',
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
-INSERT INTO `t_admin` VALUES ('1', null, 'admin', '21232f297a57a5a743894a0e4a801fc3', null, '', null, '2130706433', '1522040291', '', '1521899271', '1');
+INSERT INTO `t_admin` VALUES ('1', null, 'admin', '21232f297a57a5a743894a0e4a801fc3', null, '', null, '2130706433', '1522340653', '', '1521899271', '1');
 INSERT INTO `t_admin` VALUES ('2', null, 'test', '202cb962ac59075b964b07152d234b70', null, null, null, null, null, '', '1521897319', '1');
 
 -- ----------------------------
@@ -65,7 +65,7 @@ CREATE TABLE `t_adminrolelink` (
   `Id` longtext,
   `AdminId` longtext,
   `RoleId` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_adminrolelink
@@ -83,7 +83,7 @@ CREATE TABLE `t_admin_group` (
   `ListOrder` smallint(5) unsigned NOT NULL DEFAULT '0',
   `UpdateTime` int(10) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of t_admin_group
@@ -97,7 +97,7 @@ DROP TABLE IF EXISTS `t_admin_group_access`;
 CREATE TABLE `t_admin_group_access` (
   `UId` int(11) NOT NULL,
   `GroupId` mediumint(8) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of t_admin_group_access
@@ -118,7 +118,7 @@ CREATE TABLE `t_admin_log` (
   `Ip` int(10) NOT NULL,
   `Time` int(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=622 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1257 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of t_admin_log
@@ -744,6 +744,641 @@ INSERT INTO `t_admin_log` VALUES ('618', 'admin', 'Member', 'excleexport', '?/ad
 INSERT INTO `t_admin_log` VALUES ('619', 'admin', 'Member', 'excleexport', '?/admin/Member/excleExport', '1', 'admin', '2130706433', '1522057037');
 INSERT INTO `t_admin_log` VALUES ('620', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522057047');
 INSERT INTO `t_admin_log` VALUES ('621', 'admin', 'Member', 'excleexport', '?/admin/Member/excleExport', '1', 'admin', '2130706433', '1522057049');
+INSERT INTO `t_admin_log` VALUES ('622', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114053');
+INSERT INTO `t_admin_log` VALUES ('623', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114438');
+INSERT INTO `t_admin_log` VALUES ('624', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522114441');
+INSERT INTO `t_admin_log` VALUES ('625', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114460');
+INSERT INTO `t_admin_log` VALUES ('626', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114504');
+INSERT INTO `t_admin_log` VALUES ('627', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522114508');
+INSERT INTO `t_admin_log` VALUES ('628', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114510');
+INSERT INTO `t_admin_log` VALUES ('629', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114821');
+INSERT INTO `t_admin_log` VALUES ('630', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522114827');
+INSERT INTO `t_admin_log` VALUES ('631', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114829');
+INSERT INTO `t_admin_log` VALUES ('632', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522114868');
+INSERT INTO `t_admin_log` VALUES ('633', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114870');
+INSERT INTO `t_admin_log` VALUES ('634', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114871');
+INSERT INTO `t_admin_log` VALUES ('635', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522114874');
+INSERT INTO `t_admin_log` VALUES ('636', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522114893');
+INSERT INTO `t_admin_log` VALUES ('637', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522114912');
+INSERT INTO `t_admin_log` VALUES ('638', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522114936');
+INSERT INTO `t_admin_log` VALUES ('639', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522114945');
+INSERT INTO `t_admin_log` VALUES ('640', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522114979');
+INSERT INTO `t_admin_log` VALUES ('641', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522114980');
+INSERT INTO `t_admin_log` VALUES ('642', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522115359');
+INSERT INTO `t_admin_log` VALUES ('643', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522115395');
+INSERT INTO `t_admin_log` VALUES ('644', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/24.html', '1', 'admin', '2130706433', '1522115409');
+INSERT INTO `t_admin_log` VALUES ('645', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/favicon.ico', '1', 'admin', '2130706433', '1522115411');
+INSERT INTO `t_admin_log` VALUES ('646', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/24.html', '1', 'admin', '2130706433', '1522115463');
+INSERT INTO `t_admin_log` VALUES ('647', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/favicon.ico', '1', 'admin', '2130706433', '1522115465');
+INSERT INTO `t_admin_log` VALUES ('648', 'admin', 'Menu', 'add', '?/admin/menu/add.html', '1', 'admin', '2130706433', '1522115487');
+INSERT INTO `t_admin_log` VALUES ('649', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/24.html', '1', 'admin', '2130706433', '1522115496');
+INSERT INTO `t_admin_log` VALUES ('650', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/favicon.ico', '1', 'admin', '2130706433', '1522115498');
+INSERT INTO `t_admin_log` VALUES ('651', 'admin', 'Menu', 'add', '?/admin/menu/add.html', '1', 'admin', '2130706433', '1522115511');
+INSERT INTO `t_admin_log` VALUES ('652', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/24.html', '1', 'admin', '2130706433', '1522115518');
+INSERT INTO `t_admin_log` VALUES ('653', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/favicon.ico', '1', 'admin', '2130706433', '1522115520');
+INSERT INTO `t_admin_log` VALUES ('654', 'admin', 'Menu', 'add', '?/admin/menu/add.html', '1', 'admin', '2130706433', '1522115632');
+INSERT INTO `t_admin_log` VALUES ('655', 'admin', 'Menu', 'info', '?/admin/menu/info/id/41.html', '1', 'admin', '2130706433', '1522115645');
+INSERT INTO `t_admin_log` VALUES ('656', 'admin', 'Menu', 'info', '?/admin/menu/info/id/favicon.ico', '1', 'admin', '2130706433', '1522115647');
+INSERT INTO `t_admin_log` VALUES ('657', 'admin', 'Menu', 'edit', '?/admin/menu/edit.html', '1', 'admin', '2130706433', '1522115649');
+INSERT INTO `t_admin_log` VALUES ('658', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/24.html', '1', 'admin', '2130706433', '1522115655');
+INSERT INTO `t_admin_log` VALUES ('659', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/favicon.ico', '1', 'admin', '2130706433', '1522115657');
+INSERT INTO `t_admin_log` VALUES ('660', 'admin', 'Menu', 'add', '?/admin/menu/add.html', '1', 'admin', '2130706433', '1522115677');
+INSERT INTO `t_admin_log` VALUES ('661', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/24.html', '1', 'admin', '2130706433', '1522115684');
+INSERT INTO `t_admin_log` VALUES ('662', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/favicon.ico', '1', 'admin', '2130706433', '1522115685');
+INSERT INTO `t_admin_log` VALUES ('663', 'admin', 'Menu', 'add', '?/admin/menu/add.html', '1', 'admin', '2130706433', '1522115719');
+INSERT INTO `t_admin_log` VALUES ('664', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522115728');
+INSERT INTO `t_admin_log` VALUES ('665', 'admin', 'Member', 'index', '?/admin/Member/index&%E6%9F%A5%E8%AF%A2=%E6%8F%90%E4%BA%A4', '1', 'admin', '2130706433', '1522115804');
+INSERT INTO `t_admin_log` VALUES ('666', 'admin', 'Member', 'index', '?/admin/Member/index&%E6%9F%A5%E8%AF%A2=%E6%8F%90%E4%BA%A4', '1', 'admin', '2130706433', '1522115810');
+INSERT INTO `t_admin_log` VALUES ('667', 'admin', 'Member', 'index', '?/admin/Member/index&%E6%9F%A5%E8%AF%A2=%E6%8F%90%E4%BA%A4', '1', 'admin', '2130706433', '1522115824');
+INSERT INTO `t_admin_log` VALUES ('668', 'admin', 'Member', 'index', '?/admin/Member/index&%E6%9F%A5%E8%AF%A2=%E6%8F%90%E4%BA%A4', '1', 'admin', '2130706433', '1522115828');
+INSERT INTO `t_admin_log` VALUES ('669', 'admin', 'Member', 'index', '?/admin/Member/index&%E6%9F%A5%E8%AF%A2=%E6%8F%90%E4%BA%A4', '1', 'admin', '2130706433', '1522115882');
+INSERT INTO `t_admin_log` VALUES ('670', 'admin', 'Member', 'index', '?/admin/Member/index&%E6%9F%A5%E8%AF%A2=%E6%8F%90%E4%BA%A4', '1', 'admin', '2130706433', '1522115893');
+INSERT INTO `t_admin_log` VALUES ('671', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522116717');
+INSERT INTO `t_admin_log` VALUES ('672', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522116726');
+INSERT INTO `t_admin_log` VALUES ('673', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522117132');
+INSERT INTO `t_admin_log` VALUES ('674', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522117143');
+INSERT INTO `t_admin_log` VALUES ('675', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522117171');
+INSERT INTO `t_admin_log` VALUES ('676', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522117204');
+INSERT INTO `t_admin_log` VALUES ('677', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522117315');
+INSERT INTO `t_admin_log` VALUES ('678', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522117358');
+INSERT INTO `t_admin_log` VALUES ('679', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522117390');
+INSERT INTO `t_admin_log` VALUES ('680', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118009');
+INSERT INTO `t_admin_log` VALUES ('681', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118026');
+INSERT INTO `t_admin_log` VALUES ('682', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118049');
+INSERT INTO `t_admin_log` VALUES ('683', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118092');
+INSERT INTO `t_admin_log` VALUES ('684', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118116');
+INSERT INTO `t_admin_log` VALUES ('685', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118129');
+INSERT INTO `t_admin_log` VALUES ('686', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118196');
+INSERT INTO `t_admin_log` VALUES ('687', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118288');
+INSERT INTO `t_admin_log` VALUES ('688', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118327');
+INSERT INTO `t_admin_log` VALUES ('689', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118934');
+INSERT INTO `t_admin_log` VALUES ('690', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118943');
+INSERT INTO `t_admin_log` VALUES ('691', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118975');
+INSERT INTO `t_admin_log` VALUES ('692', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522118983');
+INSERT INTO `t_admin_log` VALUES ('693', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119002');
+INSERT INTO `t_admin_log` VALUES ('694', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119054');
+INSERT INTO `t_admin_log` VALUES ('695', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119072');
+INSERT INTO `t_admin_log` VALUES ('696', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119078');
+INSERT INTO `t_admin_log` VALUES ('697', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119099');
+INSERT INTO `t_admin_log` VALUES ('698', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119163');
+INSERT INTO `t_admin_log` VALUES ('699', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119178');
+INSERT INTO `t_admin_log` VALUES ('700', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119189');
+INSERT INTO `t_admin_log` VALUES ('701', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119219');
+INSERT INTO `t_admin_log` VALUES ('702', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119312');
+INSERT INTO `t_admin_log` VALUES ('703', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119318');
+INSERT INTO `t_admin_log` VALUES ('704', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119322');
+INSERT INTO `t_admin_log` VALUES ('705', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522119714');
+INSERT INTO `t_admin_log` VALUES ('706', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119715');
+INSERT INTO `t_admin_log` VALUES ('707', 'admin', 'Member', 'index', '?/admin/member/index/export/favicon.ico', '1', 'admin', '2130706433', '1522119716');
+INSERT INTO `t_admin_log` VALUES ('708', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119748');
+INSERT INTO `t_admin_log` VALUES ('709', 'admin', 'Member', 'index', '?/admin/member/index/export/favicon.ico', '1', 'admin', '2130706433', '1522119749');
+INSERT INTO `t_admin_log` VALUES ('710', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119765');
+INSERT INTO `t_admin_log` VALUES ('711', 'admin', 'Member', 'index', '?/admin/member/index/export/favicon.ico', '1', 'admin', '2130706433', '1522119766');
+INSERT INTO `t_admin_log` VALUES ('712', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119772');
+INSERT INTO `t_admin_log` VALUES ('713', 'admin', 'Member', 'index', '?/admin/member/index/export/favicon.ico', '1', 'admin', '2130706433', '1522119773');
+INSERT INTO `t_admin_log` VALUES ('714', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119784');
+INSERT INTO `t_admin_log` VALUES ('715', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119797');
+INSERT INTO `t_admin_log` VALUES ('716', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119809');
+INSERT INTO `t_admin_log` VALUES ('717', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119828');
+INSERT INTO `t_admin_log` VALUES ('718', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119839');
+INSERT INTO `t_admin_log` VALUES ('719', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119849');
+INSERT INTO `t_admin_log` VALUES ('720', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119855');
+INSERT INTO `t_admin_log` VALUES ('721', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119872');
+INSERT INTO `t_admin_log` VALUES ('722', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119877');
+INSERT INTO `t_admin_log` VALUES ('723', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119898');
+INSERT INTO `t_admin_log` VALUES ('724', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119950');
+INSERT INTO `t_admin_log` VALUES ('725', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119954');
+INSERT INTO `t_admin_log` VALUES ('726', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119957');
+INSERT INTO `t_admin_log` VALUES ('727', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119963');
+INSERT INTO `t_admin_log` VALUES ('728', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522119974');
+INSERT INTO `t_admin_log` VALUES ('729', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120019');
+INSERT INTO `t_admin_log` VALUES ('730', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120104');
+INSERT INTO `t_admin_log` VALUES ('731', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120116');
+INSERT INTO `t_admin_log` VALUES ('732', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120147');
+INSERT INTO `t_admin_log` VALUES ('733', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120172');
+INSERT INTO `t_admin_log` VALUES ('734', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120213');
+INSERT INTO `t_admin_log` VALUES ('735', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120227');
+INSERT INTO `t_admin_log` VALUES ('736', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120254');
+INSERT INTO `t_admin_log` VALUES ('737', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120316');
+INSERT INTO `t_admin_log` VALUES ('738', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120363');
+INSERT INTO `t_admin_log` VALUES ('739', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120376');
+INSERT INTO `t_admin_log` VALUES ('740', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120438');
+INSERT INTO `t_admin_log` VALUES ('741', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120469');
+INSERT INTO `t_admin_log` VALUES ('742', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522120545');
+INSERT INTO `t_admin_log` VALUES ('743', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121042');
+INSERT INTO `t_admin_log` VALUES ('744', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121080');
+INSERT INTO `t_admin_log` VALUES ('745', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121083');
+INSERT INTO `t_admin_log` VALUES ('746', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121104');
+INSERT INTO `t_admin_log` VALUES ('747', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121160');
+INSERT INTO `t_admin_log` VALUES ('748', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121199');
+INSERT INTO `t_admin_log` VALUES ('749', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121225');
+INSERT INTO `t_admin_log` VALUES ('750', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121236');
+INSERT INTO `t_admin_log` VALUES ('751', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121276');
+INSERT INTO `t_admin_log` VALUES ('752', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121292');
+INSERT INTO `t_admin_log` VALUES ('753', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121428');
+INSERT INTO `t_admin_log` VALUES ('754', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121540');
+INSERT INTO `t_admin_log` VALUES ('755', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121550');
+INSERT INTO `t_admin_log` VALUES ('756', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121586');
+INSERT INTO `t_admin_log` VALUES ('757', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121593');
+INSERT INTO `t_admin_log` VALUES ('758', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121593');
+INSERT INTO `t_admin_log` VALUES ('759', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121613');
+INSERT INTO `t_admin_log` VALUES ('760', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121728');
+INSERT INTO `t_admin_log` VALUES ('761', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121813');
+INSERT INTO `t_admin_log` VALUES ('762', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121831');
+INSERT INTO `t_admin_log` VALUES ('763', 'admin', 'Member', 'index', '?/admin/member/index/export/1.html', '1', 'admin', '2130706433', '1522121849');
+INSERT INTO `t_admin_log` VALUES ('764', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522121873');
+INSERT INTO `t_admin_log` VALUES ('765', 'admin', 'Member', 'info', '?/admin/Member/info', '1', 'admin', '2130706433', '1522121888');
+INSERT INTO `t_admin_log` VALUES ('766', 'admin', 'Member', 'info', '?/admin/Member/info', '1', 'admin', '2130706433', '1522122027');
+INSERT INTO `t_admin_log` VALUES ('767', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122137');
+INSERT INTO `t_admin_log` VALUES ('768', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122249');
+INSERT INTO `t_admin_log` VALUES ('769', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522122250');
+INSERT INTO `t_admin_log` VALUES ('770', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522122304');
+INSERT INTO `t_admin_log` VALUES ('771', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522122766');
+INSERT INTO `t_admin_log` VALUES ('772', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122769');
+INSERT INTO `t_admin_log` VALUES ('773', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522122774');
+INSERT INTO `t_admin_log` VALUES ('774', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122775');
+INSERT INTO `t_admin_log` VALUES ('775', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122791');
+INSERT INTO `t_admin_log` VALUES ('776', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522122793');
+INSERT INTO `t_admin_log` VALUES ('777', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122794');
+INSERT INTO `t_admin_log` VALUES ('778', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122816');
+INSERT INTO `t_admin_log` VALUES ('779', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522122818');
+INSERT INTO `t_admin_log` VALUES ('780', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522122882');
+INSERT INTO `t_admin_log` VALUES ('781', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29.html', '1', 'admin', '2130706433', '1522122902');
+INSERT INTO `t_admin_log` VALUES ('782', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122904');
+INSERT INTO `t_admin_log` VALUES ('783', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122932');
+INSERT INTO `t_admin_log` VALUES ('784', 'admin', 'Member', 'opreation', '?/admin/member/opreation/trade/29.html', '1', 'admin', '2130706433', '1522122936');
+INSERT INTO `t_admin_log` VALUES ('785', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522122938');
+INSERT INTO `t_admin_log` VALUES ('786', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123190');
+INSERT INTO `t_admin_log` VALUES ('787', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123394');
+INSERT INTO `t_admin_log` VALUES ('788', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123398');
+INSERT INTO `t_admin_log` VALUES ('789', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123425');
+INSERT INTO `t_admin_log` VALUES ('790', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123431');
+INSERT INTO `t_admin_log` VALUES ('791', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123447');
+INSERT INTO `t_admin_log` VALUES ('792', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123526');
+INSERT INTO `t_admin_log` VALUES ('793', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123543');
+INSERT INTO `t_admin_log` VALUES ('794', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123726');
+INSERT INTO `t_admin_log` VALUES ('795', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/29/type/0.html', '1', 'admin', '2130706433', '1522123728');
+INSERT INTO `t_admin_log` VALUES ('796', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123729');
+INSERT INTO `t_admin_log` VALUES ('797', 'admin', 'Member', 'opreation', '?/admin/member/opreation/trade/29/type/0.html', '1', 'admin', '2130706433', '1522123731');
+INSERT INTO `t_admin_log` VALUES ('798', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123732');
+INSERT INTO `t_admin_log` VALUES ('799', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/28/type/1.html', '1', 'admin', '2130706433', '1522123733');
+INSERT INTO `t_admin_log` VALUES ('800', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123735');
+INSERT INTO `t_admin_log` VALUES ('801', 'admin', 'Member', 'opreation', '?/admin/member/opreation/lock/28/type/0.html', '1', 'admin', '2130706433', '1522123736');
+INSERT INTO `t_admin_log` VALUES ('802', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522123737');
+INSERT INTO `t_admin_log` VALUES ('803', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522125301');
+INSERT INTO `t_admin_log` VALUES ('804', 'admin', 'Member', 'index', '?/admin/Member/index&page=2', '1', 'admin', '2130706433', '1522125307');
+INSERT INTO `t_admin_log` VALUES ('805', 'admin', 'Member', 'del', '?/admin/member/del/Id/8.html', '1', 'admin', '2130706433', '1522125330');
+INSERT INTO `t_admin_log` VALUES ('806', 'admin', 'Member', 'del', '?/admin/member/del/Id/8.html', '1', 'admin', '2130706433', '1522125364');
+INSERT INTO `t_admin_log` VALUES ('807', 'admin', 'Member', 'index', '?/admin/Member/index&page=2', '1', 'admin', '2130706433', '1522125366');
+INSERT INTO `t_admin_log` VALUES ('808', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522125368');
+INSERT INTO `t_admin_log` VALUES ('809', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522125662');
+INSERT INTO `t_admin_log` VALUES ('810', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522125784');
+INSERT INTO `t_admin_log` VALUES ('811', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522125815');
+INSERT INTO `t_admin_log` VALUES ('812', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522125946');
+INSERT INTO `t_admin_log` VALUES ('813', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522125958');
+INSERT INTO `t_admin_log` VALUES ('814', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522125980');
+INSERT INTO `t_admin_log` VALUES ('815', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522126014');
+INSERT INTO `t_admin_log` VALUES ('816', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136478');
+INSERT INTO `t_admin_log` VALUES ('817', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136584');
+INSERT INTO `t_admin_log` VALUES ('818', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136593');
+INSERT INTO `t_admin_log` VALUES ('819', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136608');
+INSERT INTO `t_admin_log` VALUES ('820', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136628');
+INSERT INTO `t_admin_log` VALUES ('821', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136640');
+INSERT INTO `t_admin_log` VALUES ('822', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136663');
+INSERT INTO `t_admin_log` VALUES ('823', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136738');
+INSERT INTO `t_admin_log` VALUES ('824', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136748');
+INSERT INTO `t_admin_log` VALUES ('825', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136782');
+INSERT INTO `t_admin_log` VALUES ('826', 'admin', 'Member', 'info', '?/admin/member/info/Id/29.html', '1', 'admin', '2130706433', '1522136784');
+INSERT INTO `t_admin_log` VALUES ('827', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522136786');
+INSERT INTO `t_admin_log` VALUES ('828', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522136786');
+INSERT INTO `t_admin_log` VALUES ('829', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522138882');
+INSERT INTO `t_admin_log` VALUES ('830', 'admin', 'Member', 'reset', '?/admin/member/reset/Id/21.html', '1', 'admin', '2130706433', '1522138892');
+INSERT INTO `t_admin_log` VALUES ('831', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522138894');
+INSERT INTO `t_admin_log` VALUES ('832', 'admin', 'Member', 'reset', '?/admin/member/reset/Id/20.html', '1', 'admin', '2130706433', '1522138947');
+INSERT INTO `t_admin_log` VALUES ('833', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522138950');
+INSERT INTO `t_admin_log` VALUES ('834', 'admin', 'Member', 'reset', '?/admin/member/reset/Id/19.html', '1', 'admin', '2130706433', '1522138967');
+INSERT INTO `t_admin_log` VALUES ('835', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522138971');
+INSERT INTO `t_admin_log` VALUES ('836', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522138973');
+INSERT INTO `t_admin_log` VALUES ('837', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522138999');
+INSERT INTO `t_admin_log` VALUES ('838', 'admin', 'Member', 'reset', '?/admin/member/reset/Id/26.html', '1', 'admin', '2130706433', '1522139002');
+INSERT INTO `t_admin_log` VALUES ('839', 'admin', 'Member', 'reset', '?/admin/member/reset/Id/26.html', '1', 'admin', '2130706433', '1522139063');
+INSERT INTO `t_admin_log` VALUES ('840', 'admin', 'Member', 'reset', '?/admin/member/reset/Id/26.html', '1', 'admin', '2130706433', '1522139111');
+INSERT INTO `t_admin_log` VALUES ('841', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522139113');
+INSERT INTO `t_admin_log` VALUES ('842', 'admin', 'Member', 'info', '?/admin/member/info/Id/26.html', '1', 'admin', '2130706433', '1522139130');
+INSERT INTO `t_admin_log` VALUES ('843', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522139132');
+INSERT INTO `t_admin_log` VALUES ('844', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522139133');
+INSERT INTO `t_admin_log` VALUES ('845', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522139164');
+INSERT INTO `t_admin_log` VALUES ('846', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522139166');
+INSERT INTO `t_admin_log` VALUES ('847', 'admin', 'Member', 'activation', '?/admin/Member/activation', '1', 'admin', '2130706433', '1522139169');
+INSERT INTO `t_admin_log` VALUES ('848', 'admin', 'Member', 'index', '?/admin/Member/index&page=1', '1', 'admin', '2130706433', '1522139171');
+INSERT INTO `t_admin_log` VALUES ('849', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522139182');
+INSERT INTO `t_admin_log` VALUES ('850', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522139275');
+INSERT INTO `t_admin_log` VALUES ('851', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522139288');
+INSERT INTO `t_admin_log` VALUES ('852', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522139306');
+INSERT INTO `t_admin_log` VALUES ('853', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522139309');
+INSERT INTO `t_admin_log` VALUES ('854', 'admin', 'Member', 'activation', '?/admin/Member/activation', '1', 'admin', '2130706433', '1522139332');
+INSERT INTO `t_admin_log` VALUES ('855', 'admin', 'Member', 'index', '?/admin/Member/', '1', 'admin', '2130706433', '1522139703');
+INSERT INTO `t_admin_log` VALUES ('856', 'admin', 'Menu', 'info', '?/admin/menu/info/id/40.html', '1', 'admin', '2130706433', '1522139733');
+INSERT INTO `t_admin_log` VALUES ('857', 'admin', 'Menu', 'info', '?/admin/menu/info/id/favicon.ico', '1', 'admin', '2130706433', '1522139734');
+INSERT INTO `t_admin_log` VALUES ('858', 'admin', 'Menu', 'del', '?/admin/menu/del/id/40.html', '1', 'admin', '2130706433', '1522139740');
+INSERT INTO `t_admin_log` VALUES ('859', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522139746');
+INSERT INTO `t_admin_log` VALUES ('860', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522139771');
+INSERT INTO `t_admin_log` VALUES ('861', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522139780');
+INSERT INTO `t_admin_log` VALUES ('862', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522139783');
+INSERT INTO `t_admin_log` VALUES ('863', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522139787');
+INSERT INTO `t_admin_log` VALUES ('864', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522139797');
+INSERT INTO `t_admin_log` VALUES ('865', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522139876');
+INSERT INTO `t_admin_log` VALUES ('866', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522140465');
+INSERT INTO `t_admin_log` VALUES ('867', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522143239');
+INSERT INTO `t_admin_log` VALUES ('868', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522143266');
+INSERT INTO `t_admin_log` VALUES ('869', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522143274');
+INSERT INTO `t_admin_log` VALUES ('870', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143279');
+INSERT INTO `t_admin_log` VALUES ('871', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143312');
+INSERT INTO `t_admin_log` VALUES ('872', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143328');
+INSERT INTO `t_admin_log` VALUES ('873', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143350');
+INSERT INTO `t_admin_log` VALUES ('874', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143355');
+INSERT INTO `t_admin_log` VALUES ('875', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143395');
+INSERT INTO `t_admin_log` VALUES ('876', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143399');
+INSERT INTO `t_admin_log` VALUES ('877', 'admin', 'Member', 'favicon.ico', '?/admin/member/favicon.ico', '1', 'admin', '2130706433', '1522143400');
+INSERT INTO `t_admin_log` VALUES ('878', 'admin', 'Member', 'favicon.ico', '?/admin/member/favicon.ico', '1', 'admin', '2130706433', '1522143401');
+INSERT INTO `t_admin_log` VALUES ('879', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143429');
+INSERT INTO `t_admin_log` VALUES ('880', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143450');
+INSERT INTO `t_admin_log` VALUES ('881', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143459');
+INSERT INTO `t_admin_log` VALUES ('882', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143488');
+INSERT INTO `t_admin_log` VALUES ('883', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143502');
+INSERT INTO `t_admin_log` VALUES ('884', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143515');
+INSERT INTO `t_admin_log` VALUES ('885', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143528');
+INSERT INTO `t_admin_log` VALUES ('886', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143536');
+INSERT INTO `t_admin_log` VALUES ('887', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143565');
+INSERT INTO `t_admin_log` VALUES ('888', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143570');
+INSERT INTO `t_admin_log` VALUES ('889', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143576');
+INSERT INTO `t_admin_log` VALUES ('890', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143588');
+INSERT INTO `t_admin_log` VALUES ('891', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143593');
+INSERT INTO `t_admin_log` VALUES ('892', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143616');
+INSERT INTO `t_admin_log` VALUES ('893', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143622');
+INSERT INTO `t_admin_log` VALUES ('894', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143631');
+INSERT INTO `t_admin_log` VALUES ('895', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143638');
+INSERT INTO `t_admin_log` VALUES ('896', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143647');
+INSERT INTO `t_admin_log` VALUES ('897', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143666');
+INSERT INTO `t_admin_log` VALUES ('898', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143674');
+INSERT INTO `t_admin_log` VALUES ('899', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143690');
+INSERT INTO `t_admin_log` VALUES ('900', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143806');
+INSERT INTO `t_admin_log` VALUES ('901', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143817');
+INSERT INTO `t_admin_log` VALUES ('902', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143829');
+INSERT INTO `t_admin_log` VALUES ('903', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143917');
+INSERT INTO `t_admin_log` VALUES ('904', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522143923');
+INSERT INTO `t_admin_log` VALUES ('905', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522145842');
+INSERT INTO `t_admin_log` VALUES ('906', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522145961');
+INSERT INTO `t_admin_log` VALUES ('907', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522145982');
+INSERT INTO `t_admin_log` VALUES ('908', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146126');
+INSERT INTO `t_admin_log` VALUES ('909', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146143');
+INSERT INTO `t_admin_log` VALUES ('910', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146255');
+INSERT INTO `t_admin_log` VALUES ('911', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146257');
+INSERT INTO `t_admin_log` VALUES ('912', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146304');
+INSERT INTO `t_admin_log` VALUES ('913', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146305');
+INSERT INTO `t_admin_log` VALUES ('914', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146383');
+INSERT INTO `t_admin_log` VALUES ('915', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146385');
+INSERT INTO `t_admin_log` VALUES ('916', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146427');
+INSERT INTO `t_admin_log` VALUES ('917', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146466');
+INSERT INTO `t_admin_log` VALUES ('918', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146478');
+INSERT INTO `t_admin_log` VALUES ('919', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146479');
+INSERT INTO `t_admin_log` VALUES ('920', 'admin', 'Member', 'register', '?/admin/member/register.html', '1', 'admin', '2130706433', '1522146501');
+INSERT INTO `t_admin_log` VALUES ('921', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522146506');
+INSERT INTO `t_admin_log` VALUES ('922', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522146508');
+INSERT INTO `t_admin_log` VALUES ('923', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522146509');
+INSERT INTO `t_admin_log` VALUES ('924', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522146601');
+INSERT INTO `t_admin_log` VALUES ('925', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522146631');
+INSERT INTO `t_admin_log` VALUES ('926', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147135');
+INSERT INTO `t_admin_log` VALUES ('927', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147168');
+INSERT INTO `t_admin_log` VALUES ('928', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147212');
+INSERT INTO `t_admin_log` VALUES ('929', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147213');
+INSERT INTO `t_admin_log` VALUES ('930', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147238');
+INSERT INTO `t_admin_log` VALUES ('931', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147252');
+INSERT INTO `t_admin_log` VALUES ('932', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147265');
+INSERT INTO `t_admin_log` VALUES ('933', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147270');
+INSERT INTO `t_admin_log` VALUES ('934', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147316');
+INSERT INTO `t_admin_log` VALUES ('935', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147403');
+INSERT INTO `t_admin_log` VALUES ('936', 'admin', 'Member', 'register', '?/admin/member/register', '1', 'admin', '2130706433', '1522147488');
+INSERT INTO `t_admin_log` VALUES ('937', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522147492');
+INSERT INTO `t_admin_log` VALUES ('938', 'admin', 'Member', 'info', '?/admin/member/info/Id/33.html', '1', 'admin', '2130706433', '1522147495');
+INSERT INTO `t_admin_log` VALUES ('939', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147496');
+INSERT INTO `t_admin_log` VALUES ('940', 'admin', 'Member', 'info', '?/admin/member/info/Id/33.html', '1', 'admin', '2130706433', '1522147503');
+INSERT INTO `t_admin_log` VALUES ('941', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147505');
+INSERT INTO `t_admin_log` VALUES ('942', 'admin', 'Member', 'info', '?/admin/member/info/Id/33.html', '1', 'admin', '2130706433', '1522147628');
+INSERT INTO `t_admin_log` VALUES ('943', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147629');
+INSERT INTO `t_admin_log` VALUES ('944', 'admin', 'Member', 'info', '?/admin/member/info/Id/33.html', '1', 'admin', '2130706433', '1522147639');
+INSERT INTO `t_admin_log` VALUES ('945', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147641');
+INSERT INTO `t_admin_log` VALUES ('946', 'admin', 'Member', 'info', '?/admin/member/info/Id/33.html', '1', 'admin', '2130706433', '1522147646');
+INSERT INTO `t_admin_log` VALUES ('947', 'admin', 'Member', 'info', '?/admin/member/info/Id/33.html', '1', 'admin', '2130706433', '1522147647');
+INSERT INTO `t_admin_log` VALUES ('948', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147648');
+INSERT INTO `t_admin_log` VALUES ('949', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147648');
+INSERT INTO `t_admin_log` VALUES ('950', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522147651');
+INSERT INTO `t_admin_log` VALUES ('951', 'admin', 'Member', 'info', '?/admin/member/info/Id/32.html', '1', 'admin', '2130706433', '1522147656');
+INSERT INTO `t_admin_log` VALUES ('952', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147658');
+INSERT INTO `t_admin_log` VALUES ('953', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522147659');
+INSERT INTO `t_admin_log` VALUES ('954', 'admin', 'Member', 'info', '?/admin/member/info/Id/30.html', '1', 'admin', '2130706433', '1522147663');
+INSERT INTO `t_admin_log` VALUES ('955', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147665');
+INSERT INTO `t_admin_log` VALUES ('956', 'admin', 'Member', 'info', '?/admin/member/info/Id/30.html', '1', 'admin', '2130706433', '1522147683');
+INSERT INTO `t_admin_log` VALUES ('957', 'admin', 'Member', 'info', '?/admin/member/info/Id/favicon.ico', '1', 'admin', '2130706433', '1522147685');
+INSERT INTO `t_admin_log` VALUES ('958', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522147863');
+INSERT INTO `t_admin_log` VALUES ('959', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522153979');
+INSERT INTO `t_admin_log` VALUES ('960', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522153980');
+INSERT INTO `t_admin_log` VALUES ('961', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522153997');
+INSERT INTO `t_admin_log` VALUES ('962', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522153998');
+INSERT INTO `t_admin_log` VALUES ('963', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522153999');
+INSERT INTO `t_admin_log` VALUES ('964', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154034');
+INSERT INTO `t_admin_log` VALUES ('965', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154037');
+INSERT INTO `t_admin_log` VALUES ('966', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154039');
+INSERT INTO `t_admin_log` VALUES ('967', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154054');
+INSERT INTO `t_admin_log` VALUES ('968', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154056');
+INSERT INTO `t_admin_log` VALUES ('969', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154058');
+INSERT INTO `t_admin_log` VALUES ('970', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154087');
+INSERT INTO `t_admin_log` VALUES ('971', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154088');
+INSERT INTO `t_admin_log` VALUES ('972', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154089');
+INSERT INTO `t_admin_log` VALUES ('973', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154101');
+INSERT INTO `t_admin_log` VALUES ('974', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154102');
+INSERT INTO `t_admin_log` VALUES ('975', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154104');
+INSERT INTO `t_admin_log` VALUES ('976', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154156');
+INSERT INTO `t_admin_log` VALUES ('977', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154163');
+INSERT INTO `t_admin_log` VALUES ('978', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522154164');
+INSERT INTO `t_admin_log` VALUES ('979', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154169');
+INSERT INTO `t_admin_log` VALUES ('980', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522154171');
+INSERT INTO `t_admin_log` VALUES ('981', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154172');
+INSERT INTO `t_admin_log` VALUES ('982', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522154174');
+INSERT INTO `t_admin_log` VALUES ('983', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522154234');
+INSERT INTO `t_admin_log` VALUES ('984', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154235');
+INSERT INTO `t_admin_log` VALUES ('985', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154237');
+INSERT INTO `t_admin_log` VALUES ('986', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154263');
+INSERT INTO `t_admin_log` VALUES ('987', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154263');
+INSERT INTO `t_admin_log` VALUES ('988', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154268');
+INSERT INTO `t_admin_log` VALUES ('989', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154270');
+INSERT INTO `t_admin_log` VALUES ('990', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154270');
+INSERT INTO `t_admin_log` VALUES ('991', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154275');
+INSERT INTO `t_admin_log` VALUES ('992', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154385');
+INSERT INTO `t_admin_log` VALUES ('993', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154424');
+INSERT INTO `t_admin_log` VALUES ('994', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154464');
+INSERT INTO `t_admin_log` VALUES ('995', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154466');
+INSERT INTO `t_admin_log` VALUES ('996', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154505');
+INSERT INTO `t_admin_log` VALUES ('997', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154507');
+INSERT INTO `t_admin_log` VALUES ('998', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154521');
+INSERT INTO `t_admin_log` VALUES ('999', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154523');
+INSERT INTO `t_admin_log` VALUES ('1000', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154555');
+INSERT INTO `t_admin_log` VALUES ('1001', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154557');
+INSERT INTO `t_admin_log` VALUES ('1002', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154583');
+INSERT INTO `t_admin_log` VALUES ('1003', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154585');
+INSERT INTO `t_admin_log` VALUES ('1004', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154603');
+INSERT INTO `t_admin_log` VALUES ('1005', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154605');
+INSERT INTO `t_admin_log` VALUES ('1006', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154615');
+INSERT INTO `t_admin_log` VALUES ('1007', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154620');
+INSERT INTO `t_admin_log` VALUES ('1008', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/33.html', '1', 'admin', '2130706433', '1522154622');
+INSERT INTO `t_admin_log` VALUES ('1009', 'admin', 'Member', 'edit', '?/admin/member/edit/Id/favicon.ico', '1', 'admin', '2130706433', '1522154623');
+INSERT INTO `t_admin_log` VALUES ('1010', 'admin', 'Member', 'index', '?/admin/member/index.html', '1', 'admin', '2130706433', '1522154624');
+INSERT INTO `t_admin_log` VALUES ('1011', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522154642');
+INSERT INTO `t_admin_log` VALUES ('1012', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/33.html', '1', 'admin', '2130706433', '1522154676');
+INSERT INTO `t_admin_log` VALUES ('1013', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/favicon.ico', '1', 'admin', '2130706433', '1522154678');
+INSERT INTO `t_admin_log` VALUES ('1014', 'admin', 'Menu', 'add', '?/admin/menu/add.html', '1', 'admin', '2130706433', '1522154706');
+INSERT INTO `t_admin_log` VALUES ('1015', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522154812');
+INSERT INTO `t_admin_log` VALUES ('1016', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522154841');
+INSERT INTO `t_admin_log` VALUES ('1017', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522154848');
+INSERT INTO `t_admin_log` VALUES ('1018', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522154851');
+INSERT INTO `t_admin_log` VALUES ('1019', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522155581');
+INSERT INTO `t_admin_log` VALUES ('1020', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522155583');
+INSERT INTO `t_admin_log` VALUES ('1021', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522155591');
+INSERT INTO `t_admin_log` VALUES ('1022', 'admin', 'Bonus', 'favicon.ico', '?/admin/bonus/favicon.ico', '1', 'admin', '2130706433', '1522155593');
+INSERT INTO `t_admin_log` VALUES ('1023', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522155602');
+INSERT INTO `t_admin_log` VALUES ('1024', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522155612');
+INSERT INTO `t_admin_log` VALUES ('1025', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522156375');
+INSERT INTO `t_admin_log` VALUES ('1026', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522156383');
+INSERT INTO `t_admin_log` VALUES ('1027', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522156432');
+INSERT INTO `t_admin_log` VALUES ('1028', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522156519');
+INSERT INTO `t_admin_log` VALUES ('1029', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522156540');
+INSERT INTO `t_admin_log` VALUES ('1030', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522156544');
+INSERT INTO `t_admin_log` VALUES ('1031', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158531');
+INSERT INTO `t_admin_log` VALUES ('1032', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158571');
+INSERT INTO `t_admin_log` VALUES ('1033', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158602');
+INSERT INTO `t_admin_log` VALUES ('1034', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158667');
+INSERT INTO `t_admin_log` VALUES ('1035', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158807');
+INSERT INTO `t_admin_log` VALUES ('1036', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158815');
+INSERT INTO `t_admin_log` VALUES ('1037', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158823');
+INSERT INTO `t_admin_log` VALUES ('1038', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158836');
+INSERT INTO `t_admin_log` VALUES ('1039', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522158849');
+INSERT INTO `t_admin_log` VALUES ('1040', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159468');
+INSERT INTO `t_admin_log` VALUES ('1041', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159475');
+INSERT INTO `t_admin_log` VALUES ('1042', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159526');
+INSERT INTO `t_admin_log` VALUES ('1043', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159579');
+INSERT INTO `t_admin_log` VALUES ('1044', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159610');
+INSERT INTO `t_admin_log` VALUES ('1045', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159788');
+INSERT INTO `t_admin_log` VALUES ('1046', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159806');
+INSERT INTO `t_admin_log` VALUES ('1047', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159818');
+INSERT INTO `t_admin_log` VALUES ('1048', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159826');
+INSERT INTO `t_admin_log` VALUES ('1049', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522159855');
+INSERT INTO `t_admin_log` VALUES ('1050', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/33.html', '1', 'admin', '2130706433', '1522159957');
+INSERT INTO `t_admin_log` VALUES ('1051', 'admin', 'Menu', 'info', '?/admin/menu/info/parentid/favicon.ico', '1', 'admin', '2130706433', '1522159959');
+INSERT INTO `t_admin_log` VALUES ('1052', 'admin', 'Menu', 'add', '?/admin/menu/add.html', '1', 'admin', '2130706433', '1522159995');
+INSERT INTO `t_admin_log` VALUES ('1053', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522160084');
+INSERT INTO `t_admin_log` VALUES ('1054', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522160086');
+INSERT INTO `t_admin_log` VALUES ('1055', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522160246');
+INSERT INTO `t_admin_log` VALUES ('1056', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522160248');
+INSERT INTO `t_admin_log` VALUES ('1057', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/favicon.ico', '1', 'admin', '2130706433', '1522160250');
+INSERT INTO `t_admin_log` VALUES ('1058', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522160414');
+INSERT INTO `t_admin_log` VALUES ('1059', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/favicon.ico', '1', 'admin', '2130706433', '1522160415');
+INSERT INTO `t_admin_log` VALUES ('1060', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/24.html', '1', 'admin', '2130706433', '1522160419');
+INSERT INTO `t_admin_log` VALUES ('1061', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/1.html', '1', 'admin', '2130706433', '1522160424');
+INSERT INTO `t_admin_log` VALUES ('1062', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/favicon.ico', '1', 'admin', '2130706433', '1522160425');
+INSERT INTO `t_admin_log` VALUES ('1063', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/4.html', '1', 'admin', '2130706433', '1522160427');
+INSERT INTO `t_admin_log` VALUES ('1064', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/1.html', '1', 'admin', '2130706433', '1522160429');
+INSERT INTO `t_admin_log` VALUES ('1065', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/favicon.ico', '1', 'admin', '2130706433', '1522160431');
+INSERT INTO `t_admin_log` VALUES ('1066', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/1.html', '1', 'admin', '2130706433', '1522160508');
+INSERT INTO `t_admin_log` VALUES ('1067', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/1.html', '1', 'admin', '2130706433', '1522160522');
+INSERT INTO `t_admin_log` VALUES ('1068', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522160539');
+INSERT INTO `t_admin_log` VALUES ('1069', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/favicon.ico', '1', 'admin', '2130706433', '1522160541');
+INSERT INTO `t_admin_log` VALUES ('1070', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522160543');
+INSERT INTO `t_admin_log` VALUES ('1071', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/favicon.ico', '1', 'admin', '2130706433', '1522160545');
+INSERT INTO `t_admin_log` VALUES ('1072', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522160558');
+INSERT INTO `t_admin_log` VALUES ('1073', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/favicon.ico', '1', 'admin', '2130706433', '1522160560');
+INSERT INTO `t_admin_log` VALUES ('1074', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522160561');
+INSERT INTO `t_admin_log` VALUES ('1075', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/favicon.ico', '1', 'admin', '2130706433', '1522160562');
+INSERT INTO `t_admin_log` VALUES ('1076', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522160599');
+INSERT INTO `t_admin_log` VALUES ('1077', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161164');
+INSERT INTO `t_admin_log` VALUES ('1078', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161223');
+INSERT INTO `t_admin_log` VALUES ('1079', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161272');
+INSERT INTO `t_admin_log` VALUES ('1080', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161397');
+INSERT INTO `t_admin_log` VALUES ('1081', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161659');
+INSERT INTO `t_admin_log` VALUES ('1082', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161677');
+INSERT INTO `t_admin_log` VALUES ('1083', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161687');
+INSERT INTO `t_admin_log` VALUES ('1084', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161748');
+INSERT INTO `t_admin_log` VALUES ('1085', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161792');
+INSERT INTO `t_admin_log` VALUES ('1086', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522161803');
+INSERT INTO `t_admin_log` VALUES ('1087', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522162520');
+INSERT INTO `t_admin_log` VALUES ('1088', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522162665');
+INSERT INTO `t_admin_log` VALUES ('1089', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522162679');
+INSERT INTO `t_admin_log` VALUES ('1090', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522162692');
+INSERT INTO `t_admin_log` VALUES ('1091', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522162738');
+INSERT INTO `t_admin_log` VALUES ('1092', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522162740');
+INSERT INTO `t_admin_log` VALUES ('1093', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522162744');
+INSERT INTO `t_admin_log` VALUES ('1094', 'admin', 'Bonus', 'index', '?/admin/bonus', '1', 'admin', '2130706433', '1522162752');
+INSERT INTO `t_admin_log` VALUES ('1095', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522162759');
+INSERT INTO `t_admin_log` VALUES ('1096', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522162763');
+INSERT INTO `t_admin_log` VALUES ('1097', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522162791');
+INSERT INTO `t_admin_log` VALUES ('1098', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522162806');
+INSERT INTO `t_admin_log` VALUES ('1099', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522162817');
+INSERT INTO `t_admin_log` VALUES ('1100', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522162818');
+INSERT INTO `t_admin_log` VALUES ('1101', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522162829');
+INSERT INTO `t_admin_log` VALUES ('1102', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522162831');
+INSERT INTO `t_admin_log` VALUES ('1103', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522162958');
+INSERT INTO `t_admin_log` VALUES ('1104', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522162962');
+INSERT INTO `t_admin_log` VALUES ('1105', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522162995');
+INSERT INTO `t_admin_log` VALUES ('1106', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163043');
+INSERT INTO `t_admin_log` VALUES ('1107', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163045');
+INSERT INTO `t_admin_log` VALUES ('1108', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163099');
+INSERT INTO `t_admin_log` VALUES ('1109', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163101');
+INSERT INTO `t_admin_log` VALUES ('1110', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163123');
+INSERT INTO `t_admin_log` VALUES ('1111', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163124');
+INSERT INTO `t_admin_log` VALUES ('1112', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163153');
+INSERT INTO `t_admin_log` VALUES ('1113', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163225');
+INSERT INTO `t_admin_log` VALUES ('1114', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163240');
+INSERT INTO `t_admin_log` VALUES ('1115', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163246');
+INSERT INTO `t_admin_log` VALUES ('1116', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163317');
+INSERT INTO `t_admin_log` VALUES ('1117', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163318');
+INSERT INTO `t_admin_log` VALUES ('1118', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163320');
+INSERT INTO `t_admin_log` VALUES ('1119', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163327');
+INSERT INTO `t_admin_log` VALUES ('1120', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163329');
+INSERT INTO `t_admin_log` VALUES ('1121', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163330');
+INSERT INTO `t_admin_log` VALUES ('1122', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163356');
+INSERT INTO `t_admin_log` VALUES ('1123', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163358');
+INSERT INTO `t_admin_log` VALUES ('1124', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163360');
+INSERT INTO `t_admin_log` VALUES ('1125', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/2.html', '1', 'admin', '2130706433', '1522163403');
+INSERT INTO `t_admin_log` VALUES ('1126', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163404');
+INSERT INTO `t_admin_log` VALUES ('1127', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163406');
+INSERT INTO `t_admin_log` VALUES ('1128', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163411');
+INSERT INTO `t_admin_log` VALUES ('1129', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163412');
+INSERT INTO `t_admin_log` VALUES ('1130', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163414');
+INSERT INTO `t_admin_log` VALUES ('1131', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163480');
+INSERT INTO `t_admin_log` VALUES ('1132', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163484');
+INSERT INTO `t_admin_log` VALUES ('1133', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163485');
+INSERT INTO `t_admin_log` VALUES ('1134', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163489');
+INSERT INTO `t_admin_log` VALUES ('1135', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163522');
+INSERT INTO `t_admin_log` VALUES ('1136', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163524');
+INSERT INTO `t_admin_log` VALUES ('1137', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163525');
+INSERT INTO `t_admin_log` VALUES ('1138', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163620');
+INSERT INTO `t_admin_log` VALUES ('1139', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/', '1', 'admin', '2130706433', '1522163621');
+INSERT INTO `t_admin_log` VALUES ('1140', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163622');
+INSERT INTO `t_admin_log` VALUES ('1141', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/favicon.ico', '1', 'admin', '2130706433', '1522163623');
+INSERT INTO `t_admin_log` VALUES ('1142', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163654');
+INSERT INTO `t_admin_log` VALUES ('1143', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522163685');
+INSERT INTO `t_admin_log` VALUES ('1144', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/0.html', '1', 'admin', '2130706433', '1522163718');
+INSERT INTO `t_admin_log` VALUES ('1145', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522163719');
+INSERT INTO `t_admin_log` VALUES ('1146', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522163740');
+INSERT INTO `t_admin_log` VALUES ('1147', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/1.html', '1', 'admin', '2130706433', '1522163744');
+INSERT INTO `t_admin_log` VALUES ('1148', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522163745');
+INSERT INTO `t_admin_log` VALUES ('1149', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting/type/1.html', '1', 'admin', '2130706433', '1522163751');
+INSERT INTO `t_admin_log` VALUES ('1150', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522163752');
+INSERT INTO `t_admin_log` VALUES ('1151', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522163773');
+INSERT INTO `t_admin_log` VALUES ('1152', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522163775');
+INSERT INTO `t_admin_log` VALUES ('1153', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522163790');
+INSERT INTO `t_admin_log` VALUES ('1154', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522164106');
+INSERT INTO `t_admin_log` VALUES ('1155', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522164124');
+INSERT INTO `t_admin_log` VALUES ('1156', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522164211');
+INSERT INTO `t_admin_log` VALUES ('1157', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522164225');
+INSERT INTO `t_admin_log` VALUES ('1158', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522164238');
+INSERT INTO `t_admin_log` VALUES ('1159', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522164265');
+INSERT INTO `t_admin_log` VALUES ('1160', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522164274');
+INSERT INTO `t_admin_log` VALUES ('1161', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522164276');
+INSERT INTO `t_admin_log` VALUES ('1162', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522164277');
+INSERT INTO `t_admin_log` VALUES ('1163', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522333930');
+INSERT INTO `t_admin_log` VALUES ('1164', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522333940');
+INSERT INTO `t_admin_log` VALUES ('1165', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340471');
+INSERT INTO `t_admin_log` VALUES ('1166', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340479');
+INSERT INTO `t_admin_log` VALUES ('1167', 'admin', 'Group', 'index', '?/admin/Group/index', '1', 'admin', '2130706433', '1522340484');
+INSERT INTO `t_admin_log` VALUES ('1168', 'admin', 'Group', 'favicon.ico', '?/admin/Group/favicon.ico', '1', 'admin', '2130706433', '1522340484');
+INSERT INTO `t_admin_log` VALUES ('1169', 'admin', 'Admin', 'public_edit_info', '?/admin/Admin/public_edit_info', '1', 'admin', '2130706433', '1522340486');
+INSERT INTO `t_admin_log` VALUES ('1170', 'admin', 'Admin', 'favicon.ico', '?/admin/Admin/favicon.ico', '1', 'admin', '2130706433', '1522340486');
+INSERT INTO `t_admin_log` VALUES ('1171', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340487');
+INSERT INTO `t_admin_log` VALUES ('1172', 'admin', 'Admin', 'public_edit_info', '?/admin/Admin/public_edit_info', '1', 'admin', '2130706433', '1522340516');
+INSERT INTO `t_admin_log` VALUES ('1173', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522340518');
+INSERT INTO `t_admin_log` VALUES ('1174', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340520');
+INSERT INTO `t_admin_log` VALUES ('1175', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522340522');
+INSERT INTO `t_admin_log` VALUES ('1176', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340524');
+INSERT INTO `t_admin_log` VALUES ('1177', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340546');
+INSERT INTO `t_admin_log` VALUES ('1178', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340548');
+INSERT INTO `t_admin_log` VALUES ('1179', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340549');
+INSERT INTO `t_admin_log` VALUES ('1180', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340550');
+INSERT INTO `t_admin_log` VALUES ('1181', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340553');
+INSERT INTO `t_admin_log` VALUES ('1182', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340553');
+INSERT INTO `t_admin_log` VALUES ('1183', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340567');
+INSERT INTO `t_admin_log` VALUES ('1184', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340569');
+INSERT INTO `t_admin_log` VALUES ('1185', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340571');
+INSERT INTO `t_admin_log` VALUES ('1186', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340571');
+INSERT INTO `t_admin_log` VALUES ('1187', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522340573');
+INSERT INTO `t_admin_log` VALUES ('1188', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522340574');
+INSERT INTO `t_admin_log` VALUES ('1189', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522340580');
+INSERT INTO `t_admin_log` VALUES ('1190', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522340582');
+INSERT INTO `t_admin_log` VALUES ('1191', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522340583');
+INSERT INTO `t_admin_log` VALUES ('1192', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340585');
+INSERT INTO `t_admin_log` VALUES ('1193', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522340588');
+INSERT INTO `t_admin_log` VALUES ('1194', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340590');
+INSERT INTO `t_admin_log` VALUES ('1195', 'admin', 'Index', 'favicon.ico', '?/admin/index/favicon.ico', '1', 'admin', '2130706433', '1522340657');
+INSERT INTO `t_admin_log` VALUES ('1196', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340659');
+INSERT INTO `t_admin_log` VALUES ('1197', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340685');
+INSERT INTO `t_admin_log` VALUES ('1198', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340692');
+INSERT INTO `t_admin_log` VALUES ('1199', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340770');
+INSERT INTO `t_admin_log` VALUES ('1200', 'admin', 'Group', 'index', '?/admin/Group/index', '1', 'admin', '2130706433', '1522340775');
+INSERT INTO `t_admin_log` VALUES ('1201', 'admin', 'Group', 'favicon.ico', '?/admin/Group/favicon.ico', '1', 'admin', '2130706433', '1522340776');
+INSERT INTO `t_admin_log` VALUES ('1202', 'admin', 'Admin', 'public_edit_info', '?/admin/Admin/public_edit_info', '1', 'admin', '2130706433', '1522340778');
+INSERT INTO `t_admin_log` VALUES ('1203', 'admin', 'Admin', 'favicon.ico', '?/admin/Admin/favicon.ico', '1', 'admin', '2130706433', '1522340778');
+INSERT INTO `t_admin_log` VALUES ('1204', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340780');
+INSERT INTO `t_admin_log` VALUES ('1205', 'admin', 'Admin', 'public_edit_info', '?/admin/Admin/public_edit_info', '1', 'admin', '2130706433', '1522340784');
+INSERT INTO `t_admin_log` VALUES ('1206', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522340786');
+INSERT INTO `t_admin_log` VALUES ('1207', 'admin', 'Admin', 'public_edit_info', '?/admin/Admin/public_edit_info', '1', 'admin', '2130706433', '1522340789');
+INSERT INTO `t_admin_log` VALUES ('1208', 'admin', 'Group', 'index', '?/admin/Group/index', '1', 'admin', '2130706433', '1522340790');
+INSERT INTO `t_admin_log` VALUES ('1209', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340793');
+INSERT INTO `t_admin_log` VALUES ('1210', 'admin', 'Group', 'index', '?/admin/Group/index', '1', 'admin', '2130706433', '1522340796');
+INSERT INTO `t_admin_log` VALUES ('1211', 'admin', 'Admin', 'public_edit_info', '?/admin/Admin/public_edit_info', '1', 'admin', '2130706433', '1522340798');
+INSERT INTO `t_admin_log` VALUES ('1212', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340805');
+INSERT INTO `t_admin_log` VALUES ('1213', 'admin', 'Admin', 'public_edit_info', '?/admin/Admin/public_edit_info', '1', 'admin', '2130706433', '1522340807');
+INSERT INTO `t_admin_log` VALUES ('1214', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522340808');
+INSERT INTO `t_admin_log` VALUES ('1215', 'admin', 'Member', 'favicon.ico', '?/admin/Member/favicon.ico', '1', 'admin', '2130706433', '1522340808');
+INSERT INTO `t_admin_log` VALUES ('1216', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522340811');
+INSERT INTO `t_admin_log` VALUES ('1217', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522340817');
+INSERT INTO `t_admin_log` VALUES ('1218', 'admin', 'Menu', 'favicon.ico', '?/admin/Menu/favicon.ico', '1', 'admin', '2130706433', '1522340819');
+INSERT INTO `t_admin_log` VALUES ('1219', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340820');
+INSERT INTO `t_admin_log` VALUES ('1220', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340830');
+INSERT INTO `t_admin_log` VALUES ('1221', 'admin', 'Group', 'index', '?/admin/Group/index', '1', 'admin', '2130706433', '1522340842');
+INSERT INTO `t_admin_log` VALUES ('1222', 'admin', 'Admin', 'public_edit_info', '?/admin/Admin/public_edit_info', '1', 'admin', '2130706433', '1522340844');
+INSERT INTO `t_admin_log` VALUES ('1223', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522340853');
+INSERT INTO `t_admin_log` VALUES ('1224', 'admin', 'Bonus', 'favicon.ico', '?/admin/bonus/favicon.ico', '1', 'admin', '2130706433', '1522340853');
+INSERT INTO `t_admin_log` VALUES ('1225', 'admin', 'Menu', 'info', '?/admin/menu/info/id/33.html', '1', 'admin', '2130706433', '1522340868');
+INSERT INTO `t_admin_log` VALUES ('1226', 'admin', 'Menu', 'info', '?/admin/menu/info/id/favicon.ico', '1', 'admin', '2130706433', '1522340869');
+INSERT INTO `t_admin_log` VALUES ('1227', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522340882');
+INSERT INTO `t_admin_log` VALUES ('1228', 'admin', 'Menu', 'info', '?/admin/menu/info/id/33.html', '1', 'admin', '2130706433', '1522340884');
+INSERT INTO `t_admin_log` VALUES ('1229', 'admin', 'Menu', 'info', '?/admin/menu/info/id/favicon.ico', '1', 'admin', '2130706433', '1522340884');
+INSERT INTO `t_admin_log` VALUES ('1230', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522341150');
+INSERT INTO `t_admin_log` VALUES ('1231', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522341472');
+INSERT INTO `t_admin_log` VALUES ('1232', 'admin', 'Log', 'favicon.ico', '?/admin/Log/favicon.ico', '1', 'admin', '2130706433', '1522341478');
+INSERT INTO `t_admin_log` VALUES ('1233', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522341479');
+INSERT INTO `t_admin_log` VALUES ('1234', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522341481');
+INSERT INTO `t_admin_log` VALUES ('1235', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522341483');
+INSERT INTO `t_admin_log` VALUES ('1236', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522341484');
+INSERT INTO `t_admin_log` VALUES ('1237', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522341485');
+INSERT INTO `t_admin_log` VALUES ('1238', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting', '1', 'admin', '2130706433', '1522341488');
+INSERT INTO `t_admin_log` VALUES ('1239', 'admin', 'Bonus', 'add', '?/admin/bonus/add', '1', 'admin', '2130706433', '1522341490');
+INSERT INTO `t_admin_log` VALUES ('1240', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341493');
+INSERT INTO `t_admin_log` VALUES ('1241', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341735');
+INSERT INTO `t_admin_log` VALUES ('1242', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341736');
+INSERT INTO `t_admin_log` VALUES ('1243', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341758');
+INSERT INTO `t_admin_log` VALUES ('1244', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341788');
+INSERT INTO `t_admin_log` VALUES ('1245', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341792');
+INSERT INTO `t_admin_log` VALUES ('1246', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341797');
+INSERT INTO `t_admin_log` VALUES ('1247', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341805');
+INSERT INTO `t_admin_log` VALUES ('1248', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522341808');
+INSERT INTO `t_admin_log` VALUES ('1249', 'admin', 'Bonus', 'setting', '?/admin/bonus/setting.html', '1', 'admin', '2130706433', '1522341810');
+INSERT INTO `t_admin_log` VALUES ('1250', 'admin', 'Member', 'index', '?/admin/Member/index', '1', 'admin', '2130706433', '1522341811');
+INSERT INTO `t_admin_log` VALUES ('1251', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522341813');
+INSERT INTO `t_admin_log` VALUES ('1252', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522342605');
+INSERT INTO `t_admin_log` VALUES ('1253', 'admin', 'Admin', 'index', '?/admin/Admin/index', '1', 'admin', '2130706433', '1522342608');
+INSERT INTO `t_admin_log` VALUES ('1254', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522342609');
+INSERT INTO `t_admin_log` VALUES ('1255', 'admin', 'Member', 'register', '?/admin/Member/register', '1', 'admin', '2130706433', '1522343160');
+INSERT INTO `t_admin_log` VALUES ('1256', 'admin', 'Member', 'assets', '?/admin/Member/assets/js/jquery.mobile.custom.min.js', '1', 'admin', '2130706433', '1522343160');
 
 -- ----------------------------
 -- Table structure for t_authorize
@@ -753,7 +1388,7 @@ CREATE TABLE `t_authorize` (
   `Id` longtext,
   `RoleId` longtext,
   `MenuActionId` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_authorize
@@ -774,11 +1409,56 @@ CREATE TABLE `t_balance` (
   `LastRunDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `Archived` tinyint(4) DEFAULT NULL,
   `TimeStamp` tinyblob
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_balance
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_bonus_parameter
+-- ----------------------------
+DROP TABLE IF EXISTS `t_bonus_parameter`;
+CREATE TABLE `t_bonus_parameter` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Max` double DEFAULT NULL,
+  `Min` double DEFAULT NULL,
+  `Percent` double DEFAULT NULL,
+  `Give` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_bonus_parameter
+-- ----------------------------
+INSERT INTO `t_bonus_parameter` VALUES ('1', '账户激活', '0', '2', null, '2');
+INSERT INTO `t_bonus_parameter` VALUES ('2', '节点算力', null, '200030', '0.3', null);
+INSERT INTO `t_bonus_parameter` VALUES ('3', '奖金日封顶', '5000', null, '50', null);
+INSERT INTO `t_bonus_parameter` VALUES ('4', '本币', null, null, '0.4', null);
+INSERT INTO `t_bonus_parameter` VALUES ('5', '奖金发放', null, null, '1002', null);
+
+-- ----------------------------
+-- Table structure for t_bonus_setting
+-- ----------------------------
+DROP TABLE IF EXISTS `t_bonus_setting`;
+CREATE TABLE `t_bonus_setting` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Max` double DEFAULT NULL,
+  `Min` double DEFAULT NULL,
+  `Percent` double DEFAULT NULL,
+  `Type` tinyint(1) DEFAULT '0' COMMENT '0智能算力',
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_bonus_setting
+-- ----------------------------
+INSERT INTO `t_bonus_setting` VALUES ('1', '100', '0', '23', '0');
+INSERT INTO `t_bonus_setting` VALUES ('2', '100', '0', '44', '1');
+INSERT INTO `t_bonus_setting` VALUES ('3', '300', '100', '3', '0');
+INSERT INTO `t_bonus_setting` VALUES ('4', '500', '300', '0.13', '0');
+INSERT INTO `t_bonus_setting` VALUES ('5', '0', '600', '0.3', '0');
 
 -- ----------------------------
 -- Table structure for t_cash
@@ -798,7 +1478,7 @@ CREATE TABLE `t_cash` (
   `Amount` double DEFAULT NULL,
   `ServiceFee` double DEFAULT NULL,
   `Status` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_cash
@@ -817,7 +1497,7 @@ CREATE TABLE `t_cashxlbirecord` (
   `JieKouId` longtext,
   `WalletAddress` longtext,
   `UserWalletAddress` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_cashxlbirecord
@@ -839,7 +1519,7 @@ CREATE TABLE `t_changelevel` (
   `CurrencyId` int(11) DEFAULT NULL,
   `Koukuan` double DEFAULT NULL,
   `Pv` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_changelevel
@@ -859,7 +1539,7 @@ CREATE TABLE `t_charge` (
   `CheckedDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `Status` int(11) DEFAULT NULL,
   `Description` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_charge
@@ -874,7 +1554,7 @@ CREATE TABLE `t_config` (
   `k` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `v` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of t_config
@@ -894,7 +1574,7 @@ CREATE TABLE `t_currencychange` (
   `BLText` varchar(50) DEFAULT NULL,
   `Amount` double DEFAULT NULL,
   `NLTotal` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_currencychange
@@ -912,11 +1592,39 @@ CREATE TABLE `t_deliveryaddress` (
   `Recipient` varchar(200) DEFAULT NULL,
   `ZipCode` varchar(200) DEFAULT NULL,
   `IsDefault` tinyint(4) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_deliveryaddress
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `t_detail`;
+CREATE TABLE `t_detail` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` int(11) DEFAULT NULL,
+  `Amount` double DEFAULT NULL,
+  `WalletAdress` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AddTime` int(11) DEFAULT NULL,
+  `Way` tinyint(1) DEFAULT '0' COMMENT '0发送1接收',
+  `Type` tinyint(1) DEFAULT '0' COMMENT '0在线1离线',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_detail
+-- ----------------------------
+INSERT INTO `t_detail` VALUES ('1', '30', '12', '04db54f4c10b467e5e1cff80d40c3449', '1522735848', '1', '0');
+INSERT INTO `t_detail` VALUES ('5', '30', '24', '04db54f4c10b467e5e1cff80d40c3449', '1522736140', '1', '0');
+INSERT INTO `t_detail` VALUES ('6', '19', '21.23', '1', '1522736140', '0', '0');
+INSERT INTO `t_detail` VALUES ('7', '30', '121', '04db54f4c10b467e5e1cff80d40c3449', '1522736583', '1', '0');
+INSERT INTO `t_detail` VALUES ('8', '19', '121', '1', '1522736583', '0', '0');
+INSERT INTO `t_detail` VALUES ('9', '30', '121', '04db54f4c10b467e5e1cff80d40c3449', '1522736675', '1', '0');
+INSERT INTO `t_detail` VALUES ('10', '19', '121', '1', '1522736675', '0', '0');
+INSERT INTO `t_detail` VALUES ('11', '30', '123', '04db54f4c10b467e5e1cff80d40c3449', '1522737970', '1', '0');
+INSERT INTO `t_detail` VALUES ('12', '19', '123', '1', '1522737970', '0', '0');
 
 -- ----------------------------
 -- Table structure for t_duipenggrade
@@ -932,7 +1640,7 @@ CREATE TABLE `t_duipenggrade` (
   `Total` double DEFAULT NULL,
   `LeftRest` double DEFAULT NULL,
   `RightRest` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_duipenggrade
@@ -955,7 +1663,7 @@ CREATE TABLE `t_financialdetail` (
   `Description` longtext,
   `IsCompanyIncome` tinyint(4) DEFAULT NULL,
   `EventCid` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_financialdetail
@@ -989,11 +1697,31 @@ CREATE TABLE `t_financialsummary` (
   `Field_18` double DEFAULT NULL,
   `Field_19` double DEFAULT NULL,
   `Field_20` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_financialsummary
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_gas_log
+-- ----------------------------
+DROP TABLE IF EXISTS `t_gas_log`;
+CREATE TABLE `t_gas_log` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` int(11) DEFAULT NULL,
+  `Amount` double DEFAULT NULL,
+  `AddTime` int(11) DEFAULT NULL,
+  `Type` tinyint(1) DEFAULT '0' COMMENT '0兑换1转账消耗',
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_gas_log
+-- ----------------------------
+INSERT INTO `t_gas_log` VALUES ('1', '29', '312', '1343252432', '0');
+INSERT INTO `t_gas_log` VALUES ('2', '19', '12', '1522738442', '0');
+INSERT INTO `t_gas_log` VALUES ('3', '19', '12', '1522738479', '0');
 
 -- ----------------------------
 -- Table structure for t_gradedetail
@@ -1022,7 +1750,7 @@ CREATE TABLE `t_language` (
   `Enable` tinyint(4) DEFAULT NULL,
   `SequenceNum` int(11) DEFAULT NULL,
   `BDCulture` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_language
@@ -1038,7 +1766,7 @@ CREATE TABLE `t_localestringresource` (
   `ResourceName` varchar(50) DEFAULT NULL,
   `ResourceValue` longtext,
   `LastModifyDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_localestringresource
@@ -1055,7 +1783,7 @@ CREATE TABLE `t_logistics` (
   `Contacter` varchar(200) DEFAULT NULL,
   `Url` varchar(255) DEFAULT NULL,
   `IsDeleted` tinyint(4) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_logistics
@@ -1073,7 +1801,7 @@ CREATE TABLE `t_mallrecharge` (
   `Total` double DEFAULT NULL,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `MalluserCode` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_mallrecharge
@@ -1100,7 +1828,7 @@ CREATE TABLE `t_menu` (
   `Display` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否显示(1:显示,2:不显示)',
   `UpdateTime` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_menu
@@ -1128,7 +1856,6 @@ INSERT INTO `t_menu` VALUES ('21', '日志管理', null, '18', null, null, null,
 INSERT INTO `t_menu` VALUES ('22', '系统首页', null, '0', 'fa-bank', null, null, 'Index', 'index', null, null, null, '0', '1', '1521903016');
 INSERT INTO `t_menu` VALUES ('24', '会员管理', null, '0', '', null, null, 'Member', 'index', '', null, null, '2', '1', '1522049692');
 INSERT INTO `t_menu` VALUES ('27', '会员列表', null, '24', '', null, null, 'Member', 'index', '', null, null, '999', '1', '1522049841');
-INSERT INTO `t_menu` VALUES ('39', '注册会员', null, '24', '', null, null, 'Member', 'register', '', null, null, '999', '1', null);
 INSERT INTO `t_menu` VALUES ('30', '财务管理', null, '0', '', null, null, 'Current', '', '', null, null, '999', '1', null);
 INSERT INTO `t_menu` VALUES ('31', '手工充值扣款', null, '30', '', null, null, 'Current', 'operation', '', null, null, '999', '1', null);
 INSERT INTO `t_menu` VALUES ('32', '货币管理', null, '30', '', null, null, 'Current', 'manager', '', null, null, '999', '1', null);
@@ -1138,7 +1865,14 @@ INSERT INTO `t_menu` VALUES ('35', '货币兑换', null, '30', '', null, null, '
 INSERT INTO `t_menu` VALUES ('36', '财务明细', null, '30', '', null, null, 'Current', 'info', '', null, null, '999', '1', null);
 INSERT INTO `t_menu` VALUES ('37', '财务报表', null, '30', '', null, null, 'Current', 'table', '', null, null, '999', '1', null);
 INSERT INTO `t_menu` VALUES ('38', '公告管理', null, '0', '', null, null, 'Notice', '', '', null, null, '999', '1', null);
-INSERT INTO `t_menu` VALUES ('40', '待激活会员', null, '24', '', null, null, 'Member', 'activation', '', null, null, '999', '1', null);
+INSERT INTO `t_menu` VALUES ('39', '注册会员', null, '24', '', null, null, 'Member', 'register', '', null, null, '999', '1', null);
+INSERT INTO `t_menu` VALUES ('41', '编辑', null, '24', '', null, null, 'Member', 'edit', '', null, null, '999', '2', '1522115649');
+INSERT INTO `t_menu` VALUES ('42', '删除', null, '24', '', null, null, 'Member', 'del', '', null, null, '999', '2', null);
+INSERT INTO `t_menu` VALUES ('43', '查看详情', null, '24', '', null, null, 'Member', 'info', '', null, null, '999', '2', null);
+INSERT INTO `t_menu` VALUES ('44', '重置密码', null, '24', '', null, null, 'Member', 'reset', '', null, null, '999', '2', null);
+INSERT INTO `t_menu` VALUES ('45', '操作（锁定）', null, '24', '', null, null, 'Member', 'operation', '', null, null, '999', '2', null);
+INSERT INTO `t_menu` VALUES ('46', '奖金设置', null, '33', '', null, null, 'bonus', 'setting', '', null, null, '999', '1', null);
+INSERT INTO `t_menu` VALUES ('47', '添加奖金设置', null, '33', '', null, null, 'bonus', 'add', '', null, null, '999', '1', null);
 
 -- ----------------------------
 -- Table structure for t_menuaction
@@ -1150,7 +1884,7 @@ CREATE TABLE `t_menuaction` (
   `MenuActionName` varchar(50) DEFAULT NULL,
   `MenuActionCode` varchar(255) DEFAULT NULL,
   `T_Role_Id` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_menuaction
@@ -1166,11 +1900,32 @@ CREATE TABLE `t_menutype` (
   `MenuTypeSequenceNum` int(11) DEFAULT NULL,
   `IsSystem` tinyint(4) DEFAULT NULL,
   `IsLock` tinyint(4) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_menutype
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_mess
+-- ----------------------------
+DROP TABLE IF EXISTS `t_mess`;
+CREATE TABLE `t_mess` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` int(11) DEFAULT NULL,
+  `Title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Mobile` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Content` text COLLATE utf8_unicode_ci,
+  `Type` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_mess
+-- ----------------------------
+INSERT INTO `t_mess` VALUES ('1', null, '312', '15283827970', '423', '123');
+INSERT INTO `t_mess` VALUES ('2', null, '312', '15283827970', '423', '123');
+INSERT INTO `t_mess` VALUES ('3', '19', '312', '15283827970', '423', '123');
 
 -- ----------------------------
 -- Table structure for t_message
@@ -1188,7 +1943,7 @@ CREATE TABLE `t_message` (
   `LastModifyDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `IsRead` tinyint(4) DEFAULT NULL,
   `LastModifyMemberId` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_message
@@ -1204,7 +1959,7 @@ CREATE TABLE `t_messagebody` (
   `Content` longtext,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `MemberType` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_messagebody
@@ -1215,13 +1970,14 @@ CREATE TABLE `t_messagebody` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_news`;
 CREATE TABLE `t_news` (
-  `Id` longtext,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(200) DEFAULT NULL,
   `Content` longtext,
-  `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `LastModifyDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `Type` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `CreateDate` int(11) DEFAULT NULL,
+  `LastModifyDate` int(11) DEFAULT NULL,
+  `Type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_news
@@ -1239,7 +1995,7 @@ CREATE TABLE `t_obtainxiliangbi` (
   `UserId` longtext,
   `UserCode` longtext,
   `address` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_obtainxiliangbi
@@ -1264,7 +2020,7 @@ CREATE TABLE `t_order` (
   `Status` int(11) DEFAULT NULL,
   `Type` int(11) DEFAULT NULL,
   `Description` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_order
@@ -1280,7 +2036,7 @@ CREATE TABLE `t_orderdetail` (
   `Product` varchar(255) DEFAULT NULL,
   `Count` int(11) DEFAULT NULL,
   `Price` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_orderdetail
@@ -1293,7 +2049,7 @@ DROP TABLE IF EXISTS `t_pcc`;
 CREATE TABLE `t_pcc` (
   `Id` int(11) DEFAULT NULL,
   `Name` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_pcc
@@ -1327,7 +2083,7 @@ CREATE TABLE `t_prizedetail` (
   `Item_5` double DEFAULT NULL,
   `Total` double DEFAULT NULL,
   `Description` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_prizedetail
@@ -1372,7 +2128,7 @@ CREATE TABLE `t_prizesummary` (
   `Item_4` double DEFAULT NULL,
   `Item_5` double DEFAULT NULL,
   `Total` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_prizesummary
@@ -1396,7 +2152,7 @@ CREATE TABLE `t_product` (
   `IsDeleted` tinyint(4) DEFAULT NULL,
   `IsLock` tinyint(4) DEFAULT NULL,
   `EnableRegister` tinyint(4) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_product
@@ -1416,7 +2172,7 @@ CREATE TABLE `t_producttype` (
   `LeftValue` int(11) DEFAULT NULL,
   `RightValue` int(11) DEFAULT NULL,
   `GroupId` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_producttype
@@ -1441,7 +2197,7 @@ CREATE TABLE `t_remittance` (
   `SysBankAccount` varchar(200) DEFAULT NULL,
   `PostBankAccount` varchar(200) DEFAULT NULL,
   `PostDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_remittance
@@ -1459,7 +2215,7 @@ CREATE TABLE `t_reportcenterrecord` (
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `CheckDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ReportCenterLevelId` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_reportcenterrecord
@@ -1474,7 +2230,7 @@ CREATE TABLE `t_role` (
   `RoleName` varchar(50) DEFAULT NULL,
   `Description` longtext,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_role
@@ -1492,7 +2248,7 @@ CREATE TABLE `t_screcharge` (
   `Total` double DEFAULT NULL,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `MalluserCode` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_screcharge
@@ -1507,10 +2263,28 @@ CREATE TABLE `t_shoppingcart` (
   `ProductId` longtext,
   `Count` int(11) DEFAULT NULL,
   `UserId` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_shoppingcart
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_sl_log
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sl_log`;
+CREATE TABLE `t_sl_log` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Userid` int(11) DEFAULT NULL,
+  `SL` double DEFAULT NULL,
+  `Release` double DEFAULT NULL,
+  `AddTime` int(11) DEFAULT NULL,
+  `type` tinyint(1) DEFAULT '0' COMMENT '0智能算力1节点算力2链接算力',
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_sl_log
 -- ----------------------------
 
 -- ----------------------------
@@ -1523,7 +2297,7 @@ CREATE TABLE `t_smslist` (
   `Content` longtext,
   `Mobile` longtext,
   `UserId` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_smslist
@@ -1539,7 +2313,7 @@ CREATE TABLE `t_sysbankaccount` (
   `CardCode` varchar(200) DEFAULT NULL,
   `CardUserName` varchar(200) DEFAULT NULL,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sysbankaccount
@@ -1558,7 +2332,7 @@ CREATE TABLE `t_syslog` (
   `IP` varchar(50) DEFAULT NULL,
   `Description` longtext,
   `DisplayDescription` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_syslog
@@ -1581,7 +2355,7 @@ CREATE TABLE `t_tradelist` (
   `Status` int(11) DEFAULT NULL,
   `TimeStamp` tinyblob,
   `Price` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_tradelist
@@ -1596,7 +2370,7 @@ CREATE TABLE `t_traderiserecord` (
   `NewPrice` double DEFAULT NULL,
   `OldPrice` double DEFAULT NULL,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_traderiserecord
@@ -1627,7 +2401,7 @@ CREATE TABLE `t_tradeuser` (
   `T_TradeList_Id` longtext,
   `T_TradeList_Id1` longtext,
   `DaKuanAmount` double DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_tradeuser
@@ -1649,7 +2423,7 @@ CREATE TABLE `t_transfer` (
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `WalletAddress` varchar(50) DEFAULT NULL,
   `ToWalletAddress` varchar(50) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_transfer
@@ -1699,7 +2473,7 @@ CREATE TABLE `t_user` (
   `RegisterDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `JiHuoMemberType` tinyint(1) DEFAULT '0',
   `JiHuoMemberId` longtext,
-  `JiHuoDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `JiHuoDate` int(11) DEFAULT NULL,
   `JiHuoKouKuanId` int(11) DEFAULT NULL,
   `IsValid` tinyint(4) DEFAULT '0' COMMENT '0未激活',
   `IsLock` tinyint(4) DEFAULT '0',
@@ -1709,7 +2483,7 @@ CREATE TABLE `t_user` (
   `ID_Number` varchar(50) DEFAULT NULL,
   `Mobile` varchar(50) DEFAULT NULL,
   `Email` varchar(50) DEFAULT NULL,
-  `Isjiaoyi` tinyint(4) DEFAULT NULL,
+  `Isjiaoyi` tinyint(4) DEFAULT '0',
   `WalletAddress` longtext NOT NULL,
   `Titleid` int(11) DEFAULT NULL,
   `isDOUT` tinyint(4) DEFAULT NULL,
@@ -1719,39 +2493,46 @@ CREATE TABLE `t_user` (
   `TJtoken` varchar(8) NOT NULL,
   `IsFull` tinyint(1) NOT NULL DEFAULT '0',
   `Ranks` text,
+  `JTRanks` text,
+  `RanksTime` int(11) DEFAULT NULL,
+  `WalletAdress` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '123', '123', '123', null, null, null, '1', '', null, null, null, null, '16', '17', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0000-00-00 00:00:00', null, null, null, null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '123', '3', '0,2,3,11,14,16,17,18,19,20,23,24,26,27,28,29');
-INSERT INTO `t_user` VALUES ('2', '3', '33', '44', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:33:20', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, null, null, null, '', null, null, null, null, null, '', '3', '0,3,26');
-INSERT INTO `t_user` VALUES ('3', '32', '42', '234', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 11:29:12', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, null, null, null, '', null, null, null, null, null, '', '3', null);
-INSERT INTO `t_user` VALUES ('4', null, '123', '45431598ccd1e9cf2fc678d423b89c9e', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '633c6e6', '0', '0,11,14,16,17,18,19,20,23,24,26,27,28,29');
-INSERT INTO `t_user` VALUES ('5', null, '', '3a9d933c8d8ab6338805d7f1d843cb89', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 12:01:41', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, 'fc5f3e9', '0', null);
-INSERT INTO `t_user` VALUES ('6', null, '', 'bb1224976d44d1db64d9b2a0db7991f1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '', '0', '0,11,14,16,17,18,19,20,23,24,26,27,28,29');
-INSERT INTO `t_user` VALUES ('7', null, '', '2c777e5b6dfd2504b66fb77488e8ca70', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 12:02:57', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '48e0089c', '0', null);
-INSERT INTO `t_user` VALUES ('8', null, '213', '3c15e4d9a10af58056c91af6d6433cb9', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 12:04:08', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, 'bd9ccc0e', '0', null);
-INSERT INTO `t_user` VALUES ('9', null, '2343', 'a886a6f93ce544ad6689e33fb576e47e', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 12:05:14', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '35d20189', '0', null);
-INSERT INTO `t_user` VALUES ('11', null, '带我去', 'a829fbf65466441a0ab78d24cd947827', null, null, null, null, null, null, null, null, null, '18', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '3d46091', '0', '0,2,3,11,14,16,17,18,19,20,23,24,26,27,28,29');
-INSERT INTO `t_user` VALUES ('12', null, '要的', 'd0fadd6d5559c85e2e368eb4ba88ab4a', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:26', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, '47058379', '0', '0');
-INSERT INTO `t_user` VALUES ('13', null, '要的', 'f5860d7420c1968893391e450bd86a32', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:28', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'b4752064', '0', '0');
-INSERT INTO `t_user` VALUES ('14', null, '要的', '58f6969f979f1919ab12c17d9e8651de', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:30', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, '938daa24', '0', '0');
-INSERT INTO `t_user` VALUES ('15', null, '带我去分', '856dd2c9bcb118ef4b31fbd04338f1e0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:32', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'f245df41', '0', '0');
-INSERT INTO `t_user` VALUES ('16', null, 'ewfew', '8b1318d0f63162b6ed94c6bc23e416ce', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:34', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'd2c0baa7', '0', '0');
-INSERT INTO `t_user` VALUES ('17', null, '我确定', '7ab3aebd195c631d6d68c165b0894c56', null, null, null, null, null, null, null, null, null, '19', '20', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, '7f70e2be', '3', '0,19,20,23,24,26,27,28,29');
-INSERT INTO `t_user` VALUES ('18', null, '微服务', 'a88b110ae47749c373f3f0b4c288f2c7', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:38', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'ebd5004a', '0', '0');
-INSERT INTO `t_user` VALUES ('19', null, '啊', '0ea3bb52ae3ff75f5a70e614414b1738', null, null, null, '5', null, null, null, null, null, '23', '28', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'e1bd8752', '3', '0,23,26,28,29');
-INSERT INTO `t_user` VALUES ('20', null, '的', '60239b0d74aaef50dafe47354827cbfe', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:42', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, '2c63214e', '0', '0');
-INSERT INTO `t_user` VALUES ('21', null, '收到', 'bace5401a4ca10d53bd6b5a7b3a75ff1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:56:01', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, 'e6ae13c6', '0', '0');
-INSERT INTO `t_user` VALUES ('22', null, '打算', 'b1c539da656f93c112c5343ae6a3d74e', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 23:03:27', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, 'd3494509', '0', '0');
-INSERT INTO `t_user` VALUES ('23', null, 'ad打算', 'e4f978c1db70a224c27bfce6f4ea1d61', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '29', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '86af651a', '2', '0,29');
-INSERT INTO `t_user` VALUES ('24', null, '较大', '0727459fcfd3a5d59d7c02ee17d88fb7', null, null, null, '1', '19', null, '啊', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:28:00', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '4cd61485', '0', '0');
-INSERT INTO `t_user` VALUES ('26', null, '较大2', '1f73d42a1b4872d86abb56eaec8e3902', null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:33:20', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '39a9cc3a', '0', '0');
-INSERT INTO `t_user` VALUES ('27', null, 'qw十大', 'a46d6372ec286b1957ccd0d32d90dcb7', null, null, null, '6', '19', null, '啊', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:37:30', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, 'c0b7c83b', '0', '0');
-INSERT INTO `t_user` VALUES ('28', null, '123wer', '6c76e95072a0031088efcfc6370a62b9', null, null, null, '6', '19', null, '啊', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:40:16', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '31712362', '0', '0');
-INSERT INTO `t_user` VALUES ('29', null, 'sadas的', '7fdb5acc6d0b30408f426f540aca3e4e', null, null, null, '6', '19', null, '啊', null, null, null, null, '23', null, 'ad打算', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0000-00-00 00:00:00', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '7d9adbbf', '0', '0');
+INSERT INTO `t_user` VALUES ('1', '123', '123', '123', null, null, null, '1', '', null, null, null, null, '16', '17', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0', null, null, null, null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '123', '3', '0,2,3,11,14,16,17,18,19,20,23,24,26,27,28,29', null, null, null);
+INSERT INTO `t_user` VALUES ('2', '3', '33', '44', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:33:20', null, null, '0', null, null, '0', null, null, null, null, null, null, null, '', null, null, null, null, null, '', '3', '0,3,26', null, null, null);
+INSERT INTO `t_user` VALUES ('3', '32', '42', '234', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 11:29:12', null, null, '0', null, null, '0', null, null, null, null, null, null, null, '', null, null, null, null, null, '', '3', null, null, null, null);
+INSERT INTO `t_user` VALUES ('4', null, '123', '45431598ccd1e9cf2fc678d423b89c9e', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '633c6e6', '0', '0,11,14,16,17,18,19,20,23,24,26,27,28,29', null, null, null);
+INSERT INTO `t_user` VALUES ('5', null, '', '3a9d933c8d8ab6338805d7f1d843cb89', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 12:01:41', null, null, '0', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, 'fc5f3e9', '0', null, null, null, null);
+INSERT INTO `t_user` VALUES ('6', null, '', 'bb1224976d44d1db64d9b2a0db7991f1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '', '0', '0,11,14,16,17,18,19,20,23,24,26,27,28,29', null, null, null);
+INSERT INTO `t_user` VALUES ('7', null, '', '2c777e5b6dfd2504b66fb77488e8ca70', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 12:02:57', null, null, '0', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '48e0089c', '0', null, null, null, null);
+INSERT INTO `t_user` VALUES ('30', null, '435d', '6ab74d2d5e66db4323bc685f79667293', null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-27 18:24:15', '1', null, '1522146255', null, '0', '0', null, null, null, null, '15283827970', null, '0', '', null, null, null, null, null, 'd1ea33d4', '0', '0', null, null, '04db54f4c10b467e5e1cff80d40c3449');
+INSERT INTO `t_user` VALUES ('9', null, '2343', 'a886a6f93ce544ad6689e33fb576e47e', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 12:05:14', null, null, '0', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '35d20189', '0', null, null, null, null);
+INSERT INTO `t_user` VALUES ('11', null, '带我去', 'a829fbf65466441a0ab78d24cd947827', null, null, null, null, null, null, null, null, null, '18', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0', null, null, '0', null, null, null, null, '', null, null, '', null, null, null, null, null, '3d46091', '0', '0,2,3,11,14,16,17,18,19,20,23,24,26,27,28,29', null, null, null);
+INSERT INTO `t_user` VALUES ('12', null, '要的', 'd0fadd6d5559c85e2e368eb4ba88ab4a', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:26', null, null, '0', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, '47058379', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('13', null, '要的', 'f5860d7420c1968893391e450bd86a32', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:28', null, null, '0', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'b4752064', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('14', null, '要的', '58f6969f979f1919ab12c17d9e8651de', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:30', null, null, '0', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, '938daa24', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('15', null, '带我去分', '856dd2c9bcb118ef4b31fbd04338f1e0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:32', null, null, '0', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'f245df41', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('16', null, 'ewfew', '8b1318d0f63162b6ed94c6bc23e416ce', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:34', null, null, '0', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'd2c0baa7', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('17', null, '我确定', '7ab3aebd195c631d6d68c165b0894c56', null, null, null, null, null, null, null, null, null, '19', '20', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, '7f70e2be', '3', '0,19,20,23,24,26,27,28,29', null, null, null);
+INSERT INTO `t_user` VALUES ('18', null, '微服务', 'a88b110ae47749c373f3f0b4c288f2c7', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:38', null, null, '0', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, 'ebd5004a', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('19', null, '啊', '574dfc3623c821452d098d73dfcd4e42', '574dfc3623c821452d098d73dfcd4e42', null, null, '5', null, null, null, null, null, '23', '28', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-04-03 13:01:42', null, null, '0', null, null, '0', null, null, null, null, '15283827923', null, null, '', null, null, null, null, null, 'e1bd8752', '3', '0,23,26,28,29', '0', '1522388009', '1');
+INSERT INTO `t_user` VALUES ('20', null, '的', '60239b0d74aaef50dafe47354827cbfe', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 22:55:42', null, null, '0', null, null, '0', null, null, null, null, '15283827971', null, null, '', null, null, null, null, null, '2c63214e', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('21', null, '收到', 'bace5401a4ca10d53bd6b5a7b3a75ff1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-27 10:52:57', null, null, '1524585600', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, 'e6ae13c6', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('22', null, '打算', 'b1c539da656f93c112c5343ae6a3d74e', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-23 23:03:27', null, null, '0', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, 'd3494509', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('23', null, 'ad打算', 'e4f978c1db70a224c27bfce6f4ea1d61', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '29', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:41:21', null, null, '0', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '86af651a', '2', '0,29', null, null, null);
+INSERT INTO `t_user` VALUES ('24', null, '较大', '0727459fcfd3a5d59d7c02ee17d88fb7', null, null, null, '1', '19', null, '啊', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:28:00', null, null, '0', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '4cd61485', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('26', null, '较大2', '59b974430619b85a55f57bcaa34ec08f', null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-27 16:25:11', null, null, '1521043200', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '39a9cc3a', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('27', null, 'qw十大', 'a46d6372ec286b1957ccd0d32d90dcb7', null, null, null, '6', '19', null, '啊', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-26 13:37:30', null, null, '0', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, 'c0b7c83b', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('28', null, '123wer', '6c76e95072a0031088efcfc6370a62b9', null, null, null, '6', '19', null, '啊', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-27 12:08:56', null, null, '1521043200', null, null, '0', null, null, null, null, '15283827970', null, null, '', null, null, null, null, null, '31712362', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('29', null, 'sadas的', '7fdb5acc6d0b30408f426f540aca3e4e', null, null, null, '6', '19', null, '啊', null, null, null, null, '23', null, 'ad打算', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-27 12:08:51', null, null, '0', null, null, '0', null, null, null, null, '15283827970', null, '0', '', null, null, null, null, null, '7d9adbbf', '0', '0', null, null, null);
+INSERT INTO `t_user` VALUES ('31', null, 'ewqe23', 'ee9123e5e7055b8bb4ac4be65d565525', null, null, null, '1', null, null, null, null, null, '32', '36', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-30 13:33:52', '1', null, '1522146304', null, '0', '0', null, null, null, null, '15283827970', null, '0', '', null, null, null, null, null, '4c555177', '3', '0,32,36', '36', '1522388009', 'd4191aac171b528e326ab3491873c925');
+INSERT INTO `t_user` VALUES ('32', null, 'adsa2', '19f8552454abb90fc767b69a4f160fa8', null, null, null, '2', '31', null, 'ewqe23', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-27 18:26:23', '1', null, '1522146383', null, '0', '0', null, null, null, null, '15283827970', null, '0', '', null, null, null, null, null, 'e64e4b1', '0', '0', null, null, 'e3b8d988bd48def0c10de8b93b84a68f');
+INSERT INTO `t_user` VALUES ('33', null, '435', '123123', null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-27 20:43:40', '1', null, '1522146478', null, '0', '0', null, null, null, null, '15283827974', null, '0', '', null, null, null, null, null, '852c8ba6', '0', '0', null, null, '12314');
+INSERT INTO `t_user` VALUES ('36', null, '123435', '0d14b7f7aa907883cdf34c9bdebbc1f4', null, null, null, '2', '31', null, 'ewqe23', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-03-30 13:33:29', '0', null, null, null, '0', '0', null, null, null, null, '15283827970', null, '0', '', null, null, null, null, null, '7d48d1df', '0', '0', '0', '1522388009', 'aa4d2f7aa65daa2074b5187c7114f7f4');
 
 -- ----------------------------
 -- Table structure for t_userbankaccount
@@ -1766,7 +2547,7 @@ CREATE TABLE `t_userbankaccount` (
   `CardUserName` varchar(200) DEFAULT NULL,
   `IsDefault` tinyint(4) DEFAULT NULL,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_userbankaccount
@@ -1777,18 +2558,21 @@ CREATE TABLE `t_userbankaccount` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_wallet`;
 CREATE TABLE `t_wallet` (
-  `Id` longtext,
-  `UserId` longtext,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` int(11) DEFAULT NULL,
   `CurrencyId` int(11) DEFAULT NULL,
-  `Amount` double DEFAULT NULL,
+  `Amount` double DEFAULT '0',
   `Gas` double DEFAULT '0',
-  `release` double DEFAULT '0',
-  `TimeStamp` tinyblob
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `Release` double DEFAULT '0',
+  `UpdateTime` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_wallet
 -- ----------------------------
+INSERT INTO `t_wallet` VALUES ('1', '19', null, '342', '3600', '121', '1522737970');
+INSERT INTO `t_wallet` VALUES ('2', '30', null, '266', '0', '123', '1522737970');
 
 -- ----------------------------
 -- Table structure for __migrationhistory
@@ -1799,7 +2583,7 @@ CREATE TABLE `__migrationhistory` (
   `ContextKey` varchar(255) DEFAULT NULL,
   `Model` longblob,
   `ProductVersion` varchar(32) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of __migrationhistory

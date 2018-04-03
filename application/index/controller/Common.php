@@ -16,6 +16,7 @@ class Common extends Controller{
         }
         $this->userId = session('userInfo.Id');
         $this->userInfo = session('userInfo');
+        $this->wallet = $this->getWallet();
     }
     protected function getWallet()
     {
@@ -26,7 +27,7 @@ class Common extends Controller{
     //获取智能算力
     protected function getZN($type=0)
     {
-    	$wallet = $this->getWallet();
+    	$wallet = $this->wallet;
     	$sl = model('BonusSetting')->where("Type = 0")->select();
     	foreach ($sl as $v) {
             if($v['Max']==0){
@@ -52,7 +53,7 @@ class Common extends Controller{
     protected function refresh()
     {
     	$mem = model('Member')->where('Id = '.$this->userId)->find();
-    	$this->userInfo = $mem;
+    	session('userInfo',$mem);
     	return true; 
     }
 }

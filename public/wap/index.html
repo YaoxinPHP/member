@@ -20,6 +20,46 @@
 		<a href="">算力</a>
 		<a href="member.html">我的</a>
 	</div>
+	<div style="border: 1px solid red; width: 200px;height: 200px;" id="mes">
+		标题<input type="text" name="title">
+		phone<input type="text" name="phone">
+		type<input type="text" name="type">
+		content<input type="text" name="content">
+		<button class="bu">234</button>
+	</div>
+	<!-- <img src="/index/Returnjson/getQrcode"> -->
+	<div style="border: 1px solid red; width: 250px;height: 200px;" id="cp">
+		电话<input type="text" name="phone">
+		验证码<input type="text" name="captcha"><img src="/captcha.html" onclick="this.src=this.src">
+		短信验证<input type="text" name="phoneCode"><a href="/index/Returnjson/sendCode" target="_bank">发送</a>
+		<button class="bu">234</button>
+	</div>
+	<div style="border: 1px solid red; width: 250px;height: 200px;" id="l2">
+		短信验证<input type="text" name="phoneCode"><a href="/index/Returnjson/sendCode" target="_bank">发送</a>
+		pwd<input type="password" name="pwd">
+		repwd<input type="password" name="repwd">
+		<button class="bu">234</button>
+	</div>
+
+	<div style="border: 1px solid red; width: 250px;height: 200px;" id="l1">
+		短信验证<input type="text" name="phoneCode"><a href="/index/Returnjson/sendCode" target="_bank">发送</a>
+		pwd<input type="password" name="pwd">
+		repwd<input type="password" name="repwd">
+		<button class="bu">234</button>
+	</div>
+	<div style="border: 1px solid red; width: 250px;height: 200px;" id="to">
+		钱包<input type="text" name="walletAdress">
+		数量<input type="text" name="num">
+		验证码<input type="text" name="captcha"><img src="/captcha.html" onclick="this.src=this.src">
+		短信验证<input type="text" name="phoneCode"><a href="/index/Returnjson/sendCode" target="_bank">发送</a>
+		pwd<input type="password" name="pwd">
+		<button class="bu">234</button>
+	</div>
+
+	<div style="border: 1px solid red; width: 250px;height: 200px;" id="gas">
+		pwd<input type="text" name="num">
+		<button class="bu">234</button>
+	</div>
 </body>
 <script type="text/javascript" src="../static/js/vue.min.js"></script>
 <script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
@@ -36,6 +76,93 @@
                 return  this.site + " - 学的不仅是技术，更是梦想！";
             }
         }
+    })
+    $('#mes .bu').click(function(){
+		var data = {
+			'title':$('#mes input[name="title"]').val(),
+			'phone':$('#mes input[name="phone"]').val(),
+			'type':$('#mes input[name="type"]').val(),
+			'content':$('#mes input[name="content"]').val(),
+		};
+		console.log(data);
+    	$.ajax({
+	    	url:'/index/Returnjson/takeMsg',
+	    	data:data,
+	    	type:'post',
+	    	success:function(obj)
+	    	{
+	    		console.log(obj);
+	    	}
+	    })
+    })
+    $('#cp .bu').click(function(){
+		var data = {
+			'phone':$('#cp input[name="phone"]').val(),
+			'captcha':$('#cp input[name="captcha"]').val(),
+			'phoneCode':$('#cp input[name="phoneCode"]').val(),
+		};
+		console.log(data);
+    	$.ajax({
+	    	url:'/index/Returnjson/changePhone',
+	    	data:data,
+	    	type:'post',
+	    	success:function(obj)
+	    	{
+	    		console.log(obj);
+	    	}
+	    })
+    })
+    $('#l2 .bu').click(function(){
+		var data = {
+			'phoneCode':$('#l2 input[name="phoneCode"]').val(),
+			'pwd':$('#l2 input[name="pwd"]').val(),
+			'repwd':$('#l2 input[name="repwd"]').val(),
+		};
+		console.log(data);
+    	$.ajax({
+	    	url:'/index/Returnjson/changeL2',
+	    	data:data,
+	    	type:'post',
+	    	success:function(obj)
+	    	{
+	    		console.log(obj);
+	    	}
+	    })
+    })
+    
+    $('#to .bu').click(function(){
+		var data = {
+			'walletAdress':$('#to input[name="walletAdress"]').val(),
+			'num':$('#to input[name="num"]').val(),
+			'captcha':$('#to input[name="captcha"]').val(),
+			'phoneCode':$('#to input[name="phoneCode"]').val(),
+			'pwd':$('#to input[name="pwd"]').val(),
+		};
+		console.log(data);
+    	$.ajax({
+	    	url:'/index/Returnjson/tradeOnline',
+	    	data:data,
+	    	type:'post',
+	    	success:function(obj)
+	    	{
+	    		console.log(obj);
+	    	}
+	    })
+    })
+    $('#gas .bu').click(function(){
+		var data = {
+			'num':$('#gas input[name="num"]').val(),
+		};
+		console.log(data);
+    	$.ajax({
+	    	url:'/index/Returnjson/tradeGas',
+	    	data:data,
+	    	type:'post',
+	    	success:function(obj)
+	    	{
+	    		console.log(obj);
+	    	}
+	    })
     })
 </script>
 </html>
