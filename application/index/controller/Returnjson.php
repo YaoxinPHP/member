@@ -51,8 +51,8 @@ class Returnjson extends Common
         if(!preg_match('/^[012]$/', input('type'))){
             return ['status'=>201,'msg'=>'错误操作'];
         }
-        $where['Type'] = input('type');
-        $where['Way'] = 0;
+        $where['Type'] = 0;
+        $where['Way'] = input('type');
         $where['UserId'] = $this->userId;
         return model('Detail')->where($where)->select();
     }
@@ -62,8 +62,8 @@ class Returnjson extends Common
         if(!preg_match('/^[012]$/', input('type'))){
             return ['status'=>201,'msg'=>'错误操作'];
         }
-        $where['Type'] = input('type');
-        $where['Way'] = 1;
+        $where['Type'] = 1;
+        $where['Way'] = input('type');
         $where['UserId'] = $this->userId;
         return model('Detail')->where($where)->select();
     }
@@ -71,7 +71,7 @@ class Returnjson extends Common
     public function news()
     {
         if(!preg_match('/^\d{1,}$/', input('id'))){
-            return model('News')->field('Title,CreateDate,Type')->select();
+            return model('News')->field('Id,Title,CreateDate,Type')->select();
         }else{
             return model('News')->where("Id = ".input('id'))->select();
         }
@@ -329,6 +329,7 @@ class Returnjson extends Common
             return ['status'=>202,'msg'=>'参数错误'];
         }
         $post = input('post.');
+        p($post);exit;
         $validate = Loader::validate('Msg');
         //验证
         if(!$validate->check($post)){
@@ -371,12 +372,12 @@ class Returnjson extends Common
     public function getQrcode()
     {
         /*$url = (input('type')==1)?:url('/wap/online','wallet='.Session::get('userInfo.WalletAdress'));*/
-        getQrcodeImg('https://www.m.com'.url('/index/login/register','tj='.$this->userInfo['TJtoken']));
+        getQrcodeImg(self::$realm.url('/wap/register','tj='.$this->userInfo['TJtoken']));
     }
     //接收二维码
     public function getWalletQrcode()
     {
-        getQrcodeImg('https://www.m.com'.url('/wap/online','tj='.$this->userInfo['walletAdress']));
+        getQrcodeImg(self::$realm.url('/wap/online','tj='.$this->userInfo['walletAdress']));
     }
     //发送验证码
     public function sendCode()

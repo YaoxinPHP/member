@@ -6,7 +6,7 @@ class Common extends Controller{
 
     protected $userId;
     protected $userInfo;
-
+    protected static $realm = 'http://39.104.169.237';
     public function __construct(\think\Request $request = null) {
         parent::__construct($request);
         Config::set('default_return_type','json');
