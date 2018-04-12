@@ -81,6 +81,14 @@ class Returnjson extends Common
     {
         return model('Mess')->where("UserId = ".$this->userId)->select();
     }
+    //留言详情
+    public function messageInfo()
+    {
+        if(!preg_match('/^\d{1,}$/', input('post.id'))){
+            return ['status'=>202,'msg'=>'错误操作'];
+        }
+        return model('Msg')->where("MessId = ".input('id'))->select();
+    }
     //退出
     public function loginOut()
     {
@@ -329,20 +337,47 @@ class Returnjson extends Common
             return ['status'=>202,'msg'=>'参数错误'];
         }
         $post = input('post.');
-        p($post);exit;
-        $validate = Loader::validate('Msg');
+        $validate = Loader::validate('Msg')->scene('msg');
         //验证
         if(!$validate->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
         }
         $data['Title'] = $post['title'];
         $data['UserId'] = $this->userId;
-        $data['UserId'] = $this->userInfo['NickName'];
+        $data['NickName'] = $this->userInfo['NickName'];
         $data['Type'] = $post['type'];
         $data['Mobile'] = $post['phone'];
+        $data['AddTime'] = time();
+        $flagid = model('Mess')->insertGetId($data);
+        if(!$flagid){
+            return ['status'=>202,'msg'=>'留言失败'];
+        }
+        $arr['MessId'] = $flagid;
+        $arr['UserId'] = $data['UserId'];
+        $arr['NickName'] = $data['NickName'];
+        $arr['Content'] = $post['content'];
+        $arr['AddTime'] = $data['AddTime'];
+        $flag = model('Msg')->save($arr);        
+        return $flag?['status'=>200,'msg'=>'留言成功']:['status'=>202,'msg'=>'留言失败'];
+    }
+    //回复Msg
+    public function replyMsg()
+    {
+        if(!request()->isPost()){
+            return ['status'=>202,'msg'=>'参数错误'];
+        }        
+        $post = input('post.');
+        $validate = Loader::validate('Msg')->scene('reply');
+        //验证
+        if(!$validate->check($post)){
+            return ['status'=>202,'msg'=>$this->error($validate->getError())];
+        }
+        $data['MessId'] = $post['id'];
+        $data['UserId'] = $this->userId;
+        $data['NickName'] = $this->userInfo['NickName'];
         $data['Content'] = $post['content'];
         $data['AddTime'] = time();
-        $flag = model('Mess')->save($data);
+        $flag = model('Msg')->save($data);        
         return $flag?['status'=>200,'msg'=>'留言成功']:['status'=>202,'msg'=>'留言失败'];
     }
     //在线发送info

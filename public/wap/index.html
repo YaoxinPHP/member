@@ -60,6 +60,18 @@
 		pwd<input type="text" name="num">
 		<button class="bu">234</button>
 	</div>
+
+
+	<ul style="border: 1px solid red; width: 250px;" id="list">
+	</ul>
+	<div style="border: 1px solid red; width: 250px;height: 200px;" id="cont">
+		<ul>
+			<li></li>
+		</ul>
+		<input type="hidden" id="messid">
+		<textarea id="text"></textarea>
+		<button id="hui">回复</button>
+	</div>
 </body>
 <script type="text/javascript" src="../static/js/vue.min.js"></script>
 <script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
@@ -70,6 +82,15 @@
 			console.log(obj);
 			if(obj.code==0){
 				window.location.href = obj.url;
+			}
+		}
+	})
+	$.ajax({
+		url:'/index/Returnjson/message',
+		success:function(obj){
+				console.log(obj);
+			for (var i = 0; i <= obj.length-1; i++) {
+				$('#list').append("<li messid='"+obj[i].Id+"'>"+obj[i].Title+"</li>")
 			}
 		}
 	})
@@ -173,5 +194,33 @@
 	    	}
 	    })
     })
+    $('#list').on('click','li',function(){
+    	var data = {'id':$(this).attr('messid')};
+    	$.ajax({
+    		url:'/index/Returnjson/messageInfo',
+	    	data:data,
+	    	type:'post',
+	    	success:function(obj)
+	    	{
+	    		console.log(obj);
+	    		for (var i = 0; i <= obj.length-1; i++) {
+					$('#cont ul').append("<li>"+obj[i].NickName+'：'+obj[i].Content+"</li>");
+				}
+				$('#messid').val(obj[0].MessId);
+	    	}
+    	})
+    })
+    $('#hui').click(function(){
+    	var data = {'id':$('#messid').val(),'content':$('#text').val()};
+    	$.ajax({
+    		url:'/index/Returnjson/replyMsg',
+	    	data:data,
+	    	type:'post',
+	    	success:function(obj)
+	    	{
+	    		console.log(obj);
+	    	}
+    	})
+    });
 </script>
 </html>
