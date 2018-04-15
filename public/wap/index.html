@@ -3,6 +3,7 @@
 <head>
 	<title>Show</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="../static/layui/css/layui.css">
 </head>
 <body>
 	<h1>Banner</h1>
@@ -61,7 +62,7 @@
 		<button class="bu">234</button>
 	</div>
 
-
+	<img src="http://m.com/index/returnJson/getQrcode">
 	<ul style="border: 1px solid red; width: 250px;" id="list">
 	</ul>
 	<div style="border: 1px solid red; width: 250px;height: 200px;" id="cont">
@@ -69,13 +70,19 @@
 			<li></li>
 		</ul>
 		<input type="hidden" id="messid">
-		<textarea id="text"></textarea>
+		<textarea id="text" ></textarea>
 		<button id="hui">回复</button>
 	</div>
+	<textarea id="demo" style="display: none;"></textarea>
 </body>
 <script type="text/javascript" src="../static/js/vue.min.js"></script>
 <script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../static/layui/layui.js"></script>
 <script type="text/javascript">
+	layui.use('layedit', function(){
+	  var layedit = layui.layedit;
+	  layedit.build('demo'); //建立编辑器
+	});
 	$.ajax({
 		url:'/index/Returnjson/index',
 		success:function(obj){
@@ -86,7 +93,7 @@
 		}
 	})
 	$.ajax({
-		url:'/index/Returnjson/message',
+		url:'http://39.104.169.237/index/Returnjson/message',
 		success:function(obj){
 				console.log(obj);
 			for (var i = 0; i <= obj.length-1; i++) {

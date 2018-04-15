@@ -944,11 +944,11 @@ function getQrcodeImg($url)
     //想显示在二维码中的文字内容，这里设置了一个查看文章的地址
     $qrCode->setText($url)
         ->setSize(300)//大小
-        ->setLabelFontPath(VENDOR_PATH.'endroid\qrcode\assets\noto_sans.otf')
+        ->setLabelFontPath(VENDOR_PATH.'endroid/qrcode/assets/noto_sans.otf')
         ->setErrorCorrectionLevel('high')
         ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
         ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
-        ->setLabel('推广码')
+        ->setLabel('')
         ->setLabelFontSize(16);
     header('Content-Type: '.$qrCode->getContentType());
     echo $qrCode->writeString();
@@ -1208,4 +1208,45 @@ function excelExport($fileName = '', $headArr = [], $data = []) {
 
     exit();
 
+}
+//获取api内容
+function getApi($url,$type='get',$post='')
+{
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_HEADER, 1);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+  if($type=='post')
+  {
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+  }
+  $data = curl_exec($curl);
+  curl_close($curl);
+  return $data;
+}
+//交易所加密方式
+function getSign($id,$token)
+{
+    return strtoupper(md5($id.$token));
+}
+//判断地址是否存在
+function isAddress($url)
+{
+    $info = @get_headers($url);
+    return is_array($info) ? preg_match('/^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$/',$info[0]) : false;
+}
+//抓取信息
+function getInfo($url,$id,$token)
+{
+    $post = [
+        'client_id' => $id,
+        'sign'      => getSign($id,$token),
+    ];
+    return getApi($url,'post',$post);
+}
+//生成验证token
+function setToken($str)
+{
+    return md5($str.microtime());
 }

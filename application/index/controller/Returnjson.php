@@ -25,6 +25,7 @@ class Returnjson extends Common
         $data['TJtoken'] = $this->userInfo['TJtoken'];
         $data['Mobile'] = $this->userInfo['Mobile'];
         $data['WalletAdress'] = $this->userInfo['WalletAdress'];
+        $data['Name'] = $this->userInfo['NickName'];
         return $data;
     }
     //算力记录
@@ -92,7 +93,7 @@ class Returnjson extends Common
     //退出
     public function loginOut()
     {
-        Session::delete('userInfo');
+        Cache::rm('userInfo');
         return $this->success('成功登出',url('/index/index/login'));
     }
     //兑换GAS
@@ -129,13 +130,13 @@ class Returnjson extends Common
         if(!$validate->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
         }
-        if(!valiCaptcha($post['captcha'])){
+        /*if(!valiCaptcha($post['captcha'])){
             return ['status'=>202,'msg'=>'图形验证码错误'];
         }        
-        $code = session($this->userInfo['Mobile'].'_smsVali');
+        $code = Cache::get($this->userInfo['Mobile'].'_smsVali');
         if($post['phoneCode']!=$code){
             return ['status'=>203,'msg'=>'短信验证码错误'];
-        }
+        }*/
         if($this->userInfo['L2Pwd'] !== md5($post['pwd'].$this->userInfo['TJtoken'])){
             return ['status'=>202,'msg'=>'高级密码错误'];
         }
@@ -201,13 +202,13 @@ class Returnjson extends Common
         if(!$validate->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
         }
-        if(!valiCaptcha($post['captcha'])){
+        /*if(!valiCaptcha($post['captcha'])){
             return ['status'=>202,'msg'=>'图形验证码错误'];
         }        
-        $code = session($this->userInfo['Mobile'].'_smsVali');
+        $code = Cache::get($this->userInfo['Mobile'].'_smsVali');
         if($post['phoneCode']!=$code){
             return ['status'=>203,'msg'=>'短信验证码错误'];
-        }
+        }*/
         if($this->userInfo['L2Pwd'] !== md5($post['pwd'].$this->userInfo['TJtoken'])){
             return ['status'=>202,'msg'=>'高级密码错误'];
         }
@@ -274,10 +275,10 @@ class Returnjson extends Common
         if(!$validate->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
         }
-        $code = session($this->userInfo['Mobile'].'_smsVali');
+        /*$code = Cache::get($this->userInfo['Mobile'].'_smsVali');
         if($post['phoneCode']!=$code){
             return ['status'=>203,'msg'=>'短信验证码错误'];
-        }
+        }*/
         $pwd = md5($post['pwd'].$this->userInfo['TJtoken']);
         $flag = model('Member')->where("Id = ".$this->userId)->update(['L1Pwd'=>$pwd]);
         //更新
@@ -296,10 +297,10 @@ class Returnjson extends Common
         if(!$validate->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
         }
-        $code = session($this->userInfo['Mobile'].'_smsVali');
+        /*$code = Cache::get($this->userInfo['Mobile'].'_smsVali');
         if($post['phoneCode']!=$code){
             return ['status'=>203,'msg'=>'短信验证码错误'];
-        }
+        }*/
         $pwd = md5($post['pwd'].$this->userInfo['TJtoken']);
         $flag = model('Member')->where("Id = ".$this->userId)->update(['L2Pwd'=>$pwd]);
         //更新
@@ -318,13 +319,13 @@ class Returnjson extends Common
         if(!$validate->scene('updatePhone')->check($post)){
             return ['status'=>202,'msg'=>$this->error($validate->getError())];
         }
-        if(!valiCaptcha($post['captcha'])){
+        /*if(!valiCaptcha($post['captcha'])){
             return ['status'=>202,'msg'=>'图形验证码错误'];
         }
-        $code = session($this->userInfo['Mobile'].'_smsVali');
+        $code = Cache::get($this->userInfo['Mobile'].'_smsVali');
         if($post['phoneCode']!=$code){
             return ['status'=>203,'msg'=>'短信验证码错误'];
-        }
+        }*/
         $flag = model('Member')->where("Id = ".$this->userId)->update(['Mobile'=>$post['phone']]);
         //更新
         $this->refresh();
@@ -406,20 +407,19 @@ class Returnjson extends Common
     //推广二维码
     public function getQrcode()
     {
-        /*$url = (input('type')==1)?:url('/wap/online','wallet='.Session::get('userInfo.WalletAdress'));*/
         getQrcodeImg(self::$realm.url('/wap/register','tj='.$this->userInfo['TJtoken']));
     }
     //接收二维码
     public function getWalletQrcode()
     {
-        getQrcodeImg(self::$realm.url('/wap/online','tj='.$this->userInfo['walletAdress']));
+        getQrcodeImg(self::$realm.url('/wap/online','tj='.$this->userInfo['WalletAdress']));
     }
     //发送验证码
     public function sendCode()
     {
         $code = rand(1000,9999);
         $p = $this->userInfo['Mobile'];
-        session($p.'_smsVali',$code);
+        Cache::set($p.'_smsVali',$code);
         echo $code;
     }
 }

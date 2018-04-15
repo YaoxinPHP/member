@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="__STATIC__/layui/css/layui.css">
 <div class="page-content">
     <div class="col-sm-6 pull-right">
         <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = '{:url(\"news\")}'">
@@ -34,7 +35,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">内容</label>
                     <div class="col-sm-9">
-                        <textarea name="Content">{$info.Content|default=''}
+                        <textarea id="fuwen" name="Content">{$info.Content|default=''}
                         </textarea>
                     </div>
                 </div>    
@@ -69,3 +70,13 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 </div><!-- /.page-content -->
+<script src="__STATIC__/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use('layedit', function(){
+      var layedit = layui.layedit;
+      layedit.build('fuwen',{
+        width:100,
+        tool: ['strong','italic','underline','strikeThrough','left','center','right','link', 'unlink', 'face']
+      });
+    });
+</script>

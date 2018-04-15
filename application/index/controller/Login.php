@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use think\Loader;
 use think\Session;
+use think\Cache;
 class Login extends \think\Controller
 {
     public function register()
@@ -13,9 +14,9 @@ class Login extends \think\Controller
             if(!$validate->check($post)){
                 return ['status'=>201,'msg'=>$validate->getError()];
             }
-            if(!valiCaptcha($post['imgVali'])){
-                return ['status'=>201,'msg'=>'图形验证码错误'];
-            }
+            // if(!valiCaptcha($post['imgVali'])){
+            //     return ['status'=>201,'msg'=>'图形验证码错误'];
+            // }
             $member = model('Member');
             $isNull = $member->where("NickName = '$post[nickname]'")->field('Id')->find();
             if($isNull){
@@ -29,9 +30,9 @@ class Login extends \think\Controller
             if($count === 10){
                 return ['status'=>201,'msg'=>'手机已经注册10次了'];
             }
-            if($post['phoneCode'] != Session::get($post['phone'].'_smsVali')){
-                return ['status'=>201,'msg'=>'短信验证码错误'];
-            }
+            // if($post['phoneCode'] != Cache::get($post['phone'].'_smsVali')){
+            //     return ['status'=>201,'msg'=>'短信验证码错误'];
+            // }
             /*
                 1、判断是否还有推荐位 如果有填入TJvalue 如果没有往下填入DJvalue
                 isFull 0 有两个位子 1 左边位子被占（推荐位） 2 左边位子被占（节点位）3 两个位置都被占
@@ -140,9 +141,9 @@ class Login extends \think\Controller
         }
         //验证
         $flag = valiCaptcha($post['captcha']);
-        if(!$post['nickname']||!preg_match('/^\w{6,}$/',$post['pwd'])||!$flag){
-            return ['status'=>202,'msg'=>'错误数据'];
-        }
+        // if(!$post['nickname']||!preg_match('/^\w{6,}$/',$post['pwd'])||!$flag){
+        //     return ['status'=>202,'msg'=>'错误数据'];
+        // }
         $member = model('member');
         $result = $member->where("NickName = '$post[nickname]'")->find();
         if(!$result){
@@ -152,8 +153,11 @@ class Login extends \think\Controller
             return ['status'=>202,'msg'=>'密码错误'];
         }
         //登陆成功
-        Session::set('userInfo',$result);
-        return ['status'=>200,'msg'=>'登录成功','url'=>'/wap/index.html'];;
+        Cache::set('userInfo',$result);
+        //设置token值
+        $token = setToken($result['Id']);
+        Cache::set('token'.$result['Id'],$token);
+        return ['status'=>200,'msg'=>'登录成功','token'=>$token];
     }
 
     //二维码
@@ -169,7 +173,7 @@ class Login extends \think\Controller
         }
         $code = rand(1000,9999);
         $p = input('phone');
-        Session::set($p.'_smsVali',$code);
+        Cache::set($p.'_smsVali',$code);
         echo $code;
     }
 }

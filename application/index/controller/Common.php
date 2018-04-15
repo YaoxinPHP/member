@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use think\Controller;
 use think\Config;
+use think\Cache;
 class Common extends Controller{
 
     protected $userId;
@@ -9,12 +10,27 @@ class Common extends Controller{
     protected static $realm = 'http://39.104.169.237';
     public function __construct(\think\Request $request = null) {
         parent::__construct($request);
+        header("Access-Control-Allow-Origin: *");  
+        header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With,content-type'); 
+        header('Access-Control-Allow-Credentials: true'); 
+        header('Access-Control-Allow-Headers: Content-Type,Access-Token');
+        header('Access-Control-Expose-Headers: *'); 
+        header("Content-type:application/json"); 
+        header("token:123"); 
         Config::set('default_return_type','json');
-        if (!session('userInfo.Id')) {
+        /*if (!session('userInfo.Id')) {
             $this->error('请登陆', '/wap/login.html');
-        }
-        $this->userId = session('userInfo.Id');
-        $this->userInfo = session('userInfo');
+        }*/
+        $userInfos = model('Member')->where('Id = 19')->find();
+        $this->userId = $userInfos['Id'];
+        $this->userInfo = $userInfos;        
+        //判断头部信息
+        /*if($_SERVER['HTTP_TOKEN'] == Cache::get("token".$this->userId))
+        {
+            $this->error('没得访问权限');
+        }*/
+       /* $this->userId = session('userInfo.Id');
+        $this->userInfo = session('userInfo');*/
         $this->wallet = $this->getWallet();
     }
     protected function getWallet()
