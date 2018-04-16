@@ -62,7 +62,7 @@
 		<button class="bu">234</button>
 	</div>
 
-	<img src="http://m.com/index/returnJson/getQrcode">
+	<img src="http://39.104.169.237/index/returnJson/getQrcode">
 	<ul style="border: 1px solid red; width: 250px;" id="list">
 	</ul>
 	<div style="border: 1px solid red; width: 250px;height: 200px;" id="cont">
@@ -85,14 +85,17 @@
 	});
 	$.ajax({
 		url:'/index/Returnjson/index',
+		headers:{
+			'token':'14dea71ad870b797721b876818acb3d9',
+		},
 		success:function(obj){
 			console.log(obj);
-			if(obj.code==0){
+			/*if(obj.code==0){
 				window.location.href = obj.url;
-			}
+			}*/
 		}
 	})
-	$.ajax({
+	/*$.ajax({
 		url:'http://39.104.169.237/index/Returnjson/message',
 		success:function(obj){
 				console.log(obj);
@@ -228,6 +231,6 @@
 	    		console.log(obj);
 	    	}
     	})
-    });
+    });*/
 </script>
 </html>

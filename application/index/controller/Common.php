@@ -25,10 +25,10 @@ class Common extends Controller{
         $this->userId = $userInfos['Id'];
         $this->userInfo = $userInfos;        
         //判断头部信息
-        /*if($_SERVER['HTTP_TOKEN'] == Cache::get("token".$this->userId))
+        if($_SERVER['HTTP_TOKEN'] != Cache::get("token".$this->userId))
         {
             $this->error('没得访问权限');
-        }*/
+        }
        /* $this->userId = session('userInfo.Id');
         $this->userInfo = session('userInfo');*/
         $this->wallet = $this->getWallet();

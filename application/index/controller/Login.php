@@ -1,10 +1,20 @@
 <?php
 namespace app\index\controller;
+use think\Config;
 use think\Loader;
 use think\Session;
 use think\Cache;
 class Login extends \think\Controller
 {
+    public function _initialize(){
+        Config::set('default_return_type','json');
+        header("Access-Control-Allow-Origin: *");  
+        header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With,content-type'); 
+        header('Access-Control-Allow-Credentials: true'); 
+        header('Access-Control-Allow-Headers: Content-Type,Access-Token');
+        header('Access-Control-Expose-Headers: *'); 
+        header("Content-type:application/json");     
+    } 
     public function register()
     {
         if(request()->isPost()){
@@ -129,7 +139,6 @@ class Login extends \think\Controller
             $update['RanksTime'] = time();
             $flagUp = $member->where("Id = $resultId")->update($update);
             return ['status'=>200,'msg'=>'注册成功','url'=>'/wap/login.html'];
-            return $this->success('',url('/index/index/login'));
         }
     }
     //登录
@@ -137,7 +146,7 @@ class Login extends \think\Controller
     {
         $post = input('post.');
         if(!request()->isPost()&&count($post)!==3){
-            return $this->fetch();
+            return ['status'=>202,'msg'=>'错误操作'];
         }
         //验证
         $flag = valiCaptcha($post['captcha']);

@@ -22,6 +22,7 @@ class Returnjson extends Common
     //个人自资料
     public function memberInfo()
     {
+        $data['Id'] = $this->userId;
         $data['TJtoken'] = $this->userInfo['TJtoken'];
         $data['Mobile'] = $this->userInfo['Mobile'];
         $data['WalletAdress'] = $this->userInfo['WalletAdress'];
