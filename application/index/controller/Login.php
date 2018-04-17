@@ -11,7 +11,7 @@ class Login extends \think\Controller
         header("Access-Control-Allow-Origin: *");  
         header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With,content-type'); 
         header('Access-Control-Allow-Credentials: true'); 
-        header('Access-Control-Allow-Headers: Content-Type,Access-Token');
+        header('Access-Control-Allow-Headers: Content-Type,Authorization');
         header('Access-Control-Expose-Headers: *'); 
         header("Content-type:application/json");     
     } 
@@ -165,10 +165,36 @@ class Login extends \think\Controller
         Cache::set('userInfo',$result);
         //设置token值
         $token = setToken($result['Id']);
-        Cache::set('token'.$result['Id'],$token);
+        Cache::set('token'.$result['Id'],$token,86400);
         return ['status'=>200,'msg'=>'登录成功','token'=>$token];
     }
-
+    //找回密码
+    public function findPwd()
+    {
+        if(request()->isPost()){
+            $post = input('post.');
+            $validate = Loader::validate('User')->scene('register');
+            //验证
+            if(!$validate->check($post)){
+                return ['status'=>201,'msg'=>$validate->getError()];
+            }
+            /*if(!valiCaptcha($post['imgVali'])){
+                return ['status'=>201,'msg'=>'图形验证码错误'];
+            }*/
+            $user = model('Member')->where("NickName = $post[nickname] AND Mobile = $post[phone]")->field('Id,TJtoken')->find();
+            if(count($user)==0){
+                return ['status'=>201,'msg'=>'没有该用户'];
+            }
+             if($post['phoneCode'] != Cache::get($post['phone'].'_smsVali')){
+                return ['status'=>201,'msg'=>'短信验证码错误'];
+            }
+            $data['L1Pwd'] = md5($post['pwd'].$user['TJtoken']);
+            $flag = model('Member')->where("Id = $user[Id]")->update($data);
+            return $flag?['status'=>200,'msg'=>'成功找回']:['status'=>201,'msg'=>'操作失败']; 
+        }else{
+            return ['status'=>201,'msg'=>'错误操作'];
+        }
+    }
     //二维码
     public function getQrcode()
     {

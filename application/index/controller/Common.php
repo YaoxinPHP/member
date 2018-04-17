@@ -13,10 +13,9 @@ class Common extends Controller{
         header("Access-Control-Allow-Origin: *");  
         header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With,content-type'); 
         header('Access-Control-Allow-Credentials: true'); 
-        header('Access-Control-Allow-Headers: Content-Type,Access-Token');
+        header('Access-Control-Allow-Headers: Content-Type,Authorization');
         header('Access-Control-Expose-Headers: *'); 
-        header("Content-type:application/json"); 
-        header("token:123"); 
+        header("Content-type:application/json");  
         Config::set('default_return_type','json');
         /*if (!session('userInfo.Id')) {
             $this->error('请登陆', '/wap/login.html');
@@ -25,9 +24,9 @@ class Common extends Controller{
         $this->userId = $userInfos['Id'];
         $this->userInfo = $userInfos;        
         //判断头部信息
-        if($_SERVER['HTTP_TOKEN'] != Cache::get("token".$this->userId))
+        if(!$_SERVER['HTTP_AUTHORIZATION']||$_SERVER['HTTP_AUTHORIZATION'] != Cache::get("token".$this->userId))
         {
-            $this->error('没得访问权限');
+            echo json_encode(['status'=>401,'msg'=>'没有权限']);exit;
         }
        /* $this->userId = session('userInfo.Id');
         $this->userInfo = session('userInfo');*/

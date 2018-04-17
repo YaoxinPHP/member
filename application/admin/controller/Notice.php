@@ -17,7 +17,7 @@ class Notice extends Common
 	}
 	public function news()
 	{
-		$lists = model('News')->paginate(10);
+		$lists = model('News')->field('Id,Title,CreateDate,Type')->paginate(10);
 		$this->assign('lists',$lists);
 		return $this->fetch();
 	}
@@ -62,7 +62,7 @@ class Notice extends Common
 	        }
 		}
 		$this->assign('url',url(''));
-		return $this->fetch();
+		return $this->fetch('addNew');
 		
 	}
 	public function delNew()

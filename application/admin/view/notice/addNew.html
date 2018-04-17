@@ -54,7 +54,7 @@
 
                 <div class="clearfix form-actions">
                     <div class="col-md-offset-3 col-md-9">
-                        <button class="btn btn-info" type="button" onclick="myfrom.submit()">
+                        <button id="sub" class="btn btn-info" type="button" onclick="">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             提交
                         </button>
@@ -71,12 +71,17 @@
     </div><!-- /.row -->
 </div><!-- /.page-content -->
 <script src="__STATIC__/layui/layui.js"></script>
+<script src="__STATIC__/js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
     layui.use('layedit', function(){
       var layedit = layui.layedit;
-      layedit.build('fuwen',{
+      var data = layedit.build('fuwen',{
         width:100,
         tool: ['strong','italic','underline','strikeThrough','left','center','right','link', 'unlink', 'face']
       });
+        $('#sub').click(function(){
+            $('#fuwen').val(layui.layedit.getContent(data));
+            myfrom.submit()
+        })
     });
 </script>

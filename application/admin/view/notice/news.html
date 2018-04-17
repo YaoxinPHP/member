@@ -27,7 +27,6 @@
                                 </th>
                                 <th class="detail-col">编号</th>
                                 <th>标题</th>
-                                <th>内容</th>
                                 <th>添加时间</th>
                                 <th>类型</th>
                                 <th>操作</th>
@@ -45,7 +44,6 @@
                                 </td>
                                 <td>{$vo.Id}</td>
                                 <td>{$vo.Title}</td>
-                                <td>{$vo.Content}</td>
                                 <td>{:date('Y-m-d',$vo.CreateDate)}</td>
                                 <td>{if($vo.Type==0)}系统{else/}其他{/if}</td>
                                 <td>

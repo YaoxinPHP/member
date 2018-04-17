@@ -31,7 +31,7 @@
 	<!-- <img src="/index/Returnjson/getQrcode"> -->
 	<div style="border: 1px solid red; width: 250px;height: 200px;" id="cp">
 		电话<input type="text" name="phone">
-		验证码<input type="text" name="captcha"><img src="/captcha.html" onclick="this.src=this.src">
+		验证码<input type="text" name="captcha"><img src="/captcha.html" onclick="this.src=this.src+'?'+Math.random();">
 		短信验证<input type="text" name="phoneCode"><a href="/index/Returnjson/sendCode" target="_bank">发送</a>
 		<button class="bu">234</button>
 	</div>
@@ -86,7 +86,7 @@
 	$.ajax({
 		url:'/index/Returnjson/index',
 		headers:{
-			'token':'14dea71ad870b797721b876818acb3d9',
+			'Authorizations': '5b1d8a806c8f068ea257cc2cf5c893b5',
 		},
 		success:function(obj){
 			console.log(obj);
