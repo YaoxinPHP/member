@@ -1,0 +1,186 @@
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'currentInfo'">
+            充值记录
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+    <div class="page-header">
+        <h1>
+            {:model('menu')->getName()} 
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom:10px;">
+            <form action="" method="post">
+               会员编号<input type="text" name="Id" value="{$where.Id}">
+               <input type="submit" value="查询" name="submit">
+            </form>
+        </div>
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th class="detail-col">会员编号</th>
+                                <th>会员电话</th>
+                                <th>昵称</th>
+                                <th>推荐人</th>
+                                <th>节点人</th>
+                                <th>注册时间</th>
+                                <th>状态</th>
+                                <th>本币</th>
+                                <th>可转移资产</th>
+                                <th>钱包地址</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {volist name="lists" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>{$vo.Id}</td>
+                                <td>{$vo.Mobile}</td>
+                                <td>{$vo.NickName}</td>
+                                <td>{$vo.TJUserNickName}</td>
+                                <td>{$vo.JDUserNickName}</td>
+                                <td>{$vo.RegisterDate}</td>
+                                <td>{if($vo.JiHuoMemberType)}激活{else/}未激活{/if}</td>
+                                <td>{$vo.Amount}</td>
+                                <td>{$vo.Release}</td>
+                                <td>{$vo.WalletAdress}</td>
+                                <td>
+                                    <a href="#" class="add" cid='{$vo.Id}'>充值</a>
+                                    <a href="#" class="del" cid='{$vo.Id}'>扣款</a>
+                                </td>
+                            </tr>
+                            {/volist}    
+                        </tbody>
+                    </table>
+                    {$lists->render()}
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+            <div id="form" style="width: 400px; border: 1px solid #000;position: absolute;
+            top: 20%;left: 40%;background: #fff;display: none;">
+            <div style="background: #a7a7a7;height: 30px;"><div id="close" style="float: right;color: #fff;padding:5px 5px 0px 0px;cursor: pointer;">关闭</div></div>
+                <form style="margin-top: 5px;" class="form-horizontal" role="form" action="operationCurrent" method="post" name="myfrom">
+                    <input type="hidden" id="cid" name="cid">
+                    <input type="hidden" id="type" name="type">
+                    <input type="hidden" id="Mobile" name="Mobile">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" id="nickname">昵称：</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly>
+                        </div>
+                    </div>    
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" id="amount">货币类型：</label>
+                        <div class="col-sm-9">
+                            <select name="current">
+                                <option value="1">可转移资产</option>
+                                <option value="0">FCC</option>
+                                <option value="2">Gas</option>
+                            </select>
+                        </div>
+                    </div>    
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" id="release">可转移资产</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" id="status">状态：</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly>
+                        </div>
+                    </div>  
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">金额：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="col-xs-10 col-sm-5" name="amount" value=''/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">密码：</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="col-xs-10 col-sm-5" name="pwd" value=''/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">备注：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="col-xs-10 col-sm-5" name="remarks" value=''/>
+                        </div>
+                    </div>
+                    <div class="space-4"></div>   
+                    <div class="space-4"></div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="button" onclick="myfrom.submit()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                提交
+                            </button>
+                            &nbsp; &nbsp; &nbsp;
+                            <button class="btn" type="reset">
+                                <i class="ace-icon fa fa-undo bigger-110"></i>
+                                重置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<script src="__STATIC__/js/jquery-2.1.4.min.js"></script>
+<script src="__STATIC__/js/laydate.js"></script>
+<script>
+laydate.render({
+  elem: '#calendar',type: 'datetime',range: true
+});
+$('.add').click(function(){
+    $('#cid').val($(this).attr('cid'));
+    $('#type').val(0);
+    $('#Mobile').val($(this).parents('tr').find('td').eq(2).text());
+    $('#nickname').siblings('div').find('input').val($(this).parents('tr').find('td').eq(3).text());
+    $('#release').siblings('div').find('input').val($(this).parents('tr').find('td').eq(9).text());
+    $('#status').siblings('div').find('input').val('充值');
+    $('#form').css('display','block');
+});
+$('.del').click(function(){    
+    $('#cid').val($(this).attr('cid'));
+    $('#type').val(1);
+    $('#Mobile').val($(this).parents('tr').find('td').eq(2).text());
+    $('#nickname').siblings('div').find('input').val($(this).parents('tr').find('td').eq(3).text());
+    $('#release').siblings('div').find('input').val($(this).parents('tr').find('td').eq(9).text());
+    $('#status').siblings('div').find('input').val('扣款');
+    $('#form').css('display','block');
+});
+$('#close').click(function(){
+    $('#form').css('display','none');
+})
+</script>
+
+

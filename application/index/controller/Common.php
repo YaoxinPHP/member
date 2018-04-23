@@ -7,35 +7,32 @@ class Common extends Controller{
 
     protected $userId;
     protected $userInfo;
-    protected static $realm = 'http://39.104.169.237';
     public function __construct(\think\Request $request = null) {
         parent::__construct($request);
         header("Access-Control-Allow-Origin: *");  
         header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With,content-type'); 
         header('Access-Control-Allow-Credentials: true'); 
         header('Access-Control-Allow-Headers: Content-Type,Authorization');
+        header('Access-Control-Allow-Methods:GET,POST,OPTIONS,PUT,DELETE');
         header('Access-Control-Expose-Headers: *'); 
-        header("Content-type:application/json");  
+        header("Content-type:application/json");
         Config::set('default_return_type','json');
-        /*if (!session('userInfo.Id')) {
-            $this->error('请登陆', '/wap/login.html');
-        }*/
-        $userInfos = model('Member')->where('Id = 19')->find();
-        $this->userId = $userInfos['Id'];
-        $this->userInfo = $userInfos;        
         //判断头部信息
-        if(!$_SERVER['HTTP_AUTHORIZATION']||$_SERVER['HTTP_AUTHORIZATION'] != Cache::get("token".$this->userId))
+        if(!Cache::get('userInfo_'.$_SERVER['HTTP_AUTHORIZATION']))
         {
-            echo json_encode(['status'=>401,'msg'=>'没有权限']);exit;
-        }
-       /* $this->userId = session('userInfo.Id');
-        $this->userInfo = session('userInfo');*/
+            echo json_encode(['status'=>401,'msg'=>'没有权限!']);exit;
+        }            
+        $this->userInfo = Cache::get('userInfo_'.$_SERVER['HTTP_AUTHORIZATION']);
+        $this->userId = $this->userInfo['Id'];
+        if($_SERVER['HTTP_AUTHORIZATION'] != Cache::get("token".$this->userId)){
+            echo json_encode(['status'=>401,'msg'=>'没有权限'.$this->userId]);exit;
+            }            
         $this->wallet = $this->getWallet();
     }
     protected function getWallet()
     {
     	//获取钱包
-    	return model('Wallet')->where("userId = ".$this->userId)->field('Amount,Release,Gas')->find();
+    	return model('Wallet')->where("UserId = ".$this->userId)->field('Amount,Release,Gas')->find();
 
     }
     //获取智能算力
@@ -67,7 +64,7 @@ class Common extends Controller{
     protected function refresh()
     {
     	$mem = model('Member')->where('Id = '.$this->userId)->find();
-    	session('userInfo',$mem);
+    	Cache::set('userInfo',$mem,86400);
     	return true; 
     }
 }

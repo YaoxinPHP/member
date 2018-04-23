@@ -1,0 +1,59 @@
+<link rel="icon" type="image/x-icon" href="../img/logo.ico">
+<link rel="stylesheet" href="__STATIC__/tree/css/font-awesome.min.css">
+<link rel="stylesheet" href="__STATIC__/tree/css/jquery.orgchart.css">
+<link rel="stylesheet" href="__STATIC__/tree/css/style.css">
+<style type="text/css">
+    .content table,.content table td{
+        border: solid thin rgba(217, 83, 79, 0.8);
+    }
+</style>
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = '{:url('jdvtree')}'">
+            刷新
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+    <div class="page-header">
+        <h1>
+            {:model('menu')->getName()} 
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom:10px;">
+            <form action="" method="post">
+               会员编号<input type="text" name="id" value="{$where.Id}">
+               <input type="submit" name="submit" value="查询">
+            </form>
+            一级会员：
+            {foreach name='user' item='v'}
+                <a href="jdvtree/id/{$v[Id]}">{$v['NickName']}</a>&nbsp;&nbsp;&nbsp;
+            {/foreach}
+        </div>
+
+        <div id="chart-container"></div>
+        
+    </div>
+</div> 
+<script type="text/javascript" src="__STATIC__/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="__STATIC__/tree/js/jquery.orgchart.js"></script>
+<script>
+    'use strict';
+
+(function($){
+
+  $(function() {
+
+    var datascource = {$list};
+
+    $('#chart-container').orgchart({
+      'data' : datascource,
+      'nodeContent': 'title',
+      'toggleSiblingsResp': true
+    });
+
+  });
+
+})(jQuery);
+</script>

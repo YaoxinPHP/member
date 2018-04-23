@@ -24,21 +24,41 @@ class Login extends \think\Controller
             if(!$validate->check($post)){
                 return ['status'=>201,'msg'=>$validate->getError()];
             }
-            // if(!valiCaptcha($post['imgVali'])){
-            //     return ['status'=>201,'msg'=>'图形验证码错误'];
-            // }
+            /*if(!valiCaptcha($post['imgVali'])){
+                return ['status'=>201,'msg'=>'图形验证码错误'];
+            }*/
             $member = model('Member');
             $isNull = $member->where("NickName = '$post[nickname]'")->field('Id')->find();
             if($isNull){
                 return ['status'=>201,'msg'=>'用户已经存在'];
             }
-            $result = $member->where("TJtoken = '$post[tjtoken]'")->find();
-            if($result['TJtoken'] !== $post['tjtoken']){
-                return ['status'=>201,'msg'=>'邀请码错误'];
-            }
             $count = $member->where("Mobile = $post[phone]")->count();
             if($count === 10){
                 return ['status'=>201,'msg'=>'手机已经注册10次了'];
+            }
+            //判断邀请码
+            $unlock_url = explode('_', unlock_url($post['tjtoken']));
+            if($unlock_url[0] == 'T')
+            {
+                if(count($unlock_url)!=3){
+                    $result = $member->where(['Id'=>$unlock_url[1]])->find();
+                    if(empty($result)){
+                        return ['status'=>201,'msg'=>'邀请码错误!'];
+                    }
+                }else{
+                    $result = $member->where(['Id'=>$unlock_url[2]])->find();
+                    if(empty($result)){
+                        return ['status'=>201,'msg'=>'邀请码错误!'];
+                    }
+                    if(haveSeat($result,$unlock_url[1])){
+                        return ['status'=>201,'msg'=>'邀请码过期'];
+                    }
+                }
+            }else{
+                $result = $member->where("TJtoken = '$post[tjtoken]'")->find();
+                if($result['TJtoken'] !== $post['tjtoken']){
+                    return ['status'=>201,'msg'=>'邀请码错误'];
+                }
             }
             // if($post['phoneCode'] != Cache::get($post['phone'].'_smsVali')){
             //     return ['status'=>201,'msg'=>'短信验证码错误'];
@@ -76,9 +96,7 @@ class Login extends \think\Controller
                     break;
                 case 3:
                 //向下滑
-
-                    $ranks = explode(',',$result['Ranks']);
-                    $arr = $member->where(['Id'=>['in',$ranks],'IsFull'=>['neq',3]])->find();
+                    $arr = findTJ($result);
                     if(count($arr)){
                         if($arr['IsFull']==0){
                             $updateflag = 'JDLeftValue';
@@ -124,7 +142,7 @@ class Login extends \think\Controller
             model('Wallet')->insert(['UserId'=>$flagid,'UpdateTime'=>time()]);
             $update["$updateflag"] = $flagid;
             //更新上游数据
-            $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks,RanksTime')->select();
+            $resultArr = $member->where("Ranks like '%,$resultId%'")->field('Id,Ranks,RanksTime,JTRanks')->select();
             foreach ($resultArr as $v) {
                 //今日增加团队
                 $Ranksdata = ['Ranks'=>$v['Ranks'].','.$flagid];
@@ -139,7 +157,8 @@ class Login extends \think\Controller
             $update['RanksTime'] = time();
             $flagUp = $member->where("Id = $resultId")->update($update);
             return ['status'=>200,'msg'=>'注册成功','url'=>'/wap/login.html'];
-        }
+        }else
+            return ['status'=>201,'msg'=>'提交错误'];
     }
     //登录
     public function login()
@@ -150,9 +169,12 @@ class Login extends \think\Controller
         }
         //验证
         $flag = valiCaptcha($post['captcha']);
-        // if(!$post['nickname']||!preg_match('/^\w{6,}$/',$post['pwd'])||!$flag){
-        //     return ['status'=>202,'msg'=>'错误数据'];
-        // }
+        if(!$post['nickname']||!preg_match('/^\w{6,}$/',$post['pwd'])){
+            return ['status'=>202,'msg'=>'提交失败'];
+        }
+        if(!$flag){
+            return ['status'=>202,'msg'=>'验证码错误'];
+        }
         $member = model('member');
         $result = $member->where("NickName = '$post[nickname]'")->find();
         if(!$result){
@@ -161,11 +183,11 @@ class Login extends \think\Controller
         if(md5($post['pwd'].$result['TJtoken'])!==$result['L1Pwd']){
             return ['status'=>202,'msg'=>'密码错误'];
         }
-        //登陆成功
-        Cache::set('userInfo',$result);
         //设置token值
         $token = setToken($result['Id']);
         Cache::set('token'.$result['Id'],$token,86400);
+        //登陆成功
+        Cache::set('userInfo_'.$token,$result,86400);
         return ['status'=>200,'msg'=>'登录成功','token'=>$token];
     }
     //找回密码
@@ -178,16 +200,16 @@ class Login extends \think\Controller
             if(!$validate->check($post)){
                 return ['status'=>201,'msg'=>$validate->getError()];
             }
-            /*if(!valiCaptcha($post['imgVali'])){
+            if(!valiCaptcha($post['imgVali'])){
                 return ['status'=>201,'msg'=>'图形验证码错误'];
-            }*/
+            }
             $user = model('Member')->where("NickName = $post[nickname] AND Mobile = $post[phone]")->field('Id,TJtoken')->find();
             if(count($user)==0){
                 return ['status'=>201,'msg'=>'没有该用户'];
             }
-             if($post['phoneCode'] != Cache::get($post['phone'].'_smsVali')){
+             /*if($post['phoneCode'] != Cache::get($post['phone'].'_smsVali')){
                 return ['status'=>201,'msg'=>'短信验证码错误'];
-            }
+            }*/
             $data['L1Pwd'] = md5($post['pwd'].$user['TJtoken']);
             $flag = model('Member')->where("Id = $user[Id]")->update($data);
             return $flag?['status'=>200,'msg'=>'成功找回']:['status'=>201,'msg'=>'操作失败']; 

@@ -65,7 +65,7 @@ class Admin extends Common {
         if ($id) {
             //当前用户信息
             $info = $this->_Admin->getInfo($id);
-            $info['userGroups'] = $this->_Admin->getUserGroups($id);
+            $info['userGroups'] = $this->_AdminGroupAccess->getUserGroups($id);
             $this->assign('info', $info);
         }
 

@@ -22,15 +22,18 @@ class Member extends Common
 						$vv[0] = 'between';
 						$v = $vv;
 					}
+					$k = 'a.'.$k;
 					$data[$k] = $v;
 				}
 			}
-			unset($data['submit']);
+			unset($data['a.submit']);
 		}
-		$field = input('export')?'Id,NickName,TJUserNickName,JDUserNickName,RegisterDate,JiHuoMemberType':'*';
-		$res = db('user')->where($data)->field($field)->order('Id desc')->paginate(10);
+		$field = input('export')?'a.Id,a.NickName,a.TJUserNickName,a.JDUserNickName,a.RegisterDate,a.JiHuoMemberType,b.Amount,b.Release,a.WalletAdress':'a.*,b.Amount,b.Release';
+		$res = db('user')->alias('a')->join('__WALLET__ b','a.Id = b.UserId','left')->field($field)->where($data)->order('a.Id DESC')->paginate(10);
 		if(input('export')){
-			return $this->excleExport($res);
+			$name='会员管理Excel表';
+         	$header=['会员编号','昵称','推荐人','节点人','注册时间','状态','本币','可转移资产','钱包地址'];
+			return $this->excleExport($name,$header,$res);
 		}
         $this->assign('lists', $res);
         $this->assign('where', $where);
@@ -216,13 +219,5 @@ class Member extends Common
 		$pwd = md5('123456'.$token['TJtoken']);
 		$flag = db('user')->where("Id = ".input('Id'))->update(['L1Pwd' => $pwd]);
 		return ($flag)?$this->success('操作成功'):$this->error('操作失败');
-	}
-	//导出Excel
-	public function excleExport($data)
-	{
-		 $name='会员管理Excel表';
-         $header=['会员编号','昵称','推荐人','节点人','注册时间','状态','本币','可转移资产','钱包地址'];
-        excelExport($name,$header,$data);
-
 	}
 }

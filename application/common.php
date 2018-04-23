@@ -941,7 +941,6 @@ function getQrcodeImg($url)
 {
     //生成当前的二维码
     $qrCode = new \Endroid\QrCode\QrCode();
-    //想显示在二维码中的文字内容，这里设置了一个查看文章的地址
     $qrCode->setText($url)
         ->setSize(300)//大小
         ->setLabelFontPath(VENDOR_PATH.'endroid/qrcode/assets/noto_sans.otf')
@@ -1249,4 +1248,62 @@ function getInfo($url,$id,$token)
 function setToken($str)
 {
     return md5($str.microtime());
+}
+//找寻tj位
+function findTJ($res,$num='')
+{
+    //标识符
+    $flag = $num?$num:$res['RegisterLevelId']+1;
+    $ranks = explode(',',substr($res['Ranks'], 2));
+    $arr = db('user')->where(['Id'=>['in',$ranks],'IsFull'=>['neq',3],'RegisterLevelId'=>$flag])->field('Id,NickName,Ranks,JTRanks,RanksTime')->find();
+    if(empty($arr)){
+        findTj($res,$flag+1);
+    }else{
+        return $arr;
+    }
+}
+function haveSeat($res,$flag='left')
+{
+    if($flag=='right'){
+       return (!$res['TJRightValue'])?(!$res['JDRightValue'])?false:true:true;
+    }
+    return (!$res['TJLeftValue'])?(!$res['JDLeftValue'])?false:true:true;
+}
+//加密函数
+function lock_url($txt,$key='')
+{
+  $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-=+";
+  $nh = rand(0,64);
+  $ch = $chars[$nh];
+  $mdKey = md5($key.$ch);
+  $mdKey = substr($mdKey,$nh%8, $nh%8+7);
+  $txt = base64_encode($txt);
+  $tmp = '';
+  $i=0;$j=0;$k = 0;
+  for ($i=0; $i<strlen($txt); $i++) {
+    $k = $k == strlen($mdKey) ? 0 : $k;
+    $j = ($nh+strpos($chars,$txt[$i])+ord($mdKey[$k++]))%64;
+    $tmp .= $chars[$j];
+  }
+  return urlencode($ch.$tmp);
+}
+//解密函数
+function unlock_url($txt,$key='')
+{
+  $txt = urldecode($txt);
+  $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-=+";
+  $ch = $txt[0];
+  $nh = strpos($chars,$ch);
+  $mdKey = md5($key.$ch);
+  $mdKey = substr($mdKey,$nh%8, $nh%8+7);
+  $txt = substr($txt,1);
+  $tmp = '';
+  $i=0;$j=0; $k = 0;
+  for ($i=0; $i<strlen($txt); $i++) {
+    $k = $k == strlen($mdKey) ? 0 : $k;
+    $j = strpos($chars,$txt[$i])-$nh - ord($mdKey[$k++]);
+    while ($j<0) $j+=64;
+    $tmp .= $chars[$j];
+  }
+  return base64_decode($tmp);
 }

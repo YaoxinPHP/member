@@ -3,6 +3,13 @@
 /**
  * 后台公共文件 
  * @file   Common.php  
+ 第一次注册卖多少币送等额Gas(第一次)每推荐一个人注册买币后，奖励100GAS
+ 每天释放本币转入可转移资产
+ 每天业绩
+ 每天福利
+ 每天利息
+ 奖金转入可转移资产
+ 每天更新user表jtranks
  */
 
 namespace app\admin\controller;
@@ -80,5 +87,10 @@ class Common extends Controller {
             db('admin_log')->insert($data);
         } 
     }
+    //导出Excel
+    protected function excleExport($name,$header,$data)
+    {
+        excelExport($name,$header,$data);
 
+    }
 }

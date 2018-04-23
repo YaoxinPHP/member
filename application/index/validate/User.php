@@ -12,8 +12,8 @@ class User extends Validate
 		'repwd'	   => 'require|confirm:pwd',
 		'phone'   =>  'require|/^1[34578]\d{9}$/',
 		'oldPhone'   =>  'require|/^1[34578]\d{9}$/',
-		'phoneCode' => 'require|between:1000,9999',
-		'walletAdress' => 'require|/^[a-z0-9]{32}$/',
+		// 'phoneCode' => 'require|between:1000,9999',
+		'walletAddress' => 'require|/^[a-z0-9]{32}$/',
 		'num' => 'require|/^\d*$/',
 	];
 	protected $message = [
@@ -22,14 +22,14 @@ class User extends Validate
 		'repwd'			   => '两次密码不相同',
 		'phone'		   => '手机格式错误',
 		'oldPhone'		   => '手机格式错误',
-		'phoneCode'		   => '短信验证码错误',
-		'walletAdress'		   => '钱包地址错误',
+		// 'phoneCode'		   => '短信验证码错误',
+		'walletAddress'		   => '钱包地址错误',
 		'num'		   => '数量错误',
 	];
 	protected $scene = [
-		'register' => ['nickname','pwd','repwd','phone','phoneCode'],
-		'online' => ['walletAdress','pwd','num','phoneCode'],
-		'updatePwd' => ['pwd','repwd','phoneCode'],
-		'updatePhone' => ['phone','phoneCode'],
+		'register' => ['nickname','pwd','repwd','phone'],
+		'online' => ['walletAdress','pwd','num'],
+		'updatePwd' => ['pwd','repwd'],
+		'updatePhone' => ['phone'],
 	];
 }

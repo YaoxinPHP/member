@@ -1,0 +1,87 @@
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = '{:url('trade')}'">
+            刷新
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+    <div class="page-header">
+        <h1>
+            {:model('menu')->getName()} 
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom:10px;">
+            <form action="" method="post">
+               转账会员编号<input type="text" name="WalletAdress" value="{$where.WalletAdress}">
+               收款会员编号<input type="text" name="ToWalletAdress" value="{$where.ToWalletAdress}">
+               <input type="submit" value="查询" name="submit">
+            </form>
+        </div>
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th class="detail-col">转账会员</th>
+                                <th>转账钱包地址</th>
+                                <th>收款会员</th>
+                                <th>收款钱包地址</th>
+                                <th>货币类型</th>
+                                <th>总额</th>
+                                <th>手续费</th>
+                                <th>实际到账金额</th>
+                                <th>日期</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>{$vo.FromName}</td>
+                                <td>{$vo.WalletAdress}</td>
+                                <td>{$vo.ToName}</td>
+                                <td>{$vo.ToWalletAdress}</td>
+                                <td>可转移资产</td>
+                                <td>{$vo.Amount}</td>
+                                <td>0.00</td>
+                                <td>{$vo.Amount}</td>
+                                <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                            </tr>
+                            {/volist}    
+                        </tbody>
+                    </table>
+                    {$list->render()}
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+        </div>
+
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<script src="__STATIC__/js/jquery-2.1.4.min.js"></script>
+<script src="__STATIC__/js/laydate.js"></script>
+<script>
+laydate.render({
+  elem: '#calendar',type: 'datetime',range: true
+});
+</script>
+
+

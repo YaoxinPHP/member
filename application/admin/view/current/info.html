@@ -1,0 +1,172 @@
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = '{:url('info')}'">
+            刷新
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+    <div class="page-header">
+        <h1>
+            {:model('menu')->getName()} 
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom:10px;">
+            <form action="" method="post">
+               会员编号：<input type="text" name="UserId" value="{$where.UserId}">
+               日期：<input type="text" name="AddTime" id="calendar" style="width: 270px;"  value="{$where.AddTime}">
+               操作类型：<select name="type">
+                   <option value="0" {if condition="$where.type == 0"}selected{/if}>能量兑换</option>
+                   <option value="1" {if condition="$where.type == 1"}selected{/if}>发送/接收</option>
+                   <option value="2" {if condition="$where.type == 2"}selected{/if}>离线发送</option>
+                   <option value="3" {if condition="$where.type == 3"}selected{/if}>后台充值扣款</option>
+               </select> 
+               <input type="submit" value="查询" name="submit">
+            </form>
+        </div>
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th class="detail-col">会员编号</th>
+                                <th>操作类型</th>
+                                <th>货币类型</th>
+                                <th>收入</th>
+                                <th>支出</th>
+                                <th>余额</th>
+                                <th>日期</th>
+                                <th>描述</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>{$vo.UserId}</td>
+                                {if condition="$where.type == 0"}
+                                        <td>能量兑换</td>
+                                        <td>Gas</td>
+                                    {if condition="$vo.Type == 0"}
+                                        <td>{$vo.Amount}</td>
+                                        <td></td>
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>Gas兑换</td>
+                                    {else/}                           
+                                        <td></td>          
+                                        <td>-{$vo.Amount}</td>
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>转出消耗</td>
+                                    {/if}
+                                {elseif condition="$where.type == 1"/}
+                                        <td>发送/接收</td>
+                                        <td>可转移资产 Gas</td>
+                                    {if condition="$vo.Way == 0"}
+                                        <td></td>
+                                        <td>-{$vo.Amount}</td>
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>在线发送</td>
+                                    {else/}
+                                        <td>{$vo.Amount}</td>
+                                        <td></td>
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>在线接收</td>
+                                    {/if}
+                                {elseif condition="$where.type == 2"/}
+                                        <td>离线发送</td>
+                                        <td>可转移资产 Gas</td>
+                                    {if condition="$vo.Way == 0"}
+                                        <td></td>
+                                        <td>-{$vo.Amount}</td>
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>离线发送</td>
+                                    {else/}
+                                        <td>{$vo.Amount}</td>
+                                        <td></td>
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>离线接收</td>
+                                    {/if}
+                                {else /}
+                                        <td>后台充值扣款</td>
+                                    {if condition="$vo.Type == 0"}                                       
+                                        <td>Fcc</td>
+                                        {if condition="$vo.Way == 0"}
+                                        <td>{$vo.Amount}</td>
+                                        <td></td>
+                                        {else/}
+                                        <td></td>
+                                        <td>-{$vo.Amount}</td>
+                                        {/if}
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>{$vo.Remarks}</td>
+                                    {elseif condition="$vo.Type == 1"/}
+                                        <td>可转移资产</td>
+                                        {if condition="$vo.Way == 0"}
+                                        <td>{$vo.Amount}</td>
+                                        <td></td>
+                                        {else/}
+                                        <td></td>
+                                        <td>-{$vo.Amount}</td>
+                                        {/if}
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>{$vo.Remarks}</td>
+                                    {else /}
+                                        <td>Gas</td>
+                                        {if condition="$vo.Way == 0"}
+                                        <td>{$vo.Amount}</td>
+                                        <td></td>
+                                        {else/}
+                                        <td></td>
+                                        <td>-{$vo.Amount}</td>
+                                        {/if}
+                                        <td>{$vo.Money}</td>
+                                        <td>{:date('Y-m-d H:s:i',$vo.AddTime)}</td>
+                                        <td>{$vo.Remarks}</td>
+                                    {/if}
+                                {/if}
+                            </tr>
+                            {/volist}   
+                        </tbody>
+                    </table>
+                    {$list->render()}
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+        </div>
+
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<script src="__STATIC__/js/jquery-2.1.4.min.js"></script>
+<script src="__STATIC__/js/laydate.js"></script>
+<script>
+laydate.render({
+  elem: '#calendar',type: 'datetime',range: true
+});
+</script>
+
+

@@ -67,8 +67,8 @@
                                 <td>{$vo.JDUserNickName}</td>
                                 <td>{$vo.RegisterDate}</td>
                                 <td>{if($vo.JiHuoMemberType)}激活{else/}未激活{/if}</td>
-                                <td>{$vo.IsValid}</td>
-                                <td>{$vo.IsValid}</td>
+                                <td>{$vo.Amount}</td>
+                                <td>{$vo.Release}</td>
                                 <td>{$vo.WalletAdress}</td>
                                 <td>
                                     {if condition="$vo.IsLock == 1"}<a href="{:url(opreation,[lock=>$vo.Id,type=>0])}">解锁</a>{else/}<a href="{:url(opreation,[lock=>$vo.Id,type=>1])}">锁定</a>{/if}&nbsp;

@@ -1,0 +1,70 @@
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstraps.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/style.css" />
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = '{:url('\/admin\/User\/jdtree')}'">
+            刷新
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+    <div class="page-header">
+        <h1>
+            {:model('menu')->getName()} 
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom:10px;">
+            <form action="{:url('/admin/User/jdtree')}" method="get">
+               会员编号<input type="text" name="id" value="{$where.Id}">
+               <input type="submit" name="submit" value="查询">
+            </form>
+        </div>
+        <div class="tree">
+            <ul>                
+                 {foreach name='user' item='v'}
+                <li class="parent_li" >
+                    <span cid="{$v[Id]}"><i class="icon-user" ></i>{$v[Mobile]} 会员</span> <a href="jdtree/id/{$v[Id]}">{$v[NickName]}  [人数：{:count(explode(',',substr($v[Ranks],2)))}]</a>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+        
+    </div>
+</div> 
+<script type="text/javascript" src="__STATIC__/js/jquery-2.1.4.min.js"></script>
+<script>
+    $(function(){
+    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+    $('body').on('click','.parent_li>span',function (e) {
+        var tthis = $(this).parent();
+        var data = {'id':$(this).attr('cid')};
+        if(tthis.find('>ul').length<=0){
+            $.ajax({
+                url:'jdtree',
+                data:data,
+                type:'post',
+                success:function(obj){
+                    obj = $.parseJSON(obj);
+                    if(obj.length>0){
+                        for (var i = 0; i <= obj.length - 1; i++) {
+                            var num = (obj[i]['Ranks'])?obj[i]['Ranks'].split(',').length-1:0;
+                            tthis.append('<ul><li class="parent_li"><span cid="'+obj[i]['Id']+'"><i class="icon-plus-sign"></i>'+obj[i]['Mobile']+' 会员</span> <a href="jdtree/id/'+obj[i]['Id']+'">'+obj[i]['NickName']+'  [人数：'+num+']</a></li></ul>')
+                        }
+                    }                
+                }
+            })
+        }
+        // return false;
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(":visible")) {
+            children.hide('fast');
+            $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+        } else {
+            children.show('fast');
+            $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+        }
+        e.stopPropagation();
+    });
+});
+</script>

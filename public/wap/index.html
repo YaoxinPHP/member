@@ -62,7 +62,7 @@
 		<button class="bu">234</button>
 	</div>
 
-	<img src="http://39.104.169.237/index/returnJson/getQrcode">
+	<img src="http://m.com/index/Qrcode/getQrcodeRight/id/16">
 	<ul style="border: 1px solid red; width: 250px;" id="list">
 	</ul>
 	<div style="border: 1px solid red; width: 250px;height: 200px;" id="cont">
@@ -86,7 +86,7 @@
 	$.ajax({
 		url:'/index/Returnjson/index',
 		headers:{
-			'Authorizations': '5b1d8a806c8f068ea257cc2cf5c893b5',
+			'Authorizations': '7c25b889694abb5564d8b69a9baf447b',
 		},
 		success:function(obj){
 			console.log(obj);
@@ -95,7 +95,7 @@
 			}*/
 		}
 	})
-	/*$.ajax({
+	$.ajax({
 		url:'http://39.104.169.237/index/Returnjson/message',
 		success:function(obj){
 				console.log(obj);
@@ -223,14 +223,18 @@
     $('#hui').click(function(){
     	var data = {'id':$('#messid').val(),'content':$('#text').val()};
     	$.ajax({
-    		url:'/index/Returnjson/replyMsg',
+    		url:'/index/Returnjson/getQrcode',
+			headers:{
+				'Authorizations': '7c25b889694abb5564d8b69a9baf447b',
+			},
 	    	data:data,
 	    	type:'post',
 	    	success:function(obj)
 	    	{
-	    		console.log(obj);
+	    		// $('img').attr('src',obj)
+	    		console.log(obj)
 	    	}
     	})
-    });*/
+    });
 </script>
 </html>
